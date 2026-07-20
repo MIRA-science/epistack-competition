@@ -58,7 +58,7 @@ function evidenceCard(svg,{x,y,w,h,label,sub,href,imgW,imgH,tip}){
 function buildSnap(){
   const svg=document.getElementById('snapgraph'); if(!svg) return; ensureMarkers(svg);
   const q=nodeBox(svg,{x:24,y:56,w:148,h:44,type:'question',label:'Question',sub:'where did it begin?',r:10});
-  const cOld=nodeBox(svg,{x:24,y:182,w:192,h:56,type:'claim',label:'Claim (contested)',sub:'the outbreak centred on the market',r:11});
+  const cOld=nodeBox(svg,{x:24,y:182,w:192,h:56,type:'claim',label:'Claim (contested)',sub:'the outbreak centered on the market',r:11});
   connect(svg,cOld,q,{fs:['top',.5],ts:['bottom',.5],pred:'addresses',cls:'addresses'});
   const cNew=nodeBox(svg,{x:250,y:44,w:232,h:50,type:'claim',label:'Claim · NEW',sub:'no pre-emergence selection signature',cls:'is-new',r:11});
   const card1=evidenceCard(svg,{x:250,y:150,w:224,h:224,label:'Evidence · Fig 5A–B',sub:'single ω purifying · ω ≪ 1',href:'assets/sarscov2-selection-tree.png',imgW:196,imgH:128,tip:'<code>observationBase</code> — the actual panel this Evidence rests on, held as a field of the node: the SARS-CoV-2 phylogeny and single-ω plot.'});

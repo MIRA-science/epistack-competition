@@ -146,7 +146,7 @@ const TIP_FWD={
 };
 const TIP_INV={
   addressedBy:'The claims proposing answers here — <code>addresses</code>, read from the question’s end.',
-  supportedBy:'Arguments in favour — <code>supports</code>, read from the claim’s end.',
+  supportedBy:'Arguments in favor — <code>supports</code>, read from the claim’s end.',
   opposedBy:'Arguments against — <code>opposes</code>, read from the claim’s end.',
   is_grounded_in:'The study behind this evidence — <code>grounds</code>, read from the other end.',
   follows:'The studies that have run this recipe — <code>follows</code>, read from the study’s end.'
@@ -209,7 +209,7 @@ const SCENES=[
   {key:'study',accent:'study',g:5,type:'node',
    kicker:'Study → Protocol → SourceDocument',also:'the experiment, its method, its paper',
    def:'A Study is the activity that produced the evidence; a Protocol is the reusable method it followed; a SourceDocument is the paper that reported it.',
-   ex:{tag:'In the DNA story',lead:'X-ray fibre diffraction of B-form DNA — Franklin &amp; Gosling, King’s College London, 1952.',note:'The Protocol: hydrated-fibre prep + humidity-controlled X-ray diffraction — a recipe, written once. The SourceDocument: their 25 April 1953 <i>Nature</i> paper.'},
+   ex:{tag:'In the DNA story',lead:'X-ray fiber diffraction of B-form DNA — Franklin &amp; Gosling, King’s College London, 1952.',note:'The Protocol: hydrated-fiber prep + humidity-controlled X-ray diffraction — a recipe, written once. The SourceDocument: their 25 April 1953 <i>Nature</i> paper.'},
    why:'The Study is the <i>event</i>; the Protocol is the <i>recipe</i>. Splitting them lets two labs run the same method and be compared — and lets you tell a flawed result apart from a flawed method.',
    slots:[{s:'follows',t:'Protocol',many:true},{s:'grounds',t:'Evidence',many:true}],
    inv:[{s:'is_grounded_in',t:'Evidence',many:true}],

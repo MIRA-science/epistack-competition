@@ -113,9 +113,9 @@
 
           <!-- provenance, below the rule -->
           <g><rect class="node-box" x="150" y="372" width="210" height="60" fill="var(--study-fill)" stroke="var(--study)"/>
-            <text class="n-label" x="255" y="400">Study</text><text class="n-sub" x="255" y="419">X-ray fibre diffraction</text></g>
+            <text class="n-label" x="255" y="400">Study</text><text class="n-sub" x="255" y="419">X-ray fiber diffraction</text></g>
           <g><rect class="node-box" x="150" y="486" width="210" height="60" fill="var(--protocol-fill)" stroke="var(--protocol)"/>
-            <text class="n-label" x="255" y="514">Protocol</text><text class="n-sub" x="255" y="533">hydrated fibre · humidity-controlled</text></g>
+            <text class="n-label" x="255" y="514">Protocol</text><text class="n-sub" x="255" y="533">hydrated fiber · humidity-controlled</text></g>
           <g><rect class="node-box" x="840" y="372" width="210" height="60" fill="#fff" stroke="var(--source)"/>
             <text class="n-label" x="945" y="400">SourceDocument</text><text class="n-sub" x="945" y="419">Nature · 25 Apr 1953</text></g>
 
@@ -131,7 +131,7 @@
     <section class="move">
       <p class="kick accent-study">The format, concretely</p>
       <h2 class="sec">A record is a bundle of fields.</h2>
-      <p class="sub">A node carries a <span class="mono">@type</span> array and a set of <b>slots</b>. Some slots hold a <b>value</b>; some hold a <b>reference</b> to another node. Only when a reference needs to carry <i>who asserted it and how strongly</i> is it <b>reified</b> as its own record — and that is where <span class="mono">flavour</span>, <span class="mono">degree</span> and <span class="mono">confidence</span> live, per agent. The anti-gaming property depends on it.</p>
+      <p class="sub">A node carries a <span class="mono">@type</span> array and a set of <b>slots</b>. Some slots hold a <b>value</b>; some hold a <b>reference</b> to another node. Only when a reference needs to carry <i>who asserted it and how strongly</i> is it <b>reified</b> as its own record — and that is where <span class="mono">flavor</span>, <span class="mono">degree</span> and <span class="mono">confidence</span> live, per agent. The anti-gaming property depends on it.</p>
       <div class="code" role="img" aria-label="A JSON-LD Evidence record showing its slots as fields — some values, some references — and the same observationStatement optionally reified for attribution.">
 <span class="cm">// an Evidence record — a bundle of slots (fields)</span><br>
 { <span class="k">"@id"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
@@ -154,16 +154,16 @@
 
     <section class="move">
       <p class="kick accent-claim">Linking, without a scoreboard</p>
-      <h2 class="sec">Three flavours of evidence→claim linkage, with a qualitative degree.</h2>
-      <table class="degtable" aria-label="The three linkage flavours and their qualitative degrees">
-        <thead><tr><th>Flavour</th><th>Degree</th></tr></thead>
+      <h2 class="sec">Three flavors of evidence→claim linkage, with a qualitative degree.</h2>
+      <table class="degtable" aria-label="The three linkage flavors and their qualitative degrees">
+        <thead><tr><th>Flavor</th><th>Degree</th></tr></thead>
         <tbody>
           <tr><td class="fl-support">supports</td><td>not at all · weakly · moderately · strongly</td></tr>
           <tr><td class="fl-informs">informs</td><td>— (neutral / topical)</td></tr>
           <tr><td class="fl-opposes">opposes</td><td>not at all · weakly · moderately · strongly</td></tr>
         </tbody>
       </table>
-      <p class="prose">Plus a <b>qualitative confidence rating</b> on the relation that others can weigh in on. Flavour, degree and confidence are <b>per-agent attributed assertions on a reified relation</b> — never aggregated. Ten agents rating one relation produce ten signed ratings, not an average. Nothing in the schema computes a value, so <b>there is no value to game</b>: an adversary can add their own rating, and it arrives labelled with their identity like everyone else’s.</p>
+      <p class="prose">Plus a <b>qualitative confidence rating</b> on the relation that others can weigh in on. Flavor, degree and confidence are <b>per-agent attributed assertions on a reified relation</b> — never aggregated. Ten agents rating one relation produce ten signed ratings, not an average. Nothing in the schema computes a value, so <b>there is no value to game</b>: an adversary can add their own rating, and it arrives labeled with their identity like everyone else’s.</p>
     </section>
   </div>
 
