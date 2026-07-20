@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — context and caveats</title>
+<meta name="description" content="We ran our own validator on our own graph and it failed — findable only because the structure is typed. Plus the no-numbers anti-gaming property and human correction as a designed interface." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="walk.html">Walkthrough</a>
+    <a href="cases.html">Cases</a>
+    <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html" aria-current="page">Context and caveats</a>
+    <a href="appendix.html">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="pagehead accent-source">
+      <p class="eyebrowline">Context and caveats</p>
+      <h1 class="title">It can be checked. So we checked ours, and it failed.</h1>
+      <p class="sub">A shared graph is only worth anything if it can be validated, transported and argued with. Because the structure is typed, its own defects are findable — and we’d rather show you ours than have you find them. None of what follows is detectable in a freetext model.</p>
+    </div>
+
+    <section class="move" id="how-mira-was-made" style="border-top:0;padding-top:var(--s4);scroll-margin-top:calc(var(--head) + 12px)">
+      <p class="kick accent-protocol">How MIRA was made</p>
+      <h2 class="sec">Converged before the workshop. Tested at it.</h2>
+      <p class="sub">The usual workshop builds a schema. This one arrived with a converged schema — a year of user-story and interoperability calls behind it, published as a PR-able repo before anyone flew — and spent its days implementing it across real tools and trying to break it on real data.</p>
+
+      <p class="prose">It started as lived practice, not a spec. MIRA generalizes a discourse-graph grammar worked out over a five-plus-year deployment of <a href="https://discoursegraphs.com" target="_blank" rel="noopener">Discourse Graphs</a> in working research labs — long enough to surface the failure modes that only appear at that timescale. When that experience became a workshop proposal in 2025, the funding came with one demand that set the project’s whole posture: deliver a <b>pilot</b>, not another standards document. So the success bar was fixed before the schema was: <b>move a real knowledge object from tool A to tool B.</b> An early sketch — claim / evidence / source, plus creator and timestamps — came with a charter the schema still obeys: <b>progressive formalization</b> (incomplete objects are legitimate; structure is a scaffold you adopt gradually), schemas versioned and immutable, plain web linked data first.</p>
+
+      <p class="prose"><b>The requirements were written by users, not designers.</b> Through spring 2026, practising scientists, tool-builders, funders and publishers decomposed their real workflows in a series of user-story calls. The story everything else hangs off: <i>understand what is true, why we believe it — and what would change your mind.</i> Two of the grammar’s less obvious shapes surfaced here. <b>Protocol</b> earned its place as context you can attach rather than a step you must complete — notably, the users themselves never reached for it. <b>Request</b> entered as a need you can share before any work exists to answer it. And <b>inter-lab sharing</b> — a funder’s cohort of grantees seeing each other’s live results instead of waiting for papers — was picked as the first workflow the schema had to serve.</p>
+
+      <p class="prose"><b>Then it converged, and there’s a receipt.</b> Across working sessions in April–May 2026, a technical cohort aligned the candidate schemas into the six node types on this site — Question, Claim, Evidence, Study, Protocol, Request — with <b>typed edges as first-class objects</b> you can attribute and argue about. The worked example the group converged on is still the teaching device: a Claim that DNA forms a <i>triple</i> helix, and the X-ray diffraction pattern that <b>opposes</b> it — the same case as this site’s <a href="walk.html">interactive walkthrough</a>. The <a href="https://www.loom.com/share/8353dd6401fa45e0b6038e8213f7fd45" target="_blank" rel="noopener">walkthrough recorded the week it converged</a> is public. Transport was settled separately, on purpose — <b>KOI</b> as the cross-organization envelope — so the grammar stays tool-agnostic and every platform gets the same endpoint: <b>JSON-LD over KOI</b>.</p>
+
+      <p class="prose"><b>Published before the build, so it could be argued with.</b> On 30 May 2026 the converged draft went live as a standalone, PR-able <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">LinkML repo</a> in a collectively owned org — deliberately re-defined rather than imported from any one tool, so that every platform, <i>including Discourse Graphs itself</i>, inherits the common schema. Days later, at the <a href="https://mira.science" target="_blank" rel="noopener">mira.science</a> workshop in Ireland, it sat its exam. The question was never “is this a tidy ontology” — it was <b>can the tools in the room read and write it, and can a record move between two of them.</b> Implementing the schema was mandatory; moving a record over KOI was the stretch. Both happened: authoring paths from Obsidian and MyST Markdown, a read-only inter-lab dashboard, a real lab graph round-tripped into MIRA JSON-LD — and mid-demo, a subgraph published from one tool appeared in another. What shipped is catalogued, with honest status labels, on <a href="run.html">Run it</a>.</p>
+
+      <table class="layer">
+        <thead><tr><th>When</th><th>What happened</th><th>Open artifact</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Workshop proposed and funded on a pilot condition; seed sketch (claim / evidence / source) and the charter: progressive formalization, versioned immutable schemas, web linked data first.</td><td><a href="https://mira.science" target="_blank" rel="noopener">mira.science</a></td></tr>
+          <tr><td>Spring 2026</td><td>User-story calls put the requirements in the users’ language; Protocol-as-context and Request surface; inter-lab sharing chosen as the first target.</td><td><a href="https://mira-science.github.io/inter-lab-user-story/" target="_blank" rel="noopener">inter-lab mockups</a></td></tr>
+          <tr><td>Apr–May 2026</td><td>Technical calls converge on the six-node grammar with typed, attributable edges; KOI + JSON-LD fixed as every tool’s endpoint.</td><td><a href="https://www.loom.com/share/8353dd6401fa45e0b6038e8213f7fd45" target="_blank" rel="noopener">convergence walkthrough</a></td></tr>
+          <tr><td>30 May 2026</td><td>The draft goes public as a standalone, PR-able LinkML repo in a collectively owned org — days <i>before</i> the build.</td><td><a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">MIRA-science/schema</a></td></tr>
+          <tr><td>Jun 2026</td><td>Ireland: every tool implements the schema (mandatory); a record moves A→B over KOI (stretch). Both happen.</td><td><a href="run.html">Run-it catalogue</a></td></tr>
+          <tr><td>Jul 2026 →</td><td>Solidify and stress-test: SHACL conformance as a running contract; open edges filed as Requests; the self-audit on this page.</td><td><a href="https://github.com/MIRA-science/schema/issues" target="_blank" rel="noopener">schema issues</a></td></tr>
+        </tbody>
+      </table>
+
+      <p class="disclaim"><b>Converged, not decreed; tested, not asserted; gaps tracked, not hidden.</b> What the workshop didn’t close is filed the way the schema says work should be filed — in the open, as <b>Request</b> nodes and <a href="https://github.com/MIRA-science/schema/issues" target="_blank" rel="noopener">schema issues</a>: governance, per-node attributes, endorsement, licensing. The self-audit below is the same method, still running.</p>
+    </section>
+
+    <section class="move">
+      <div class="audit">
+        <div class="ahead">We ran our own validator on our own graph. It failed.</div>
+        <ul>
+          <li><b>347 violations</b> on the demo graph — surfaced, not hidden.</li>
+          <li>A published context that mapped <b>Study → Protocol</b> — a real type error, caught because types exist.</li>
+          <li>A canonical URL <b>unreachable in three different spellings.</b></li>
+          <li>A validator that had been <b>silently broken since June.</b></li>
+          <li class="ok">Still not done: the cross-tool round-trip is unvalidated.</li>
+          <li class="ok">Still not done: the MyST parser is ~291 lines — one authoring tool to one viewer.</li>
+          <li class="ok">Still not done: no demonstrated adversarial use yet.</li>
+        </ul>
+        <div class="foot"><b>Every one of the failures above is findable only because the structure is typed</b> — none is detectable in a freetext model, where the graph “works” indefinitely while meaning something different in every consumer. This is what maintaining a real shared contract looks like: confident, not finished.</div>
+      </div>
+      <p class="disclaim"><b>Confident, not apologetic.</b> The alternative to a schema that can fail its own validator is not a cleaner schema — it is an unfalsifiable one. A format you cannot catch drifting is a format you cannot trust.</p>
+    </section>
+
+    <section class="move" id="no-numbers" style="scroll-margin-top:calc(var(--head) + 12px)">
+      <p class="kick accent-request">Anti-gaming</p>
+      <h2 class="sec">There is no number to game.</h2>
+      <p class="sub">Flavour, degree and confidence are <b>categorical labels only</b> — no computed scores, no arithmetic, anywhere in the schema.</p>
+      <p class="prose">The failure mode we designed against is the confidence scoreboard: a model that reads “+0.1 per new attestation, +0.05 when two nodes merge, capped at 0.95,” which is <b>“both unreasonable and extremely hackable.”</b> The moment a value is computed, there is a value to game — inflate it by manufacturing attestations, or by merging nodes to trip the bonus.</p>
+      <div class="nonumbers">
+        <p class="h">The property, stated structurally</p>
+        <p>Flavour, degree and confidence are <b>per-agent attributed assertions on a reified relation</b>, never aggregated. Ten agents rating one relation produce ten signed ratings, not an average. Nothing in the schema computes a value, so there is no value to game — an adversary can add their own rating, and it arrives labelled with their identity like everyone else’s.</p>
+      </div>
+      <p class="prose">Assessment stays <b>pluggable and above the schema</b>: a funder’s weighting, a reviewer’s heuristic, a lab’s rubric can each read the same signed ratings and reach their own verdict. We ship no scorer on purpose. Where a creator is uncertain, that uncertainty is <i>named</i> — not papered over with a decimal.</p>
+    </section>
+
+    <section class="move">
+      <p class="kick accent-study">Human-in-the-loop, placed precisely</p>
+      <h2 class="sec">Extraction is AI-assisted; commitment is human.</h2>
+      <p class="sub">The hand-correction points aren’t an apology — they’re the interface. The places where a human decides what to keep and how strong a claim is are the point, and they should be explicit and visible in the data.</p>
+      <p class="prose">Every extracted node ships at a curation status and climbs a ladder: <b>Initial AI draft → In expert review → Expert-verified</b>. AI always starts a node at the bottom; <b>only a human advances it</b>. The status is surfaced as a per-node badge and a topology filter, and every AI-drafted node is anchored to a verbatim source quote, so the reviewer can check it in seconds rather than re-reading the paper. This maps onto machinery we already have: the Discourse Graphs <span class="mono">NodeFormality</span> ladder and MIRA-extraction’s <span class="mono">provenance.excerpt</span>.</p>
+      <p class="prose"><b>Isn’t a human step a bottleneck?</b> Only if it’s in the wrong place. Extraction, anchoring and structural validation scale <i>with</i> the models and get better every generation. What does <b>not</b> scale away is <b>commitment</b> — deciding what enters the shared record and how strongly it is claimed. We put the human exactly there, and nowhere else, and we make the boundary visible in the data rather than leaving it implicit. That turns a supposed weakness into the answer to the only question that matters for a shared record: <i>who is accountable for this?</i></p>
+      <p class="foot-note">The pattern is running in public in the <span class="mono">oasisresearchlab/language-and-health-open-synthesis</span> graph — its three-tier curation status is live and filterable. See it on <a href="run.html">Run it</a>.</p>
+    </section>
+
+    <section class="move" id="colophon" style="scroll-margin-top:calc(var(--head) + 12px)">
+      <p class="kick accent-source">Colophon · how this site was made</p>
+      <h2 class="sec">Built the way it argues you should build.</h2>
+      <p class="sub">The division of labour this page describes for the record — AI drafts and does the legwork, a human makes the commitments — is also how the site itself was made.</p>
+      <p class="prose">It is hand-built static HTML, CSS and inline SVG: no framework, no build step, no analytics, so every page is legible at its source. AI agents drafted the copy, the diagrams and the interactive walkthroughs from written specs and from research files that had already been checked against primary sources. A human set the argument, decided what to claim and how strongly, and corrected what the models got wrong — the same human-in-the-loop boundary as the section above, applied to the site rather than to the graph.</p>
+      <p class="foot-note">Every number and quote traces to a file in the <a href="appendix.html#receipts">receipts index</a>; each figure is reproduced under the licence named in its caption. Like the schema, the site hosts nothing of its own — it only points at public artifacts.</p>
+    </section>
+  </div>
+
+  <footer class="sitefoot">
+    <div class="wrap">
+      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      The receipts index is in the <a href="appendix.html#receipts">reference appendix</a>.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/mira.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#241F2B"/>
+  <!-- artifact anchor + two readings: a tiny discourse graph -->
+  <line x1="16" y1="21" x2="9" y2="12" stroke="#8B8581" stroke-width="1.6"/>
+  <line x1="16" y1="21" x2="23" y2="12" stroke="#8B8581" stroke-width="1.6"/>
+  <rect x="12.5" y="20" width="7" height="7" rx="1.6" fill="#FBFAF8"/>
+  <circle cx="9" cy="11" r="3.2" fill="#5BA756"/>
+  <circle cx="23" cy="11" r="3.2" fill="#E6827A"/>
+</svg>

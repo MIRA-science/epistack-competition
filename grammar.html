@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — the grammar</title>
+<meta name="description" content="Six node types, one artifact anchor. The four-layer Evidence chain is the heart of the model: a Claim is a generalized assertion, an Evidence is one observation that speaks to it, the observationBase is the literal artifact, and the Study/Protocol is how it was produced." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html" aria-current="page">Grammar</a>
+    <a href="walk.html">Walkthrough</a>
+    <a href="cases.html">Cases</a>
+    <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html">Context and caveats</a>
+    <a href="appendix.html">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="pagehead accent-source">
+      <p class="eyebrowline">The grammar</p>
+      <h1 class="title">Six node types. One artifact anchor.</h1>
+      <p class="sub">Every node is a <b>record with fields</b>: the shared set below, plus a few <b>slots</b> specific to its type. Some slots hold a value; some reference another node — and that is what weaves the records into a graph.</p>
+    </div>
+
+    <section class="move" style="border-top:0;padding-top:var(--s5)">
+      <p class="kick accent-source">The nodes</p>
+      <table class="layer" aria-label="MIRA node types and their definitions">
+        <thead><tr><th>Node</th><th>What it is (from the schema)</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--question-ink)">Question</td><td>A scientific unknown, addressable by the systematic application of research methods.</td></tr>
+          <tr><td style="color:var(--claim-ink)">Claim</td><td>An atomic, generalized assertion that (proposes to) answer a question.</td></tr>
+          <tr><td style="color:var(--evidence-ink)">Evidence</td><td>A specific empirical observation from one application of a method.</td></tr>
+          <tr><td style="color:var(--study-ink)">Study</td><td>The activity — an experiment or analysis — that produces evidence.</td></tr>
+          <tr><td style="color:var(--protocol-ink)">Protocol</td><td>The reusable method an activity follows.</td></tr>
+          <tr><td style="color:var(--request-ink)">Request</td><td>A unit of work the community can pick up — issue-tracker-shaped.</td></tr>
+          <tr><td style="color:var(--source-ink)">SourceDocument</td><td>A paper, book or preprint that reports evidence.</td></tr>
+          <tr><td style="color:var(--artifact-ink)">Entity <span style="font-weight:400;color:var(--muted)">(the artifact)</span></td><td>Not a node type — it is what an Evidence record’s <span class="mono">observationBase</span> field points to: the figure, blot or dataset an observation stands on. Held as a <b>URL pointer</b>, never a payload — MIRA hosts nothing.</td></tr>
+        </tbody>
+      </table>
+      <p class="foot-note">Every node also carries the same shared <b>NodeSchema</b> fields — <span class="mono">creator</span>, <span class="mono">created</span>, <span class="mono">modified</span>, <span class="mono">description</span>, <span class="mono">has_container</span> and the record’s own text. <span class="mono">Claim</span> and <span class="mono">Evidence</span> additionally include <b>Argument</b>, so they carry the <span class="mono">supports</span> / <span class="mono">opposes</span> slots.</p>
+
+      <div class="disclaim" style="margin-top:var(--s5)">
+        <b>A slot is a field of a node — not a free-floating edge.</b> Each type is distinguished by the handful of <b>slots</b> it carries. Some slots hold a <b>value</b>: a date, the record’s text, or a <b>pointer</b> like <span class="mono">observationBase</span>, whose value is a URL to the data. Other slots hold a <b>reference</b> to another node — <span class="mono">addresses</span> → a Question, <span class="mono">sourceDocument</span> → a SourceDocument, <span class="mono">follows</span> → a Protocol — and it is those reference-slots that weave the records into a graph. So a node is a bundle of fields first; the graph is what emerges when some of those fields name other nodes.
+      </div>
+    </section>
+
+    <section class="move">
+      <p class="kick accent-evidence">The heart of the model</p>
+      <h2 class="sec">The four-layer Evidence chain — and where the objective/subjective boundary sits.</h2>
+      <p class="sub">An <b>Evidence</b> record carries the fields that place it: <span class="mono">observationStatement</span> (which Claim it speaks to), <span class="mono">observationBase</span> (the artifact it rests on — a pointer), <span class="mono">is_grounded_in</span> (the Study that produced it) and <span class="mono">sourceDocument</span> (the paper that reported it). Reading those fields lets you ask <i>which layer</i> a problem lives in — is the claim contested, the evidence un-reproduced, or the figure itself unsound? — instead of collapsing all of it into “here’s the claim” or “cite the paper.”</p>
+
+      <figure class="fig chainfig">
+        <p class="figttl">The grammar, anchored on the artifact</p>
+        <div class="scroller">
+        <svg viewBox="0 0 1200 600" role="img" aria-label="The DNA case. Above a dashed rule sit two competing Claims — double helix (correct) and triple helix (refuted) — each addressing the Question. Below the rule, one Evidence record holds the Photograph 51 diffraction artifact nested inside it as its observationBase field; it supports the double helix and opposes the triple, is grounded in a Study that follows a Protocol, and is reported in a SourceDocument.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57505A"/></marker>
+            <marker id="ah-support" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5BA756"/></marker>
+            <marker id="ah-oppose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E6827A"/></marker>
+          </defs>
+          <line class="rule" x1="16" y1="286" x2="1184" y2="286"/>
+          <text class="zone" x="18" y="276" text-anchor="start">↑ Contested — the competing claims</text>
+          <text class="zone" x="18" y="304" text-anchor="start">↓ Shared — the Evidence, the artifact nested inside it, and how it was produced</text>
+
+          <g><rect class="node-box" x="490" y="24" width="220" height="54" fill="var(--question-fill)" stroke="var(--question)"/>
+            <text class="n-label" x="600" y="48">Question</text><text class="n-sub" x="600" y="66">a scientific unknown</text></g>
+
+          <g><rect class="node-box" x="248" y="150" width="250" height="66" fill="var(--claim-fill)" stroke="var(--claim)"/>
+            <text class="n-label" x="373" y="180">Claim A</text><text class="n-sub" x="373" y="199">double helix · correct</text></g>
+          <g><rect class="node-box" x="702" y="150" width="250" height="66" fill="var(--claim-fill)" stroke="var(--claim)"/>
+            <text class="n-label" x="827" y="180">Claim B</text><text class="n-sub" x="827" y="199">triple helix · refuted</text></g>
+
+          <path class="edge" marker-end="url(#ah)" d="M430,150 C465,120 510,96 556,80"/><text class="e-label" x="470" y="114">addresses</text>
+          <path class="edge" marker-end="url(#ah)" d="M770,150 C735,120 690,96 644,80"/><text class="e-label" x="730" y="114">addresses</text>
+
+          <!-- supports / opposes cross the rule from the one Evidence to the two claims -->
+          <path class="edge" style="stroke:var(--claim);stroke-width:2.2" marker-end="url(#ah-support)" d="M556,322 C505,288 448,248 405,219"/>
+          <text class="e-label" style="fill:var(--claim-ink)" x="452" y="272">supports</text>
+          <path class="edge" style="stroke:var(--evidence);stroke-width:2.2" marker-end="url(#ah-oppose)" d="M644,322 C695,288 752,248 795,219"/>
+          <text class="e-label" style="fill:var(--evidence-ink)" x="748" y="272">opposes</text>
+
+          <!-- the Evidence record — its artifact nested inside as the observationBase field, never a free-floating node -->
+          <g>
+            <rect class="node-box" x="470" y="322" width="260" height="250" rx="14" stroke="var(--evidence)" style="fill:var(--evidence-fill);stroke-width:2.4px"/>
+            <text class="n-label" x="600" y="352">Evidence</text>
+            <text class="n-sub" x="600" y="373" style="fill:var(--evidence-ink)">reads Photograph 51 as a helix</text>
+            <text x="486" y="399" style="fill:var(--evidence-ink);font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.05em;text-anchor:start">observationBase</text>
+            <rect x="496" y="410" width="208" height="150" rx="8" fill="#fff" stroke="#4a444f" stroke-width="1.6"/>
+            <g fill="#3a343f">
+              <g transform="translate(600 478) rotate(45)"><ellipse cx="0" cy="-46" rx="5.6" ry="6" opacity="0.35"/><ellipse cx="0" cy="-28" rx="11.2" ry="6.5" opacity="0.72"/><ellipse cx="0" cy="28" rx="11.2" ry="6.5" opacity="0.72"/><ellipse cx="0" cy="46" rx="5.6" ry="6" opacity="0.35"/></g>
+              <g transform="translate(600 478) rotate(-45)"><ellipse cx="0" cy="-46" rx="5.6" ry="6" opacity="0.35"/><ellipse cx="0" cy="-28" rx="11.2" ry="6.5" opacity="0.72"/><ellipse cx="0" cy="28" rx="11.2" ry="6.5" opacity="0.72"/><ellipse cx="0" cy="46" rx="5.6" ry="6" opacity="0.35"/></g>
+              <circle cx="600" cy="478" r="3.2"/>
+            </g>
+            <text x="600" y="551" text-anchor="middle" style="fill:#4a444f;font-family:var(--sans);font-size:10px;font-weight:700">Photograph 51 · X-ray diffraction</text>
+          </g>
+
+          <!-- provenance, below the rule -->
+          <g><rect class="node-box" x="150" y="372" width="210" height="60" fill="var(--study-fill)" stroke="var(--study)"/>
+            <text class="n-label" x="255" y="400">Study</text><text class="n-sub" x="255" y="419">X-ray fibre diffraction</text></g>
+          <g><rect class="node-box" x="150" y="486" width="210" height="60" fill="var(--protocol-fill)" stroke="var(--protocol)"/>
+            <text class="n-label" x="255" y="514">Protocol</text><text class="n-sub" x="255" y="533">hydrated fibre · humidity-controlled</text></g>
+          <g><rect class="node-box" x="840" y="372" width="210" height="60" fill="#fff" stroke="var(--source)"/>
+            <text class="n-label" x="945" y="400">SourceDocument</text><text class="n-sub" x="945" y="419">Nature · 25 Apr 1953</text></g>
+
+          <path class="edge" marker-end="url(#ah)" d="M470,440 C432,424 398,410 362,403"/><text class="e-label" x="414" y="416">is_grounded_in</text>
+          <path class="edge" marker-end="url(#ah)" d="M730,440 C778,424 808,410 838,403"/><text class="e-label" x="786" y="416">sourceDocument</text>
+          <path class="edge" marker-end="url(#ah)" d="M255,432 L255,484"/><text class="e-label" x="292" y="462" text-anchor="start">follows</text>
+        </svg>
+        </div>
+        <figcaption>The dashed rule is the argument. <b>Above it</b> are the competing claims — what a field argues about. <b>Below it</b> is the shared basis they argue over: a single <b>Evidence</b> record, the <b>artifact nested inside it</b> as its <span class="mono">observationBase</span> field, and the Study, Protocol and SourceDocument that produced and reported it. Here that one artifact — <b>Photograph 51</b> — <span style="color:var(--claim-ink)">supports</span> the double helix and <span style="color:var(--evidence-ink)">opposes</span> the triple. The reading lives in the record; the data it rests on lives <em>inside</em> it; both are addressable and queryable.</figcaption>
+      </figure>
+    </section>
+
+    <section class="move">
+      <p class="kick accent-study">The format, concretely</p>
+      <h2 class="sec">A record is a bundle of fields.</h2>
+      <p class="sub">A node carries a <span class="mono">@type</span> array and a set of <b>slots</b>. Some slots hold a <b>value</b>; some hold a <b>reference</b> to another node. Only when a reference needs to carry <i>who asserted it and how strongly</i> is it <b>reified</b> as its own record — and that is where <span class="mono">flavour</span>, <span class="mono">degree</span> and <span class="mono">confidence</span> live, per agent. The anti-gaming property depends on it.</p>
+      <div class="code" role="img" aria-label="A JSON-LD Evidence record showing its slots as fields — some values, some references — and the same observationStatement optionally reified for attribution.">
+<span class="cm">// an Evidence record — a bundle of slots (fields)</span><br>
+{ <span class="k">"@id"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
+&nbsp;&nbsp;<span class="k">"@type"</span>: [<span class="s">"sdata:44107"</span>, <span class="s">"mira:Evidence"</span>],<br>
+&nbsp;&nbsp;<span class="k">"content"</span>: <span class="s">"An X-shaped diffraction pattern — a helix."</span>, <span class="cm">// a value</span><br>
+&nbsp;&nbsp;<span class="k">"creator"</span>: <span class="s">"mira:person-franklin"</span>, <span class="cm">// a value</span><br>
+&nbsp;&nbsp;<span class="k">"observationBase"</span>: <span class="s">"https://.../photo-51.tif"</span>, <span class="cm">// a pointer (URL)</span><br>
+&nbsp;&nbsp;<span class="k">"observationStatement"</span>: <span class="s">"mira:clm-double-helix"</span>, <span class="cm">// a reference</span><br>
+&nbsp;&nbsp;<span class="k">"is_grounded_in"</span>: <span class="s">"mira:study-franklin-1952"</span>, <span class="cm">// a reference</span><br>
+&nbsp;&nbsp;<span class="k">"sourceDocument"</span>: <span class="s">"mira:doc-franklin-1953"</span> } <span class="cm">// a reference</span><br><br>
+<span class="cm">// the same observationStatement, reified — only to add attribution</span><br>
+{ <span class="k">"@type"</span>: <span class="s">"mira:RelationInstance"</span>,<br>
+&nbsp;&nbsp;<span class="k">"predicate"</span>: <span class="s">"observationStatement"</span>,<br>
+&nbsp;&nbsp;<span class="k">"source"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
+&nbsp;&nbsp;<span class="k">"destination"</span>: <span class="s">"mira:clm-double-helix"</span>,<br>
+&nbsp;&nbsp;<span class="k">"creator"</span>: <span class="s">"mira:person-franklin"</span> } <span class="cm">// who asserted it</span>
+      </div>
+      <p class="foot-note">Canonical grammar: <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">github.com/MIRA-science/schema</a> (<span class="mono">mira.yaml</span>, LinkML — every slot is declared there with its range). The wire format is JSON-LD via <span class="mono">mira.jsonld</span>; SHACL and Turtle are generated from the source. For the same walkthrough you can click, see the interactive <a href="walk.html">DNA deck</a>.</p>
+    </section>
+
+    <section class="move">
+      <p class="kick accent-claim">Linking, without a scoreboard</p>
+      <h2 class="sec">Three flavours of evidence→claim linkage, with a qualitative degree.</h2>
+      <table class="degtable" aria-label="The three linkage flavours and their qualitative degrees">
+        <thead><tr><th>Flavour</th><th>Degree</th></tr></thead>
+        <tbody>
+          <tr><td class="fl-support">supports</td><td>not at all · weakly · moderately · strongly</td></tr>
+          <tr><td class="fl-informs">informs</td><td>— (neutral / topical)</td></tr>
+          <tr><td class="fl-opposes">opposes</td><td>not at all · weakly · moderately · strongly</td></tr>
+        </tbody>
+      </table>
+      <p class="prose">Plus a <b>qualitative confidence rating</b> on the relation that others can weigh in on. Flavour, degree and confidence are <b>per-agent attributed assertions on a reified relation</b> — never aggregated. Ten agents rating one relation produce ten signed ratings, not an average. Nothing in the schema computes a value, so <b>there is no value to game</b>: an adversary can add their own rating, and it arrives labelled with their identity like everyone else’s. More on why in the <a href="audit.html#no-numbers">Context and caveats</a>.</p>
+    </section>
+  </div>
+
+  <footer class="sitefoot">
+    <div class="wrap">
+      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      Now watch the grammar built one record at a time on the <a href="walk.html">DNA walkthrough</a>, or meet it on contested science in <a href="cases.html">the two cases</a>.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/mira.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — reference</title>
+<meta name="description" content="Schema at a glance, prior-art mapping to nanopublications / AIF / PROV-O, and a receipts index — every verbatim quote with its source." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="walk.html">Walkthrough</a>
+    <a href="cases.html">Cases</a>
+    <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html">Context and caveats</a>
+    <a href="appendix.html" aria-current="page">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="pagehead accent-source">
+      <p class="eyebrowline">Reference · the unlimited tier</p>
+      <h1 class="title">Schema, prior art, receipts.</h1>
+      <p class="sub">The supporting material for everything on the site: what the schema contains, where MIRA sits in the lineage, and the source of every quote we used.</p>
+    </div>
+
+    <!-- ===== schema at a glance ===== -->
+    <section class="move" id="schema" style="border-top:0;padding-top:var(--s4);scroll-margin-top:calc(var(--head)+12px)">
+      <p class="kick accent-source">Schema at a glance</p>
+      <h2 class="sec">One source of truth; everything else generated.</h2>
+      <p class="prose">The canonical grammar is <span class="mono">mira.yaml</span> (LinkML). From it, LinkML generates <span class="mono">mira.shacl</span> (machine-checkable conformance), <span class="mono">mira.ttl</span> (RDF), and <span class="mono">mira.jsonld</span> (the JSON-LD context that is the wire format). Hand-editing the generated artifacts is a bug; edit the source and regenerate.</p>
+      <div class="mapmini">
+        <code>mira.yaml</code><span class="arr">→</span><code>gen-shacl</code><span class="arr">→</span><code>mira.shacl</code><span class="arr">+</span><code>mira.jsonld</code><span class="arr">+</span><code>mira.ttl</code>
+      </div>
+      <p class="foot-note">Node types: Question · Claim · Evidence · Study · Protocol · Request · SourceDocument. Core slots used on this site: <span class="mono">observationBase</span> · <span class="mono">observationStatement</span> · <span class="mono">is_grounded_in</span>/<span class="mono">grounds</span> · <span class="mono">follows</span> · <span class="mono">sourceDocument</span> · <span class="mono">addresses</span> · <span class="mono">supports</span>/<span class="mono">opposes</span>/<span class="mono">informs</span> · <span class="mono">request_for</span>/<span class="mono">request_target</span>. Canonical source: <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">github.com/MIRA-science/schema</a>.</p>
+    </section>
+
+    <!-- ===== prior art ===== -->
+    <section class="move" id="priorart" style="scroll-margin-top:calc(var(--head)+12px)">
+      <p class="kick accent-study">Prior art</p>
+      <h2 class="sec">Extending a lineage, not reinventing it.</h2>
+      <table class="layer" aria-label="Prior-art mapping">
+        <thead><tr><th>Prior art</th><th>Shared idea</th><th>What MIRA adds</th></tr></thead>
+        <tbody>
+          <tr><td>Nanopublications</td><td>The reified assertion — a statement that carries its own provenance and author.</td><td rowspan="3">A <b>question layer</b> — open unknowns as durable, first-class nodes — and the specific relation <i>this observation is about that claim</i>, carried as its own relation slot (the <span class="mono">observationStatement</span> / <span class="mono">observationBase</span> split).</td></tr>
+          <tr><td>AIF (Argument Interchange Format)</td><td>Argument structure — supports and attacks between claims.</td></tr>
+          <tr><td>PROV-O</td><td>Provenance — who produced what, from what, when.</td></tr>
+        </tbody>
+      </table>
+      <p class="foot-note">MIRA is compatible with all three; the additions are the question layer and the observation-about-claim relation. Most systems that emit claims-with-source-spans already produce, in effect, an <span class="mono">Evidence + observationStatement + sourceDocument</span> triple — the mapping is short, which is the whole bet of a shared schema.</p>
+    </section>
+
+    <!-- ===== receipts index ===== -->
+    <section class="move" id="receipts" style="scroll-margin-top:calc(var(--head)+12px)">
+      <p class="kick accent-request">Receipts index</p>
+      <h2 class="sec">Every quote, with its source.</h2>
+      <p class="sub">The verbatim quotes and hard numbers used across the site, each with the research file and line where it is recorded. A judge who clicks through will find the caveats we cite first; the two research files carry the full unverified lists.</p>
+
+      <h3 class="subsec">COVID-19 origins</h3>
+      <div class="receipts">
+        <div class="receipt"><q>there does not exist any publicly available list of the earliest known covid cases… which cannot be independently verified or duplicated.</q><span class="meta"><a href="https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/" target="_blank" rel="noopener"><b>Judge Eric Stansifer</b>, Rootclaim debate decision</a> · <code>research/04-covid-findings.md:16–20</code></span></div>
+        <div class="receipt"><q>No line list of early COVID-19 cases is available</q> · extraction introduces <q>up to about 50m of noise</q>; 155 of 164 points recovered.<span class="meta"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9348750/" target="_blank" rel="noopener"><b>Worobey et al. 2022</b>, Science 377:951</a> · <code>research/04-covid-findings.md:26</code></span></div>
+        <div class="receipt"><q>I was not able to evaluate several lines of inquiry which I thought could have been valuable for both sides.</q><span class="meta"><a href="https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/" target="_blank" rel="noopener"><b>Judge Will Van Treuren</b>, Rootclaim debate decision</a> · <code>research/04-covid-findings.md:128–129</code></span></div>
+        <div class="receipt"><q>A cursory search suggested some (more credible) reports of early seropositivity in retrospective studies of US blood banks that would have been hard to explain under the ZO theory.</q><span class="meta"><a href="https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/" target="_blank" rel="noopener"><b>Van Treuren</b>, his unexamined crux</a> · <code>research/04-covid-findings.md:124–126</code></span></div>
+        <div class="receipt">The necessary model <q>does not exist</q>; neither their analysis nor Worobey’s <q>could be used to support or reject the zoonosis hypothesis.</q><span class="meta"><a href="https://academic.oup.com/jrsssa/article/187/3/710/7557954" target="_blank" rel="noopener"><b>Stoyan &amp; Chiu 2024</b>, JRSS-A</a> · <code>research/04-covid-findings.md:146–149</code></span></div>
+      </div>
+
+      <h3 class="subsec">Are eggs healthy?</h3>
+      <div class="receipts">
+        <div class="receipt"><q>a sensitive and specific biomarker of egg consumption has not yet been reported in the literature.</q><span class="meta"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6162878/" target="_blank" rel="noopener"><b>Münger et al. 2018</b>, Genes &amp; Nutrition 13:26</a> (635-paper review) · <code>research/05-eggs-findings.md:180–181</code></span></div>
+        <div class="receipt">Fasting TMAO, pooled across chronic feeding trials: <b>WMD &minus;0.08 &micro;mol/L (&minus;0.47 to 0.32), p = 0.69, I² = 23%</b> — a consistent null.<span class="meta"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12560564/" target="_blank" rel="noopener"><b>Aryaeian 2025</b>, Nutr J 24:165</a> · <code>research/05-eggs-findings.md:234–236</code></span></div>
+        <div class="receipt">Plasma choline in free-living people explains ~<b>4%</b> of its own variance (r ≈ 0.20); correlates with egg intake at <b>r = 0.06</b> (largest study), better with alcohol.<span class="meta"><code>research/05-eggs-findings.md:199–201</code></span></div>
+      </div>
+
+      <h3 class="subsec">The Request→Study handoff (one lab, Roam + DG plugin)</h3>
+      <div class="receipts">
+        <div class="receipt"><b>445 issues</b> over 40 months · 29% claimed · <b>15% by someone other than the creator</b> · 38% of claimed issues produced a result · median <b>12 days</b> claim→first result.<span class="meta"><a href="https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/tree/main/output/evidence_bundles/" target="_blank" rel="noopener">Matt Akamatsu’s published lab updates</a> · <code>DRAFT.md:337–343</code></span></div>
+      </div>
+
+      <p class="foot-note" style="margin-top:var(--s6)"><b>On what we left out.</b> Numbers that did not survive checking are not on the site: the COVID “23 orders of magnitude” framing, and the eggs CCA 40%/28% figure (still to be confirmed against the open-access Formisano 2025 full text). The self-audit baseline is <b>347</b> violations, not the stale 661 in an older validation note. Full unverified lists: <span class="mono">research/04-covid-findings.md §4</span> and <span class="mono">research/05-eggs-findings.md §5</span>.</p>
+    </section>
+  </div>
+
+  <footer class="sitefoot">
+    <div class="wrap">
+      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      Private repositories (<span class="mono">mira-board</span>, <span class="mono">Ethnography</span>, <span class="mono">MIRA-transcripts</span>) are never cited. Back to the <a href="index.html">start</a>.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/mira.js"></script>
+</body>
+</html>

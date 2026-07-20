@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — walk one result through</title>
+<meta name="description" content="Watch the discovery of DNA's structure become a graph, one record at a time — a settled case, so attention goes to the structure, not the answer." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body class="walk">
+<a class="skip" href="#steps">Skip to the walkthrough</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="walk.html" aria-current="page">Walkthrough</a>
+    <a href="cases.html">Cases</a>
+    <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html">Context and caveats</a>
+    <a href="appendix.html">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">01 / 09</div>
+<div class="dots" id="dots" role="tablist" aria-label="Scenes"></div>
+
+<main class="view scrolly" id="walk">
+  <div class="figure" id="figure" aria-hidden="true">
+    <svg id="t1svg" viewBox="0 0 430 430" role="img" aria-label="A discourse graph of the discovery of DNA's structure, built one record at a time.">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#AAA59C"></path>
+        </marker>
+      </defs>
+      <g id="t1edges"></g>
+      <g id="t1nodes"></g>
+      <g id="t1anno"></g>
+    </svg>
+  </div>
+  <div class="steps" id="steps"></div>
+</main>
+
+<script src="assets/mira.js"></script>
+<script src="assets/walk.js"></script>
+</body>
+</html>

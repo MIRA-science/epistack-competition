@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — the Protocol FAQ</title>
+<meta name="description" content="Interoperability without flattening, what the format looks like, how it is maintained over time, what it unlocks, and whether any of it is real — answered one question at a time, each grounded in a prototype." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="walk.html">Walkthrough</a>
+    <a href="cases.html">Cases</a>
+    <a href="protocol-faq.html" aria-current="page">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html">Context and caveats</a>
+    <a href="appendix.html">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<main id="main">
+  <div class="wrap" style="max-width:1040px">
+    <div class="pagehead accent-request">
+      <p class="eyebrowline">The Protocol FAQ · the spine</p>
+      <h1 class="title">Why this protocol?</h1>
+      <p class="sub">Interoperability without flattening, what the format actually looks like, how it survives new sources and better AI, and whether any of it is real. Each answer is short, carries an attributed quote where one exists, and links to a prototype or case you can open. Core questions — the ten-minute read — are marked with a dot.</p>
+    </div>
+
+    <div class="faq-layout">
+      <aside class="toc" aria-label="On this page">
+        <p class="th">On this page</p>
+        <p class="sechead">Interoperability &amp; nuance</p>
+        <a data-sec="sec-tension" href="#sec-tension">The core tension</a>
+        <p class="sechead">The format</p>
+        <a data-sec="sec-format" href="#sec-format">What it looks like</a>
+        <p class="sechead">Over time</p>
+        <a data-sec="sec-time" href="#sec-time">Maintained &amp; changing</a>
+        <p class="sechead">Payoff</p>
+        <a data-sec="sec-unlocks" href="#sec-unlocks">What it unlocks</a>
+        <p class="sechead">Credibility</p>
+        <a data-sec="sec-cred" href="#sec-cred">Provenance &amp; prior art</a>
+      </aside>
+
+      <div class="faqbody">
+        <div class="faq-controls">
+          <span class="legend"><span class="core">core question — the ten-minute read</span></span>
+          <button class="expandall" type="button" aria-label="Expand or collapse all answers">Expand all</button>
+        </div>
+
+        <!-- ===== A. the core tension ===== -->
+        <section class="faqsec" id="sec-tension">
+          <h2>Interoperability without flattening the nuance</h2>
+          <p class="secsub">The central worry: a shared format that lets analyses combine usually does it by forcing agreement, and agreement is where the nuance dies.</p>
+
+          <details class="qa" id="q-a1" open>
+            <summary><span class="core"></span>How do you get interoperability without flattening the nuance?</summary>
+            <div class="body">
+              <p class="prose">Put the objective/subjective boundary at the <b>artifact</b>. Below it — the data itself, the study that produced it, the method that study followed, which paper reported it — is shared and interoperable; everyone can point at it whether or not they agree. Above it — how you <i>describe</i> the artifact, which claim you think it speaks to, how strongly — is <b>attributed and allowed to coexist</b>, never merged into a single canonical reading.</p>
+              <p class="prose">Two people who read the same plot differently produce two attributed <span class="mono">observationStatement</span>s over one <span class="mono">observationBase</span>, and the graph keeps both. Interoperability lives below the line; nuance lives above it, signed.</p>
+              <a class="grounding" href="cases.html#covid">See it → five readings, one observationBase (COVID)</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-a2">
+            <summary><span class="core"></span>Doesn’t a shared schema force everyone into one vocabulary or ontology?</summary>
+            <div class="body">
+              <p class="prose">No. The grammar is deliberately <b>minimal — six node types</b> — and the wire format is <b>JSON-LD</b>: schema-agnostic transport, no triple store required to participate. You <b>attach</b> records to shared artifacts; you never overwrite someone else’s node. Two “similar but not identical” claims stay as separate nodes, linked by qualitative <span class="mono">supports</span> / <span class="mono">opposes</span> / <span class="mono">informs</span> — not collapsed into one.</p>
+              <p class="prose">Because MIRA is co-developed as a generalization of the Discourse Graphs <span class="mono">dg:</span> vocabulary, a tool can extend the grammar for its own field and still round-trip the shared core.</p>
+              <a class="grounding" href="run.html">Run it → the MyST → JSON-LD round-trip</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-a3">
+            <summary><span class="core"></span>Two analysts describe the same plot differently — whose description wins?</summary>
+            <div class="body">
+              <p class="prose">Neither. The <span class="mono">observationBase</span> — the plot, table or dataset — is invariant; the <span class="mono">observationStatement</span> is one person’s <i>reading</i> of it, attributed to them. Several statements over one base is just several people reading one plot differently. That is not corruption to be resolved — it is the honest state, made queryable: you can ask <i>does the disagreement live in the description, or in the inference?</i></p>
+              <a class="grounding" href="walk.html">See it → one artifact, two verdicts (DNA)</a>
+              <a class="grounding" href="cases.html#covid">and on COVID</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-a4">
+            <summary>If every reading coexists, how does a reader choose whose to trust?</summary>
+            <div class="body">
+              <p class="prose">You <b>subscribe to a lens</b>. Because every relation and every rating is <b>per-agent attributed</b> — each carries its <span class="mono">creator</span> — a reader, funder or lab can add a <b>signal for whose reading of the shared graph they trust</b>: follow one curator’s <span class="mono">observationStatement</span>s and confidence ratings, blend several, or discount a source you don’t. The artifacts underneath stay identical for everyone; the <b>lens applied on top</b> is the consumer’s choice.</p>
+              <p class="prose">So interoperability never forces one canonical reading. It guarantees a shared set of records, then lets each consumer <b>weight the curator whose judgment they subscribe to</b> — the same graph, read through whichever attributed view you pick.</p>
+              <a class="grounding" href="cases.html#covid">See it → five attributed readings, one base (COVID)</a>
+            </div>
+          </details>
+        </section>
+
+        <!-- ===== B. the format ===== -->
+        <section class="faqsec" id="sec-format">
+          <h2>The format</h2>
+          <p class="secsub">What a format looks like that is flexible enough to link diverse subtopics and multi-perspective investigations while preserving important detail.</p>
+
+          <details class="qa" id="q-b1">
+            <summary><span class="core"></span>What does the format actually look like?</summary>
+            <div class="body">
+              <p class="prose">Six node types — Question, Claim, Evidence, Study, Protocol, Request — plus SourceDocument. Each is a <b>record with fields (slots)</b>, and the type-specific slots are what distinguish the types. Some slots hold a <b>value</b> (a date, or a pointer like <span class="mono">observationBase</span> — a URL to the data); some hold a <b>reference</b> to another node, and those reference-slots are what weave the graph. The load-bearer is the <b>four-layer Evidence chain</b>: an Evidence record’s fields place it against the Claim it speaks to (<span class="mono">observationStatement</span>), the artifact it rests on (<span class="mono">observationBase</span>), the Study that produced it (<span class="mono">is_grounded_in</span>) and the paper that reported it (<span class="mono">sourceDocument</span>). When a reference needs to carry <i>who asserted it and how strongly</i>, it is <b>reified</b> as its own record so attribution, flavour and degree attach to the assertion itself.</p>
+              <a class="grounding" href="grammar.html">See it → the chain diagram + a record in JSON-LD</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-b2">
+            <summary>How does it link diverse subtopics and multi-perspective investigations without collapsing them?</summary>
+            <div class="body">
+              <p class="prose">The <b>Question layer</b> plus <span class="mono">addresses</span> lets one inquiry fan out into sub-questions (“are eggs healthy?” → “healthy compared to what, on which observable, in whom?”). Multi-perspective disagreement rides on <span class="mono">supports</span> / <span class="mono">opposes</span> / <span class="mono">informs</span> with a qualitative degree, all pointing at the same claims. Cross-links compose across topics, so a graph in one field can reference a shared artifact in another.</p>
+              <p class="prose">You can see it running on two unrelated fields at once — a live language-and-health graph and a live whitepaper-as-a-graph — both giving every node a URL and generating their narrative as a traversal.</p>
+              <a class="grounding" href="cases.html">See it → both worked cases</a>
+              <a class="grounding" href="run.html">and two live public graphs</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-b3">
+            <summary>How do you preserve caveats, uncertainty, and “similar but not identical”?</summary>
+            <div class="body">
+              <p class="prose">Three moves. Multiple Evidence records and <span class="mono">observationStatement</span>s instead of one merged claim. A <b>qualitative confidence rating</b> per edge that others can weigh in on. And <b>ghost-slots</b> — dashed placeholders that make <i>absence</i> structured and visible, so a missing dataset or an unmeasured exposure is a shape in the graph, not silence.</p>
+              <p class="prose">None of this is a number.</p>
+              <a class="grounding" href="cases.html#covid">See it → ghost-slots (COVID)</a>
+              <a class="grounding" href="cases.html#eggs">and the missing biomarker (eggs)</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-b4">
+            <summary><span class="core"></span>How do you keep disagreement legible instead of resolving it away?</summary>
+            <div class="body">
+              <p class="prose">The same anchor <b>absorbs</b> disagreement. One artifact can carry a <span class="mono">supports</span> edge and an <span class="mono">opposes</span> edge at once — Photograph 51 supports the double helix and opposes the triple helix. Five analyses can land on one <span class="mono">observationBase</span>. Once they do, you can ask <i>which layer</i> the disagreement lives in: the description of the artifact, the inference drawn from it, or the artifact itself. Nothing is deleted to reach a verdict.</p>
+              <a class="grounding" href="walk.html">See it → supports + opposes on one artifact</a>
+              <a class="grounding" href="cases.html#covid">and five readings, one base</a>
+            </div>
+          </details>
+        </section>
+
+        <!-- ===== C. over time ===== -->
+        <section class="faqsec" id="sec-time">
+          <h2>Maintained over time</h2>
+          <p class="secsub">How the format plays well with newly-emerging sources, a diverse and changing user base, and an expanding frontier of AI tooling.</p>
+
+          <details class="qa" id="q-c1">
+            <summary><span class="core"></span>New sources keep arriving — how does the graph absorb them?</summary>
+            <div class="body">
+              <p class="prose"><b>Append-only attach.</b> A new paper becomes new Evidence and Claim nodes that attach to existing ones by edge; every claim they touch updates its support without anyone rewriting a review. When <i>Cell</i> published a new class of pre-emergence-selection evidence in March 2026, two years after the Rootclaim debate closed, in a sealed-document world it is a PDF nobody wires up — in the graph it is a Claim and two Evidence nodes that snap onto the 2024 COVID graph.</p>
+              <a class="grounding" href="cases.html#covid">See it → the snap-on nodes</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-c2">
+            <summary>The user base is diverse and changing — how does that not corrupt the record?</summary>
+            <div class="body">
+              <p class="prose"><b>Extraction is AI-assisted; curation is human.</b> A curation-status ladder — <b>Initial AI draft → In review → Verified</b> — is surfaced per subgraph and per node, with plural users, allowing for filters based on one’s “epistemic standards.” Every AI-drafted node is anchored to a verbatim source quote so the reviewer can check it in seconds. Every assertion carries its <span class="mono">creator</span>.</p>
+              <p class="prose">The anti-gaming property: ratings are <b>per-agent attributed, never aggregated</b> — an adversary can only add their own labelled rating, alongside everyone else’s. This pattern is running in public in the <span class="mono">oasisresearchlab/language-and-health-open-synthesis</span> graph (<a href="https://language-and-health-open-synthesis.vercel.app/node/E-0007" target="_blank" rel="noopener">example</a>).</p>
+              <a class="grounding" href="audit.html#no-numbers">Why → the anti-gaming argument</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-c3">
+            <summary>AI tooling keeps getting better — does the format go obsolete?</summary>
+            <div class="body">
+              <p class="prose">The format is <b>downstream of the tools, not coupled to them</b>. Extraction, anchoring and structural validation scale <i>with</i> the models and get better every generation; what stays fixed is the human <b>commitment</b> point — deciding what enters the shared record and how strongly it is claimed. That is where the human goes, and nowhere else, so no hand-designed step becomes the bottleneck.</p>
+              <p class="prose"><b>LinkML → SHACL</b> makes conformance machine-checkable, so tools can be swapped without breaking the record, and <b>JSON-LD</b> means no lock-in.</p>
+              <a class="grounding" href="run.html">Run it → AI-assisted extraction</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-c4">
+            <summary>How do you know the format is being followed and not silently drifting?</summary>
+            <div class="body">
+              <p class="prose"><b>Typed and validatable.</b> While entering this contest, we ran SHACL on our own graph and it caught real drift — a type error, a dead canonical URL, a validator silently broken for weeks — that we fixed with <a href="https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/commit/08493f6a46db223614cafbde68684fcb0f4b1c8a" target="_blank" rel="noopener">commits</a> and <a href="https://github.com/MIRA-science/schema/issues/25" target="_blank" rel="noopener">issues</a> proposing schema refinement. Maintaining a shared contract <i>looks like</i> catching your own violations; community calls and issue discussions allow for principled schema changes.</p>
+              <a class="grounding" href="audit.html">See it → Context and caveats</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-c5">
+            <summary><span class="core"></span>How does it cross organizations and tools?</summary>
+            <div class="body">
+              <p class="prose"><b><a href="https://github.com/MIRA-science/koi-net-mira-prototype" target="_blank" rel="noopener">KOI</a></b> is the cross-organization envelope: during the inter-lab pilot, different people’s agents and tools read from and wrote to the same KOI node across organizational boundaries, routinely. KOI is an instance of the <a href="https://github.com/DynamicalSystemsGroup/koi-net" target="_blank" rel="noopener">Knowledge Organization Infrastructure Network</a> developed by the Dynamical Systems Group. Federation <i>across schemas</i> is designed but not implemented (we will build it this year if you support it!) <b>ATProto</b> is the intended public layer; draft lexicons (<span class="mono">science.mira.*</span>) exist and are labelled DRAFT, not on the network. Across tools the loop has three legs — <b>ingestion → structure → transport</b>: <b><a href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">MIRA-extraction</a></b> lifts nodes from a source PDF, each pinned to a verbatim source excerpt with its dangling edges reported so nothing drops silently; the shared <b>schema</b> is the structure those records validate against; and the KOI envelope above is the transport. We have demonstrated round trips from PDFs and Markdown publications: MyST Markdown → <span class="mono">myst-plus-mira</span> → JSON-LD → a drag-and-drop viewer — one authoring tool to one viewer.</p>
+              <a class="grounding" href="run.html">Run it → the local KOI round-trip + MyST</a>
+            </div>
+          </details>
+        </section>
+
+        <!-- ===== D. what it unlocks ===== -->
+        <section class="faqsec" id="sec-unlocks">
+          <h2>What it unlocks</h2>
+          <p class="secsub">Once the material is structured, what becomes possible — including the move from “assess what exists” to “generate the work that would resolve it.”</p>
+
+          <details class="qa" id="q-d1">
+            <summary><span class="core"></span>Once it’s structured, what can you do that you couldn’t before?</summary>
+            <div class="body">
+              <p class="prose">Three things. <b>Navigate to the evidence</b> — the artifact is addressable, not buried on page 44 of an annex. <b>Detect correlated evidence masquerading as independent</b> — because convergence becomes a fact about artifacts, not a count of citations. And <b>the gaps become actionable</b> (next question).</p>
+              <p class="prose">The convergence test, undecidable in a claim-indexed or freetext model where twenty <span class="mono">supports</span> edges look like twenty independent supports:</p>
+              <table class="degtable" aria-label="Four convergence patterns as facts about artifacts">
+                <thead><tr><th>Pattern</th><th>What it actually is</th></tr></thead>
+                <tbody>
+                  <tr><td>Many Evidence → one <span class="mono">observationBase</span></td><td>One dataset, re-cited. Not accumulating support.</td></tr>
+                  <tr><td>Many Evidence → many Studies → one <span class="mono">Protocol</span></td><td>Independent data, shared method ⇒ a shared systematic-error mode.</td></tr>
+                  <tr><td>Many Evidence → one <span class="mono">sourceDocument</span></td><td>One report, not many observations.</td></tr>
+                  <tr><td>Disjoint at all three</td><td><b>Actually independent.</b> Only this licenses accumulation.</td></tr>
+                </tbody>
+              </table>
+              <a class="grounding" href="cases.html#covid">See it → the patterns on the real case</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-d2">
+            <summary><span class="core"></span>How does disagreement “compound into new experiments”?</summary>
+            <div class="body">
+              <p class="prose">“What would change my mind” is a <span class="mono">Request</span>. Its <span class="mono">request_target</span> points at the contested Claim; its <span class="mono">request_for</span> points at the Study that would settle it. A researcher <b>claims</b> it and it spawns their Study, which grounds new Evidence — closing the provenance loop, with the requester’s and the claimer’s credit both on the record.</p>
+              <p class="prose">And it’s field-tested: in one lab’s issue tracker, <b>15% of claimed issues were picked up by someone other than the author</b>, and one sat dormant for fourteen months until a new undergraduate found and finished it — before the PI knew it existed. <a href="https://experiment.com/u/Hd2AYg" target="_blank" rel="noopener">Story</a> + <a href="https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/tree/main/output/evidence_bundles/evd5-issue-funnel" target="_blank" rel="noopener">evidence</a>.</p>
+              <a class="grounding" href="cases.html#covid">See it → the Request→Study spin-out + field data</a>
+            </div>
+          </details>
+        </section>
+
+        <!-- ===== E. credibility ===== -->
+        <section class="faqsec" id="sec-cred">
+          <h2>Provenance &amp; credibility</h2>
+          <p class="secsub">The meta-questions a skeptic asks: is it real, and is it new?</p>
+
+          <details class="qa" id="q-e1">
+            <summary>Is any of this actually running, or is it a spec?</summary>
+            <div class="body">
+              <p class="prose"><b>Shipped:</b> the schema, two live public graphs on unrelated fields, the extraction tool, the local KOI round-trip, the MyST→JSON-LD round-trip. <b>Designed, not built:</b> cross-schema federation, ATProto on the network, MIRA deployed at scale. We’re ready to build and test those, given financial support!</p>
+              <a class="grounding" href="run.html">See it → the whole catalogue, marked</a>
+            </div>
+          </details>
+
+          <details class="qa" id="q-e2">
+            <summary>Where does this sit relative to nanopublications, PROV-O, and AIF?</summary>
+            <div class="body">
+              <p class="prose">MIRA is compatible with all three and extends the lineage. The reified-assertion idea is shared with <b>nanopublications</b>, argument structure with <b>AIF</b>, provenance with <b>PROV-O</b>. What MIRA adds on top is a <b>question layer</b> — open unknowns as durable, first-class nodes — and the specific move at the heart of the model: <i>this observation is about that claim</i>, carried as a first-class relation slot (the <span class="mono">observationStatement</span> / <span class="mono">observationBase</span> split).</p>
+              <a class="grounding" href="appendix.html#priorart">See it → the prior-art mapping</a>
+            </div>
+          </details>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="sitefoot">
+    <div class="wrap" style="max-width:1040px">
+      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      Every quote above is matched character-for-character against its source; the <a href="appendix.html#receipts">receipts index</a> lists each with its file and line.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/mira.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<title>MIRA — the two cases</title>
+<meta name="description" content="The same grammar on contested science. COVID-19 origins: five analyses, one picture, no dataset. Eggs: what happens when the artifact under a claim doesn't exist. Each ends in a Request." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mira.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="wordmark" href="index.html"><b>MIRA</b><span class="sub">modular interoperable research attribution</span></a>
+  <button class="navtoggle" aria-label="Open menu" aria-controls="sitenav" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="nav" id="sitenav" aria-label="Pages">
+    <a href="index.html">Home</a>
+    <a href="grammar.html">Grammar</a>
+    <a href="walk.html">Walkthrough</a>
+    <a href="cases.html" aria-current="page">Cases</a>
+    <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
+    <a href="run.html">Run&nbsp;it</a>
+    <a href="audit.html">Context and caveats</a>
+    <a href="appendix.html">Reference</a>
+  </nav>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="pagehead">
+      <p class="eyebrowline">The two cases · contested science</p>
+      <h1 class="title">Applied to contested science.</h1>
+      <p class="sub">Watch the same six node types meet two questions still open on purpose: <b>where COVID-19 began</b>, and <b>whether eggs are healthy</b>. Rather than adjudicating, we are showing what becomes possible once a finding is a graph of records anchored on its actual data.</p>
+      <div class="tags">
+        <span class="vtag" style="--fill:var(--evidence-fill)"><span class="d" style="--c:var(--evidence)"></span>1 · Navigate to the evidence</span>
+        <span class="vtag" style="--fill:var(--study-fill)"><span class="d" style="--c:var(--study)"></span>2 · It accumulates</span>
+        <span class="vtag" style="--fill:var(--request-fill)"><span class="d" style="--c:var(--request)"></span>3 · The gaps become actionable</span>
+      </div>
+    </div>
+
+    <!-- ========================= COVID ========================= -->
+    <section class="move accent-evidence" id="covid" style="scroll-margin-top:calc(var(--head) + 12px)">
+      <p class="kick"><span class="num">1</span> COVID-19 origins · navigate to the evidence</p>
+      <h2 class="sec">Five readings. One picture. See for yourself.</h2>
+      <p class="sub">The <a href="https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/" target="_blank" rel="noopener">Rootclaim COVID-origins debate</a> turned on one term — where the earliest known cases clustered — and five independent-looking analyses weigh in. They are five <b>readings of one shared picture</b>, not five measurements of the world; because each is indexed to that same artifact by its <b>observationBase</b>, the schema lets the readings coexist over one base — and lets you walk down to it and judge for yourself. Do that, and the second surprise lands: the picture stands in for a dataset that was never released.</p>
+
+      <figure class="fig">
+        <p class="figttl">The convergence — five readings, one shared base</p>
+        <div class="scroller">
+          <svg id="covidgraph" viewBox="0 0 720 430" role="img" aria-label="Five Evidence nodes converge by observationBase onto a single depiction; the released dataset behind it is a ghost-slot that does not exist, and the collection log is a second ghost-slot."></svg>
+        </div>
+        <figcaption><b>observationBase</b> is the field that names the artifact a reading rests on — a pointer, not a copy. Five analysts, five readings — every one names the same public depiction. The <span class="ghostkey"><span class="sw"></span>ghost-slots</span> mark where a rigorous record would carry the released data and the collection log; here, neither exists.</figcaption>
+      </figure>
+
+      <p class="prose">Walk down to that shared base, and here is what you find. Judge Eric Stansifer, building his own case inventory for the debate, wrote down the problem himself:</p>
+      <div class="pull">
+        <q>To the best of my knowledge, there does not exist any publicly available list of the earliest known covid cases. The best source, and nearly the only source, on early covid cases is the 2021 WHO report and its annex… This aggregate data is derived from extensive searching conducted by the WHO team… <b>which cannot be independently verified or duplicated.</b></q>
+        <span class="who">— Judge Eric Stansifer, Rootclaim debate decision</span>
+      </div>
+      <p class="prose">The 164 December-2019 Wuhan cases were never published as a data table. They exist publicly <b>only</b> as dots on a map in the WHO annex. To get coordinates at all, Worobey et al. had to <b>digitize the picture</b> — recovering 155 of the 164 points, and stating plainly that <q style="font-style:italic">No line list of early COVID-19 cases is available</q>, with the extraction introducing <b>up to about 50 m of noise</b>. Every later analysis — a spatial-statistics rebuttal, both judges, the losing side — reads from that same digitized picture.</p>
+
+      <p class="figttl" style="margin-top:var(--s6)">The derivation, made visible</p>
+      <div class="pair">
+        <figure>
+          <svg class="who-schem" id="who-schem" viewBox="0 0 300 300" role="img" aria-label="A stylized dot-scatter standing in for WHO Figure 23 — a cluster of case markers around a central market location."></svg>
+          <div class="cap"><b>WHO Fig. 23</b> — the only public depiction of the 164 cases. Schematized here as a stylized dot-scatter; the original scan is not reproduced.</div>
+        </figure>
+        <div class="arrow" aria-hidden="true">→</div>
+        <figure>
+          <img id="worobey" src="assets/worobey.jpg" alt="Worobey et al. Figure 1A: a map of Wuhan with case locations for December 2019, colored by known link to the Huanan market." />
+          <div class="cap"><b>Worobey Fig. 1A</b> — a digitized re-rendering of 155 of the 164 points. <i>Adapted from Worobey et al., Science 377:951 (2022), CC BY 4.0.</i></div>
+        </figure>
+      </div>
+
+      <p class="prose">So the anchor of the entire debate is one non-reproducible picture. The five analyses were never five independent measurements of the world; they are five models over one thin input. <b>A spread that large across shared inputs is a signal about the analyses, not about the world</b> — and you can only see it once the evidence is indexed by the artifact it stands on, not by the paper that cites it.</p>
+
+      <div class="disclaim"><b>We are not adjudicating COVID-19’s origin.</b> The point is structural: the term that decided the debate rests on data public since 2021 — the disagreement is about which model to run, not about access. That is a finding about the <i>shape</i> of the evidence, and it is invisible in prose.</div>
+
+      <h3 class="subsec accent-study" style="color:var(--study-ink)">It accumulates — the graph accepts work that didn’t exist when it was built</h3>
+      <p class="prose">The Rootclaim debate closed in 2024. In March 2026, <i>Cell</i> published a new class of evidence — <b>selection dynamics on the branch preceding emergence</b>, with the 1977 H1N1 outbreak (an accepted lab/vaccine-origin event) as a validated positive control. In a sealed-document world that paper is a new PDF nobody wires up. In the graph it is a Claim and two Evidence nodes that snap onto the existing structure.</p>
+      <figure class="fig">
+        <p class="figttl">New records snap onto the existing graph</p>
+        <div class="scroller">
+          <svg id="snapgraph" viewBox="0 0 720 390" role="img" aria-label="A new Claim and two new Evidence nodes attach to the existing contested market-centrality claim; each Evidence node holds its actual figure panel inline as its observationBase field — the SARS-CoV-2 phylogeny/omega plot and the RELAX selection-intensity plot."></svg>
+        </div>
+        <figcaption>Each new <b>Evidence</b> node holds its actual <b>Fig.&nbsp;5</b> panel inline, as the value of its <b>observationBase</b> field — the real data, not a citation. The pre-emergence stem stays purifying (ω&nbsp;≪&nbsp;1) with no shift in intensity (<b>K&nbsp;=&nbsp;1.1, n.s.</b>); a relaxation shows only once the earliest human cases are folded in (<b>K&nbsp;=&nbsp;0.69</b>) — adaptation <i>after</i> emergence, not before. The 1977 H1N1 lab-origin positive control <i>does</i> relax the stem, so a flat stem here is a real signal. Panels: <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)00171-6" target="_blank" rel="noopener">Havens et&nbsp;al., <i>Cell</i> (2026)</a>, CC BY-NC 4.0.</figcaption>
+      </figure>
+
+      <h3 class="subsec accent-request" style="color:var(--request-ink)">The COVID Request writes itself</h3>
+      <p class="prose">Both judges recorded what would have changed their minds — and had nowhere to put it. Judge Will Van Treuren, on the debate format:</p>
+      <div class="pull accent-request">
+        <q>I was not able to evaluate several lines of inquiry which I thought could have been valuable for both sides.</q>
+        <span class="who">— Judge Will Van Treuren, Rootclaim debate decision</span>
+      </div>
+      <p class="prose">He even named his own unexamined crux: <q style="font-style:italic">A cursory search suggested some (more credible) reports of early seropositivity in retrospective studies of US blood banks that would have been hard to explain under the ZO theory.</q> That sentence has sat inert in a PDF ever since. As a record it becomes a <span class="term" style="color:var(--request-ink)">Request</span>: <b>request_target</b> → the contested market-centrality Claim; <b>request_for</b> → an adversarial, pre-registered re-analysis of the same 155 coordinates. It needs no new data and no one’s cooperation — it hangs off the exact claim above.</p>
+
+      <figure class="fig">
+        <p class="figttl">The full circle — a Request, claimed, becomes a Study</p>
+        <div class="scroller">
+          <svg id="spingraph" viewBox="0 0 720 300" role="img" aria-label="A Request is claimed and spins out into a new Study which grounds new Evidence, closing the loop to the Question. Creator chips mark the requester and the claimer."></svg>
+        </div>
+        <figcaption>Attribution is the payoff. The <b>requester</b> who framed the gap and the <b>claimer</b> who answered it both carry a <b>creator</b> chip — credit lands per record, not per paper.</figcaption>
+      </figure>
+      <p class="prose">This isn’t only a proposal. In one lab’s own issue tracker — Roam, with the Discourse Graphs plugin — the mechanism already runs. Over 40 months: <b>445 issues</b>; 29% claimed; <b>15% claimed by someone other than the creator</b>; 38% of claimed issues produced a result; median <b>12 days</b> from claim to first result. One issue sat dormant for fourteen months until a new undergraduate found it, claimed it, and completed it <i>before the PI knew it existed</i>. The vocabulary maps without translation: Issue = Request, Experiment = Study, Result = Evidence.</p>
+      <p class="prose foot-note"><b>Scope, honestly:</b> that is one lab, in Roam, on the DG plugin. The handoff mechanism is validated; MIRA itself is not “deployed at scale.” The field data is drawn from Matt Akamatsu’s published lab updates.</p>
+    </section>
+
+    <!-- ========================= EGGS ========================= -->
+    <section class="move accent-question" id="eggs" style="scroll-margin-top:calc(var(--head) + 12px)">
+      <p class="kick"><span class="num">2</span> Are eggs healthy? · when the artifact doesn’t exist</p>
+      <h2 class="sec">A question with no <span style="font-style:italic">observationBase</span>.</h2>
+      <p class="sub">“Are eggs healthy?” is a <span class="term" style="color:var(--question-ink)">Question</span> with <b>nothing measurable under it as posed</b>. Demand one artifact per claim and it splits into answerable sub-questions: <i>healthy compared to what, measured on which observable — apoB? lifespan? “biological age”? — in whom.</i> One level below all of them, the exposure itself is unmeasured — egg intake as the eater reports it on a food-frequency questionnaire, never directly measured.</p>
+
+      <figure class="fig">
+        <p class="figttl">A question with a missing observationBase</p>
+        <div class="scroller">
+          <svg id="egggraph" viewBox="0 0 720 300" role="img" aria-label="The question 'Are eggs healthy?' has a ghost-slot where an observationBase should be, and splits into answerable sub-questions — compared to what, on which measure, on lifespan, on biological age. One sub-question opens a specific Request and carries a proposed but unsubstantiated Claim whose supporting evidence does not yet exist."></svg>
+        </div>
+        <figcaption>One level below every sub-claim, the exposure itself is <b>self-report with no validated biomarker</b> — a missing <b>observationBase</b> under all of them at once. One sub-question is worked through: a proposed <b>Claim</b> with no evidence yet, and the <b>Request</b> that would supply it.</figcaption>
+      </figure>
+
+      <p class="prose"><b>Which layer does the problem live in?</b> Take the TMAO story — the idea that eggs harm the heart by raising a gut metabolite. The chain breaks at the first link: across chronic feeding trials, eating eggs day after day doesn’t raise fasting TMAO at all. An acute egg challenge <i>does</i> produce a transient bump. Those aren’t a contradiction — they are <b>two different observationBase entries</b> (fasting vs. post-meal), and only a typed record makes that legible instead of letting the two “findings” be quoted against each other forever.</p>
+      <p class="prose">Below all of it sits the foundation problem. No validated biomarker of egg intake exists — the systematic review that went looking concluded that <q style="font-style:italic">a sensitive and specific biomarker of egg consumption has not yet been reported in the literature.</q> The obvious candidate, plasma choline, is held nearly constant by the body: it barely tracks how many eggs a person eats — and tracks alcohol intake <i>better</i> than eggs. Decades of cohort data rest on a self-reported exposure that nothing measures.</p>
+
+      <h3 class="subsec accent-request" style="color:var(--request-ink)">The Requests fall out of the gap</h3>
+      <p class="prose">Each missing artifact names a study that would supply it: a validated biomarker of egg intake; a fasting-vs-postprandial TMAO protocol that stops the two readings being quoted against each other; and — the expensive one, worth it — a replicated crossover measuring <b>apoB</b> (not just LDL-C) with the responder question built in. Each is a <span class="term" style="color:var(--request-ink)">Request</span> pointing <b>request_target</b> at the claim it would settle and <b>request_for</b> at the study that would settle it.</p>
+
+      <div class="disclaim"><b>We are not adjudicating nutrition.</b> The eggs case is the mirror image of COVID: there, the artifact exists but is a picture of a dataset never released; here, under the headline question, the artifact <i>never existed</i>. Both are only visible once you ask what each claim is standing on.</div>
+    </section>
+
+  </div>
+
+  <footer class="sitefoot">
+    <div class="wrap">
+      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      Every number and quote here is drawn from the research files indexed in the <a href="appendix.html#receipts">receipts index</a>. Worobey Fig. 1A is reproduced under CC BY 4.0; WHO Fig. 23 is schematized, not reproduced. Figure 5 panels are reproduced from <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)00171-6" target="_blank" rel="noopener">Havens et&nbsp;al., <i>Cell</i> (2026)</a> under CC BY-NC 4.0. Next: the <a href="protocol-faq.html">Protocol FAQ</a> answers the competition’s questions by name.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/mira.js"></script>
+<script src="assets/graphs.js"></script>
+</body>
+</html>
