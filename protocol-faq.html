@@ -24,11 +24,11 @@
     <a href="walk.html">Walkthrough</a>
     <a href="cases.html">Cases</a>
     <a href="protocol-faq.html" aria-current="page">Protocol&nbsp;FAQ</a>
-    <a href="run.html">Run&nbsp;it</a>
+    <a href="run.html">Try&nbsp;it</a>
     <a href="audit.html">Context and caveats</a>
     <a href="appendix.html">Reference</a>
   </nav>
-  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Try it</span></a>
 </header>
 
 <main id="main">
@@ -79,7 +79,7 @@
             <div class="body">
               <p class="prose">No. The grammar is deliberately <b>minimal — six node types</b> — and the wire format is <b>JSON-LD</b>: schema-agnostic transport, no triple store required to participate. You <b>attach</b> records to shared artifacts; you never overwrite someone else’s node. Two “similar but not identical” claims stay as separate nodes, linked by qualitative <span class="mono">supports</span> / <span class="mono">opposes</span> / <span class="mono">informs</span> — not collapsed into one.</p>
               <p class="prose">Because MIRA is co-developed as a generalization of the Discourse Graphs <span class="mono">dg:</span> vocabulary, a tool can extend the grammar for its own field and still round-trip the shared core.</p>
-              <a class="grounding" href="run.html">Run it → the MyST → JSON-LD round-trip</a>
+              <a class="grounding" href="run.html">Try it → the MyST → JSON-LD round-trip</a>
             </div>
           </details>
 
@@ -111,6 +111,16 @@
             <summary><span class="core"></span>What does the format actually look like?</summary>
             <div class="body">
               <p class="prose">Six node types — Question, Claim, Evidence, Study, Protocol, Request — plus SourceDocument. Each is a <b>record with fields (slots)</b>, and the type-specific slots are what distinguish the types. Some slots hold a <b>value</b> (a date, or a pointer like <span class="mono">observationBase</span> — a URL to the data); some hold a <b>reference</b> to another node, and those reference-slots are what weave the graph. The load-bearer is the <b>four-layer Evidence chain</b>: an Evidence record’s fields place it against the Claim it speaks to (<span class="mono">observationStatement</span>), the artifact it rests on (<span class="mono">observationBase</span>), the Study that produced it (<span class="mono">is_grounded_in</span>) and the paper that reported it (<span class="mono">sourceDocument</span>). When a reference needs to carry <i>who asserted it and how strongly</i>, it is <b>reified</b> as its own record so attribution, flavor and degree attach to the assertion itself.</p>
+              <div class="code" role="img" aria-label="A compact JSON-LD Evidence record — its @type array plus slots, some holding a value and some a reference to another node.">
+<span class="cm">// an Evidence record — a bundle of slots (fields)</span><br>
+{ <span class="k">"@id"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
+&nbsp;&nbsp;<span class="k">"@type"</span>: [<span class="s">"sdata:44107"</span>, <span class="s">"mira:Evidence"</span>],<br>
+&nbsp;&nbsp;<span class="k">"content"</span>: <span class="s">"An X-shaped diffraction pattern — a helix."</span>, <span class="cm">// a value</span><br>
+&nbsp;&nbsp;<span class="k">"observationBase"</span>: <span class="s">"https://…/photo-51.tif"</span>, <span class="cm">// a value: a pointer (URL)</span><br>
+&nbsp;&nbsp;<span class="k">"observationStatement"</span>: <span class="s">"mira:clm-double-helix"</span>, <span class="cm">// a reference → Claim</span><br>
+&nbsp;&nbsp;<span class="k">"is_grounded_in"</span>: <span class="s">"mira:study-franklin-1952"</span>, <span class="cm">// a reference → Study</span><br>
+&nbsp;&nbsp;<span class="k">"sourceDocument"</span>: <span class="s">"mira:doc-franklin-1953"</span> } <span class="cm">// a reference → SourceDocument</span>
+              </div>
               <a class="grounding" href="grammar.html">See it → the chain diagram + a record in JSON-LD</a>
             </div>
           </details>
@@ -171,7 +181,7 @@
             <div class="body">
               <p class="prose">The format is <b>downstream of the tools, not coupled to them</b>. Extraction, anchoring and structural validation scale <i>with</i> the models and get better every generation; what stays fixed is the human <b>commitment</b> point — deciding what enters the shared record and how strongly it is claimed. That is where the human goes, and nowhere else, so no hand-designed step becomes the bottleneck.</p>
               <p class="prose"><b>LinkML → SHACL</b> makes conformance machine-checkable, so tools can be swapped without breaking the record, and <b>JSON-LD</b> means no lock-in.</p>
-              <a class="grounding" href="run.html">Run it → AI-assisted extraction</a>
+              <a class="grounding" href="run.html">Try it → AI-assisted extraction</a>
             </div>
           </details>
 
@@ -186,8 +196,8 @@
           <details class="qa" id="q-c5">
             <summary><span class="core"></span>How does it cross organizations and tools?</summary>
             <div class="body">
-              <p class="prose"><b><a href="https://github.com/MIRA-science/koi-net-mira-prototype" target="_blank" rel="noopener">KOI</a></b> is the cross-organization envelope: different people’s agents and tools read from and write to the same KOI node across organizational boundaries. KOI is an instance of the <a href="https://github.com/DynamicalSystemsGroup/koi-net" target="_blank" rel="noopener">Knowledge Organization Infrastructure Network</a> developed by the Dynamical Systems Group. Federation <i>across schemas</i> is designed but not implemented (we will build it this year if you support it!) <b>ATProto</b> is the intended public layer; draft lexicons (<span class="mono">science.mira.*</span>) exist and are labeled DRAFT, not on the network. Across tools the loop has three legs — <b>ingestion → structure → transport</b>: <b><a href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">MIRA-extraction</a></b> lifts nodes from a source PDF and emits them as schema-conformant <b>JSON-LD</b>, each pinned to a verbatim source excerpt with its dangling edges reported so nothing drops silently; the shared <b>schema</b> is the structure those records validate against; and the <b>KOI</b> envelope carries them across organizational boundaries. Two round trips run in that one wire format — <b>ingestion:</b> <span class="mono">PDF → MIRA-extraction → JSON-LD → KOI</span>; <b>authoring:</b> <span class="mono">MyST Markdown → myst-plus-mira → JSON-LD → viewer</span>. Different tools at each end, one format in the middle, nothing hand-glued between them.</p>
-              <a class="grounding" href="run.html">Run it → the KOI and MyST round trips</a>
+              <p class="prose"><b><a href="https://github.com/MIRA-science/koi-net-mira-prototype" target="_blank" rel="noopener">KOI</a></b> is the cross-organization envelope: different people’s agents and tools read from and write to the same KOI node across organizational boundaries. KOI is an instance of the <a href="https://github.com/DynamicalSystemsGroup/koi-net" target="_blank" rel="noopener">Knowledge Organization Infrastructure Network</a> developed by the Dynamical Systems Group. Those records live on KOI nodes the participating orgs run — and even there, each record is a pointer to its artifact, not a copy. Federation <i>across schemas</i> is designed but not implemented (yet!) <b>ATProto</b> is the intended public layer; draft lexicons (<span class="mono">science.mira.*</span>) exist. The three legs — <b>ingestion → structure → transport</b>: <b><a href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">MIRA-extraction</a></b> lifts nodes from a source PDF and emits them as schema-conformant <b>JSON-LD</b>, each pinned to a verbatim source excerpt; the shared <b>schema</b> is the structure those records validate against; and the <b>KOI</b> envelope carries them across organizational boundaries. Two round trips run in that one wire format — <b>ingestion:</b> <span class="mono">PDF → MIRA-extraction → JSON-LD → KOI</span>; <b>authoring:</b> <span class="mono">MyST Markdown → myst-plus-mira → JSON-LD → viewer</span>. Different tools at each end, one format in the middle, nothing hand-glued between them.</p>
+              <a class="grounding" href="run.html">Try it → the KOI and MyST round trips</a>
             </div>
           </details>
         </section>
@@ -233,7 +243,7 @@
           <details class="qa" id="q-e1">
             <summary>Is any of this actually running, or is it a spec?</summary>
             <div class="body">
-              <p class="prose"><b>Shipped:</b> the schema, two live public graphs on unrelated fields, the extraction tool (JSON-LD out), the KOI transport, and both round trips — <span class="mono">PDF→JSON-LD→KOI</span> and <span class="mono">MyST→JSON-LD→viewer</span>. <b>Designed, not built:</b> cross-schema federation, ATProto on the network, MIRA deployed at scale. We’re ready to build and test those, given financial support!</p>
+              <p class="prose"><b>Shipped:</b> the schema, two live public graphs on unrelated fields, the extraction tool (JSON-LD out), the KOI transport, and both round trips — <span class="mono">PDF→JSON-LD→KOI</span> and <span class="mono">MyST→JSON-LD→viewer</span>. <b>Designed, not built:</b> cross-schema federation, ATProto on the network, MIRA deployed at scale. We’re ready to build and test those, if we have financial support!</p>
               <a class="grounding" href="run.html">See it → the whole catalog, marked</a>
             </div>
           </details>
@@ -241,7 +251,7 @@
           <details class="qa" id="q-e2">
             <summary>Where does this sit relative to nanopublications, PROV-O, and AIF?</summary>
             <div class="body">
-              <p class="prose">MIRA is compatible with all three and extends the lineage. The reified-assertion idea is shared with <b>nanopublications</b>, argument structure with <b>AIF</b>, provenance with <b>PROV-O</b>. What MIRA adds on top is a <b>question layer</b> — open unknowns as durable, first-class nodes — and the specific move at the heart of the model: <i>this observation is about that claim</i>, carried as a first-class relation slot (the <span class="mono">observationStatement</span> / <span class="mono">observationBase</span> split).</p>
+              <p class="prose">MIRA is compatible with all three and extends the lineage. The reified-assertion idea is shared with <b>nanopublications</b>, argument structure with <b>AIF</b>, provenance with <b>PROV-O</b>. What MIRA adds on top is a question layer — open unknowns as durable, first-class nodes — and at the heart of the model: <i>this observation is about that claim</i>, carried as a first-class relation slot (the <span class="mono">observationStatement</span> / <span class="mono">observationBase</span> split).</p>
               <a class="grounding" href="appendix.html#priorart">See it → the prior-art mapping</a>
             </div>
           </details>
@@ -253,7 +263,7 @@
 
   <footer class="sitefoot">
     <div class="wrap" style="max-width:1040px">
-      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      <b>MIRA is an open schema. Every record here points at a public artifact.</b><br>
       Every quote above is matched character-for-character against its source; the <a href="appendix.html#receipts">receipts index</a> lists each with its file and line.
     </div>
   </footer>

@@ -24,11 +24,11 @@
     <a href="walk.html">Walkthrough</a>
     <a href="cases.html" aria-current="page">Cases</a>
     <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
-    <a href="run.html">Run&nbsp;it</a>
+    <a href="run.html">Try&nbsp;it</a>
     <a href="audit.html">Context and caveats</a>
     <a href="appendix.html">Reference</a>
   </nav>
-  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Try it</span></a>
 </header>
 
 <main id="main">
@@ -116,30 +116,27 @@
     <section class="move accent-question" id="eggs" style="scroll-margin-top:calc(var(--head) + 12px)">
       <p class="kick"><span class="num">2</span> Are eggs healthy? · when the artifact doesn’t exist</p>
       <h2 class="sec">A question with no <span style="font-style:italic">observationBase</span>.</h2>
-      <p class="sub">“Are eggs healthy?” is a <span class="term" style="color:var(--question-ink)">Question</span> with <b>nothing measurable under it as posed</b>. Demand one artifact per claim and it splits into answerable sub-questions: <i>healthy compared to what, measured on which observable — apoB? lifespan? “biological age”? — in whom.</i> One level below all of them, the exposure itself is unmeasured — egg intake as the eater reports it on a food-frequency questionnaire, never directly measured.</p>
+      <p class="sub">“Are eggs healthy?” is a <span class="term" style="color:var(--question-ink)">Question</span> with <b>nothing measurable under it as posed</b>. Our protocol makes it clear that you need something observable to generate evidence. The need for a data artifact splits it into answerable sub-questions: <i>healthy compared to what, measured on which observable — apoB? lifespan? “biological age”? — in whom.</i></p>
 
       <figure class="fig">
         <p class="figttl">A question with a missing observationBase</p>
         <div class="scroller">
-          <svg id="egggraph" viewBox="0 0 720 300" role="img" aria-label="The question 'Are eggs healthy?' has a ghost-slot where an observationBase should be, and splits into answerable sub-questions — compared to what, on which measure, on lifespan, on biological age. One sub-question opens a specific Request and carries a proposed but unsubstantiated Claim whose supporting evidence does not yet exist."></svg>
+          <svg id="egggraph" viewBox="0 0 720 300" role="img" aria-label="The question 'Are eggs healthy?' splits into answerable sub-questions — compared to what, on apoB, on lifespan, on biological age. One sub-question (biological age) opens a specific Request and carries a proposed but unsubstantiated Claim whose supporting evidence does not yet exist."></svg>
         </div>
-        <figcaption>One level below every sub-claim, the exposure itself is <b>self-report with no validated biomarker</b> — a missing <b>observationBase</b> under all of them at once. One sub-question is worked through: a proposed <b>Claim</b> with no evidence yet, and the <b>Request</b> that would supply it.</figcaption>
+        <figcaption>Each answerable sub-question names something <b>observable</b> a claim under it could rest on — its <b>observationBase</b>. One is worked through here: a proposed <b>Claim</b> with no evidence yet, and the <b>Request</b> — a longitudinal biological-age trial — that would supply it.</figcaption>
       </figure>
 
-      <p class="prose"><b>Which layer does the problem live in?</b> Take the TMAO story — the idea that eggs harm the heart by raising a gut metabolite. The chain breaks at the first link: across chronic feeding trials, eating eggs day after day doesn’t raise fasting TMAO at all. An acute egg challenge <i>does</i> produce a transient bump. Those aren’t a contradiction — they are <b>two different observationBase entries</b> (fasting vs. post-meal), and only a typed record makes that legible instead of letting the two “findings” be quoted against each other forever.</p>
-      <p class="prose">Below all of it sits the foundation problem. No validated biomarker of egg intake exists — the systematic review that went looking concluded that <q style="font-style:italic">a sensitive and specific biomarker of egg consumption has not yet been reported in the literature.</q> The obvious candidate, plasma choline, is held nearly constant by the body: it barely tracks how many eggs a person eats — and tracks alcohol intake <i>better</i> than eggs. Decades of cohort data rest on a self-reported exposure that nothing measures.</p>
-
       <h3 class="subsec accent-request" style="color:var(--request-ink)">The Requests fall out of the gap</h3>
-      <p class="prose">Each missing artifact names a study that would supply it: a validated biomarker of egg intake; a fasting-vs-postprandial TMAO protocol that stops the two readings being quoted against each other; and — the expensive one, worth it — a replicated crossover measuring <b>apoB</b> (not just LDL-C) with the responder question built in. Each is a <span class="term" style="color:var(--request-ink)">Request</span> pointing <b>request_target</b> at the claim it would settle and <b>request_for</b> at the study that would settle it.</p>
+      <p class="prose">Each missing artifact names a study that would supply it: a replicated crossover study measuring <b>apoB</b> (not just LDL-C), a longitudinal study controlling for egg consumption and measuring biological age. Each is a <span class="term" style="color:var(--request-ink)">Request</span> pointing <b>request_target</b> at the claim it would settle and <b>request_for</b> at the study that would settle it.</p>
 
-      <div class="disclaim"><b>We are not adjudicating nutrition.</b> The eggs case is the mirror image of COVID: there, the artifact exists but is a picture of a dataset never released; here, under the headline question, the artifact <i>never existed</i>. Both are only visible once you ask what each claim is standing on.</div>
+      <p class="prose">The eggs case is the mirror image of COVID: there, the artifact exists but is a picture of a dataset never released; here, under the headline question, the artifact <i>never existed</i>. Both are only visible once you name what each claim is standing on.</p>
     </section>
 
   </div>
 
   <footer class="sitefoot">
     <div class="wrap">
-      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      <b>MIRA is an open schema. Every record here points at a public artifact.</b><br>
       Every number and quote here is drawn from the research files indexed in the <a href="appendix.html#receipts">receipts index</a>. Worobey Fig. 1A is reproduced under CC BY 4.0; WHO Fig. 23 is schematized, not reproduced. Figure 5 panels are reproduced from <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)00171-6" target="_blank" rel="noopener">Havens et&nbsp;al., <i>Cell</i> (2026)</a> under CC BY-NC 4.0. Next: the <a href="protocol-faq.html">Protocol FAQ</a> answers the competition’s questions by name.
     </div>
   </footer>

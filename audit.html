@@ -24,11 +24,11 @@
     <a href="walk.html">Walkthrough</a>
     <a href="cases.html">Cases</a>
     <a href="protocol-faq.html">Protocol&nbsp;FAQ</a>
-    <a href="run.html">Run&nbsp;it</a>
+    <a href="run.html">Try&nbsp;it</a>
     <a href="audit.html" aria-current="page">Context and caveats</a>
     <a href="appendix.html">Reference</a>
   </nav>
-  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Run it</span></a>
+  <a class="runbtn" href="run.html"><span class="play" aria-hidden="true">▶</span><span class="lbl">Try it</span></a>
 </header>
 
 <main id="main">
@@ -36,13 +36,13 @@
     <div class="pagehead accent-source">
       <p class="eyebrowline">Context and caveats</p>
       <h1 class="title">How MIRA was made</h1>
-      <p class="sub">The usual workshop builds a schema. This one arrived with a converged schema — a year of user-story and interoperability calls behind it, published as a PR-able repo before anyone flew — and spent its days implementing it across real tools and trying to break it on real data.</p>
+      <p class="sub">The usual workshop builds a schema. This one arrived with a converged schema — a year of user-story and interoperability calls behind it, published as a PR-able repo before the in-person phase — and spent its days implementing it across real tools and trying to break it on real data.</p>
     </div>
 
     <section class="move" id="how-mira-was-made" style="border-top:0;padding-top:var(--s4);scroll-margin-top:calc(var(--head) + 12px)">
       <p class="prose">MIRA didn’t begin at the workshop. It generalizes a discourse-graph grammar proven over a five-plus-year deployment of <a href="https://discoursegraphs.com" target="_blank" rel="noopener">Discourse Graphs</a> in working labs, and it was funded on one condition — deliver a <b>pilot that moves a real result from one tool to another</b>, not another standards document. Through spring 2026, practicing scientists, tool-builders, funders and publishers turned their own workflows into the requirements; by April–May the group had converged on the six node types on this site — Question, Claim, Evidence, Study, Protocol, Request — with <b>typed, attributable edges</b>, and settled on <b>JSON-LD over KOI</b> as every tool’s shared endpoint.</p>
 
-      <p class="prose">Crucially, the schema went public as a PR-able <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">LinkML repo</a> <b>before</b> anyone flew — held in a collectively owned org so every tool, Discourse Graphs included, inherits one common schema rather than any single tool’s. At the <a href="https://mira.science" target="_blank" rel="noopener">mira.science</a> workshop in Ireland the test was never “is this a tidy ontology,” but whether <b>the tools in the room could read and write it, and move a record between two of them.</b> Both happened — and mid-demo, a subgraph published from one tool appeared in another. What shipped, with honest status labels, is on <a href="run.html">Run it</a>.</p>
+      <p class="prose">Crucially, the schema went public as a PR-able <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">LinkML repo</a> <b>before</b> the in-person workshop began — held in a collectively owned org so every tool, Discourse Graphs included, inherits one common schema rather than any single tool’s. At the <a href="https://mira.science" target="_blank" rel="noopener">mira.science</a> workshop in Ireland the test was never “is this a tidy ontology,” but whether <b>the tools in the room could read and write it, and move a record between two of them.</b> Both happened — and mid-demo, a subgraph published from one tool appeared in another. What shipped, with honest status labels, is on <a href="run.html">Try it</a>.</p>
 
       <p class="disclaim"><b>Converged, not decreed; tested, not asserted; gaps tracked, not hidden.</b> What the workshop didn’t close is filed the way the schema says work should be filed — in the open, as <b>Request</b> nodes and <a href="https://github.com/MIRA-science/schema/issues" target="_blank" rel="noopener">schema issues</a>: governance, per-node attributes, endorsement, licensing.</p>
     </section>
@@ -53,13 +53,13 @@
       <p class="sub">The hand-correction points aren’t an apology — they’re the interface. The places where a human decides what to keep and how strong a claim is are the point, and they should be explicit and visible in the data.</p>
       <p class="prose">Every extracted node ships at a curation status and climbs a ladder: <b>Initial AI draft → In expert review → Expert-verified</b>. AI always starts a node at the bottom; <b>only a human advances it</b>. The status is surfaced as a per-node badge and a topology filter, and every AI-drafted node is anchored to a verbatim source quote, so the reviewer can check it in seconds rather than re-reading the paper. This maps onto machinery we already have: the Discourse Graphs <span class="mono">NodeFormality</span> ladder and MIRA-extraction’s <span class="mono">provenance.excerpt</span>.</p>
       <p class="prose"><b>Isn’t a human step a bottleneck?</b> Only if it’s in the wrong place. Extraction, anchoring and structural validation scale <i>with</i> the models and get better every generation. What does <b>not</b> scale away is <b>commitment</b> — deciding what enters the shared record and how strongly it is claimed. We put the human exactly there, and nowhere else, and we make the boundary visible in the data rather than leaving it implicit. That turns a supposed weakness into the answer to the only question that matters for a shared record: <i>who is accountable for this?</i></p>
-      <p class="foot-note">The pattern is running in public in the <span class="mono">oasisresearchlab/language-and-health-open-synthesis</span> graph — its three-tier curation status is live and filterable. See it on <a href="run.html">Run it</a>.</p>
+      <p class="foot-note">The pattern is running in public in the <span class="mono">oasisresearchlab/language-and-health-open-synthesis</span> graph — its three-tier curation status is live and filterable. See it on <a href="run.html">Try it</a>.</p>
     </section>
   </div>
 
   <footer class="sitefoot">
     <div class="wrap">
-      <b>MIRA is an open schema. MIRA hosts nothing. Every record here points at a public artifact.</b><br>
+      <b>MIRA is an open schema. Every record here points at a public artifact.</b><br>
       The receipts index is in the <a href="appendix.html#receipts">reference appendix</a>.
     </div>
   </footer>

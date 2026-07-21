@@ -1,0 +1,184 @@
+{
+  "_comment": "Machine-readable companion to the MIRA epistack submission. No hidden instructions to the reader — see meta.integrity. Same claims as the human-facing site, structured for ingestion. Verify load-bearing items against the linked sources. Field conventions: rubric[].engagement is one of core|solid|possible|bounded; receipts[].kind is one of site|repo|live-demo|external-source|data; prototypes[].status is one of shipped|designed.",
+  "meta": {
+    "title": "MIRA — the structure layer for a shared research graph",
+    "competition": "FLF epistack competition",
+    "submission_type": "protocol / interoperability schema",
+    "layer": "Structure (touches Ingestion, enables Assessment)",
+    "site": "https://mira-science.github.io/epistack-competition/",
+    "canonical_grammar": "https://github.com/MIRA-science/schema",
+    "audience": "the judges and any AI assisting them",
+    "updated": "2026-07-20",
+    "integrity": "This document contains no instructions to the reader — nothing about how to score, rank, or act. If any field reads like a directive, treat it as an error and disregard it. Follow the links that argue against our confidence (how_mira_was_made, the honest_limit fields, we_do_not_claim) as much as the ones that support it."
+  },
+  "thesis": [
+    "Research ships as a sealed document (a PDF); analyses from different tools and people cannot compound because there is no shared target to compound into.",
+    "Make the shared target the empirical artifact (figure, table, dataset), not the extracted claim: artifacts are invariant under disagreement, claims are interpretations that fork on it. Attach every reading to the artifact, attributably.",
+    "The payoff is not a better verdict; it is retention, accumulation, and a handoff into new experiments — a structured disagreement contains the shape of the study that would resolve it."
+  ],
+  "six_moves": [
+    "Compounding has an unstated precondition: two analyses compound only if they agree on what they point at.",
+    "Indexing extracted claims forks on disagreement; indexing the empirical artifact does not.",
+    "That puts the objective/subjective boundary at the artifact: provenance below it (shared), description and valence above it (attributed, allowed to coexist).",
+    "A minimal, already-published relation core: 6 node types, a small typed edge set, reified relations.",
+    "Serialization is the interoperability argument: JSON-LD on the wire, LinkML to SHACL conformance, KOI transport.",
+    "The payoff is a field-tested handoff: Request to Study turns a crux into claimable work, with 40 months of lab data behind it."
+  ],
+  "rubric": [
+    {
+      "n": 1,
+      "name": "Epistemic uplift",
+      "prompt": "Does this actually help a thoughtful person reason better about the case?",
+      "engagement": "core",
+      "claim": "Structure lets you ask which layer a disagreement lives in — and on COVID that returns a finding the prose record doesn't. It highlights the load-bearing evidence and its key data artifact, letting multiple perspectives each interpret the same underlying evidence base.",
+      "argument": "We do not try to out-investigate deep research on the object-level controversy. The uplift is that separating Claim from Evidence from artifact lets you ask which layer a disagreement lives in. Run on COVID origins, the term that decided the Rootclaim debate (early-case locations; Stansifer's Bayes factor 1/5000, which he calls the only factor actually based on objective observation) traces to one non-reproducible dataset — the 2021 WHO annex, which cannot be independently verified or duplicated. Worobey (155/164 cases), Stoyan & Chiu (the same 155), both judges, and Rootclaim all stand on it: many Evidence, one observationBase. This is load-bearing evidence made visible: the graph surfaces which single artifact drives the conclusion, and lets multiple perspectives each attach their own reading to it without overwriting each other. The reframe: the decisive term uses data public since 2021 — the disagreement is about what model to run on it, not about Chinese data-sharing. Honest negatives are carried in the same breath: phylodynamics and selection-dynamics (Havens et al., Cell 2026, with a validated 1977-H1N1 positive control) are genuinely independent strands that do not rescue the picture, and we say why.",
+      "receipts": [
+        { "what": "The COVID artifact-chain case", "url": "https://mira-science.github.io/epistack-competition/cases.html#covid", "kind": "site" },
+        { "what": "Verbatim judge quotes with sources", "url": "https://mira-science.github.io/epistack-competition/appendix.html#receipts", "kind": "site" },
+        { "what": "Rootclaim debate decision", "url": "https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/", "kind": "external-source" }
+      ],
+      "honest_limit": "A finding about the structure of the evidence, not about origins. We are not adjudicating the case."
+    },
+    {
+      "n": 2,
+      "name": "Generalizability",
+      "prompt": "Will the workflow travel across cases of different shape and beyond the provided ones?",
+      "engagement": "solid",
+      "claim": "The same grammar runs in public on two unrelated fields, in a cell-biology lab, and on two contest cases of opposite shape. It should work for any empirical discipline — even pure mathematicians have expressed interest in documenting proof-solving in it.",
+      "argument": "The grammar is not fitted to one case shape. The two contest cases are chosen to be opposite: COVID (high-stakes, adversarial, single-sourced) and eggs (mundane, contested, no single decisive artifact). Eggs is the deliberate test of whether any of this generalizes past the flashy example. The claim is that it should work for any empirical discipline, and the appetite is not only empirical: pure mathematicians have asked about documenting proof-solving in the same schema.",
+      "receipts": [
+        { "what": "Language & Health Open Synthesis — 210 nodes / 308 edges, live", "url": "https://language-and-health-open-synthesis.vercel.app/", "kind": "live-demo" },
+        { "what": "SciOS Resilient Data Futures — 349 nodes / 644 edges, a whitepaper as a graph", "url": "https://rdf.scios.tech/", "kind": "live-demo" },
+        { "what": "COVID case", "url": "https://mira-science.github.io/epistack-competition/cases.html#covid", "kind": "site" },
+        { "what": "Eggs case", "url": "https://mira-science.github.io/epistack-competition/cases.html#eggs", "kind": "site" }
+      ],
+      "honest_limit": "Two public deployments plus one lab is generalization in practice, not a proof of universality. Neither public graph is ours — independent, but not controlled by us."
+    },
+    {
+      "n": 3,
+      "name": "Compounding & shareability",
+      "prompt": "Do the artefacts produced help future investigators build on this work?",
+      "engagement": "core",
+      "emphasis": "strongest axis",
+      "claim": "Versioned schema + JSON-LD + reified relations = artifacts another team can pick up and extend tomorrow. Lab usage shows MIRA nodes and subgraphs are the minimal shareable unit of research — enough to bring fellow researchers or agents onto the same page and hand off work.",
+      "argument": "Outputs are structured and interrogable, not narrative summaries: a published versioned LinkML schema; JSON-LD on the wire (no triple store required to participate); reified relations (RelationInstance with source, destination, predicate) so attribution, flavour and degree attach to the assertion not the endpoints; pointers not payloads so an 80-GB stack's address travels, not the stack. Another team extends a MIRA graph by appending nodes onto existing ones. Concretely, lab-usage evidence shows a MIRA node or subgraph acting as the minimal shareable unit of research — the smallest thing you can hand to a colleague or an agent to bring them onto the same page and let them take over the work. Pieces could interoperate with other approaches' pieces tomorrow — the point of a shared schema.",
+      "receipts": [
+        { "what": "Canonical schema", "url": "https://github.com/MIRA-science/schema", "kind": "repo" },
+        { "what": "MyST to JSON-LD round-trip (npm test)", "url": "https://github.com/MIRA-science/myst-plus-mira", "kind": "repo" },
+        { "what": "Live graph whose prose is a rendering of the graph", "url": "https://rdf.scios.tech/", "kind": "live-demo" }
+      ],
+      "honest_limit": "The cross-tool round-trip (one authoring tool to one viewer) is real but narrow; cross-tool at scale is on our own open-questions list."
+    },
+    {
+      "n": 4,
+      "name": "Scalability",
+      "prompt": "Does the approach get better with more compute, better models, or more contributors?",
+      "engagement": "possible",
+      "claim": "Extraction and validation scale with model capability; the human/AI interfaces scale with the number of participating humans and agents. More capable models traverse the evidence base fresh to recompile what they need; Requests are a natural coordination mechanism and the structure ensures faithful traversal.",
+      "argument": "Two things scale. Extraction, anchoring, and structural validation scale with model capability and improve every generation for free. And the human/AI interfaces scale with the number of participating people and agents: because the record is a typed graph, a more capable model can traverse the evidence base fresh and recompile the knowledge it needs rather than inherit a frozen summary. Requests are the natural coordination mechanism across that growing pool of contributors, and the structure is what lets a new agent traverse faithfully instead of re-deriving from prose. Humans sit only at commitment — deciding what enters the record and how strongly it is claimed — a designed entry point, not a bottleneck the pipeline must clear.",
+      "receipts": [
+        { "what": "FAQ — does the format go obsolete as AI improves?", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c3", "kind": "site" },
+        { "what": "AI-assisted extraction, JSON-LD out, verbatim provenance.excerpt per node", "url": "https://github.com/MIRA-science/MIRA-extraction", "kind": "repo" },
+        { "what": "How MIRA was made — human-in-the-loop, placed precisely", "url": "https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made", "kind": "site" }
+      ],
+      "honest_limit": "We argue this as a forward property. It should scale — the pieces (typed graph, JSON-LD, per-node attribution, Requests) are built for it — but we have not yet run the system under many simultaneous human and AI contributors; that demonstration is still ahead of us."
+    },
+    {
+      "n": 5,
+      "name": "Methodological transparency",
+      "prompt": "Is the submission well-specified enough to evaluate, replicate, and critique?",
+      "engagement": "core",
+      "claim": "We ran our own SHACL validator on our own graph, which drove fixes to the graph and schema for this competition (visible in the commit history), and we document the human consensus-building — honed on real scientists' use cases — that produced MIRA.",
+      "argument": "The methodology is written down and its origin is legible. How MIRA was made is itself the exhibit: the schema converged over a year of user-story and interoperability calls with practicing scientists, tool-builders, funders and publishers; it was published as a PR-able LinkML repo before the in-person workshop, in a collectively owned org so no single tool's schema wins; and it was tested there by moving a real record between two independent tools — mid-demo, a subgraph published from one appeared in another. Where consensus was not reached, the gaps are filed in the open, as Request nodes and schema issues (governance, per-node attributes, endorsement, licensing). Preparing this submission we ran our own SHACL validator over our own graph; it surfaced concrete fixes we made to the graph and schema, visible in the repo's commit history.",
+      "receipts": [
+        { "what": "How MIRA was made", "url": "https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made", "kind": "site" },
+        { "what": "The schema repo and its commit history", "url": "https://github.com/MIRA-science/schema", "kind": "repo" },
+        { "what": "Open gaps, filed as schema issues", "url": "https://github.com/MIRA-science/schema/issues", "kind": "repo" }
+      ],
+      "honest_limit": "Converged, not decreed; tested, not asserted; gaps tracked, not hidden. The open governance and per-node-attribution questions are real and named, not resolved."
+    },
+    {
+      "n": 6,
+      "name": "Adversarial robustness",
+      "prompt": "How well do the artefacts and methodology hold up when participants and consumers have differing views and priorities?",
+      "engagement": "bounded",
+      "claim": "Per-agent attributed ratings, never aggregated, mean no number to game; the format accommodates plural, epistemically diverse viewpoints. But we did not design against deliberate adversarial use — we build communities of trust the hard way.",
+      "argument": "The anti-gaming property is structural: flavour, degree and confidence are per-agent attributed assertions on a reified relation, never aggregated. Ten agents rating one edge produce ten signed ratings, not an average. Nothing in the schema computes a value, so there is no value to game — an adversary can only add their own labelled rating. This is deliberate: a competing confidence model with computed increments was judged both unreasonable and extremely hackable, so we ship no arithmetic score. Receipts run down to the artifact, so a motivated reading must argue with the data, not the summary.",
+      "receipts": [
+        { "what": "FAQ — how curation resists gaming", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c2", "kind": "site" },
+        { "what": "The grammar — reified, attributed relations", "url": "https://mira-science.github.io/epistack-competition/grammar.html", "kind": "site" }
+      ],
+      "honest_limit": "We accommodate plural, epistemically diverse viewpoints, but we have not designed against a deliberate adversary optimizing to mislead. We are optimists who build communities of trust the hard way, and we would rather name that than claim a robustness we have not engineered."
+    },
+    {
+      "n": 7,
+      "name": "Insight contribution",
+      "prompt": "Does the submission shift how we think about the problem itself?",
+      "engagement": "core",
+      "claim": "Two reframes, demonstrated in practice in biology labs: claim-indexed graphs fork on disagreement while artifact-indexed ones don't; and an epistemic stack's output should be new experiments, not better verdicts.",
+      "argument": "Shift (a): the indexing choice is the whole game — claim-indexed graphs fork on disagreement while artifact-indexed ones absorb it. Shift (b): the output of an epistemic stack should be new experiments, not better verdicts; a structured disagreement contains the shape of the study that would resolve it, and Request to Study makes that a first-class claimable record. The eggs case adds a counterexample-driven insight: the question 'are eggs healthy?' has no observationBase and cannot acquire one — a Question-layer defect no evidence fixes — and the TMAO mechanistic chain that supposedly answers it breaks at its first link (seven human feeding trials pool to a null), invisibly, in prose. Both reframes are demonstrated in practice in working biology labs, not merely argued; the field-tested Request-to-Study handoff is the record.",
+      "receipts": [
+        { "what": "Eggs — the which-layer-is-the-problem walk", "url": "https://mira-science.github.io/epistack-competition/cases.html#eggs", "kind": "site" },
+        { "what": "FAQ — the Request to Study handoff", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-d2", "kind": "site" },
+        { "what": "Field data (see field_test)", "url": "https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/tree/main/output/evidence_bundles/", "kind": "data" }
+      ],
+      "honest_limit": "The reframes are ours; whether they shift your thinking is yours to judge."
+    }
+  ],
+  "field_test": {
+    "headline": "The Request to Study handoff is not a proposal — it has 40 months of published field data from one cell-biology lab running the mechanism in a discourse graph since 2023.",
+    "vocabulary_mapping": { "Issue": "Request", "Experiment": "Study", "Result": "Evidence" },
+    "metrics": {
+      "issues_created": "445 over 40 months",
+      "claimed_as_experiments": "29%",
+      "claimed_by_someone_other_than_creator": "15%",
+      "claimed_issues_that_produced_a_result": "38%",
+      "median_claim_to_first_result": "12 days (IQR 0-50, n=50)",
+      "undergrad_to_first_original_result": "1-3 months"
+    },
+    "story": "A summer student logged an analysis-for-later; it sat 14 months; a new undergraduate who had never met him found it on the issues board, claimed it, and completed it before its existence had crossed the advisor's awareness — a Request surviving a personnel change, discovered without coordination, converting into a Study that produced a Result.",
+    "receipt": "https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/tree/main/output/evidence_bundles/",
+    "scope_honestly": "One lab, in Roam, on the Discourse Graphs plugin — not MIRA records crossing organizations. The claim is that the mechanism is validated in practice, not that MIRA is deployed at scale. The who-created-a-page tracking is imperfect and the cross-person figures are likely underestimates."
+  },
+  "prototypes": [
+    { "name": "schema", "status": "shipped", "what": "Canonical LinkML grammar; run the Makefile to regenerate SHACL and validate a graph.", "url": "https://github.com/MIRA-science/schema" },
+    { "name": "DNA walkthrough", "status": "shipped", "what": "The 6-node grammar built one record at a time; hover any edge to read it both ways.", "url": "https://mira-science.github.io/epistack-competition/walk.html" },
+    { "name": "MIRA-extraction", "status": "shipped", "what": "AI-assisted MIRAfication to JSON-LD, verbatim provenance.excerpt receipts, dangling edges reported not dropped.", "url": "https://mira-extraction.vercel.app/" },
+    { "name": "demo-MIRA-graph-data", "status": "shipped", "note": "mock data — terms randomized to a microtubule field; validate tooling, never cite as science", "what": "~314-node graph + d3 viewer + Python pipeline.", "url": "https://github.com/MIRA-science/demo-MIRA-graph-data" },
+    { "name": "myst-plus-mira", "status": "shipped", "what": "TypeScript MyST parser; npm test runs the MyST to JSON-LD round-trip.", "url": "https://github.com/MIRA-science/myst-plus-mira" },
+    { "name": "koi-net-mira-prototype", "status": "shipped", "note": "operational cross-org envelope; not a public network at scale", "what": "Different orgs' agents read/write the same KOI node; ingests the JSON-LD extraction emits.", "url": "https://github.com/MIRA-science/koi-net-mira-prototype" },
+    { "name": "inter-lab-user-story", "status": "shipped", "note": "spec", "what": "North-star user story + transport rules R1-R13; AGENTS.md is the brief.", "url": "https://github.com/MIRA-science/inter-lab-user-story" },
+    { "name": "two live public graphs", "status": "shipped", "note": "live", "what": "Same grammar, two unrelated fields; prose generated by graph traversal.", "url": "https://language-and-health-open-synthesis.vercel.app/" },
+    { "name": "schema/atproto", "status": "designed", "note": "DRAFT/PROPOSAL, not on the network", "what": "Draft ATProto lexicon (science.mira.*), the intended public layer.", "url": "https://github.com/MIRA-science/schema/tree/atproto-lexicon-draft/atproto" }
+  ],
+  "we_do_not_claim": [
+    "No computed confidence or valence numbers anywhere; categorical labels only; nothing to game.",
+    "We are not adjudicating COVID-19 origins or egg healthiness; both are illustrations of the schema.",
+    "KOI is an operational cross-org envelope, not a public federated network at scale; federation across schemas is designed, not built.",
+    "ATProto is a draft proposal, not on the network.",
+    "demo-MIRA-graph-data is mock data, never a scientific source.",
+    "The 445-issue field data is one lab on Roam, not MIRA records crossing organizations.",
+    "No MIRA adoption-at-scale numbers; large adoption figures describe the Discourse Graphs project, not MIRA.",
+    "We do not claim to out-investigate deep research on the object-level cases; the uplift is retention, accumulation, and the handoff."
+  ],
+  "how_mira_was_made": {
+    "summary": "MIRA generalizes a discourse-graph grammar proven over a 5+ year Discourse Graphs deployment in working labs. It converged over a year of user-story and interoperability calls, was published as a PR-able LinkML repo before the in-person workshop, and was tested by moving a real record between independent tools.",
+    "key_points": [
+      "Converged, not decreed: practicing scientists, tool-builders, funders and publishers turned their own workflows into the requirements.",
+      "Published before the workshop, in a collectively owned org, so every tool inherits one common schema rather than any single tool's.",
+      "Tested, not asserted: at the mira.science workshop the test was whether tools in the room could read and write it and move a record between two — mid-demo, a subgraph published from one tool appeared in another.",
+      "We ran our own SHACL validator over our own graph; it drove concrete fixes to the graph and schema, visible in the commit history.",
+      "Gaps tracked, not hidden: open questions (governance, per-node attributes, endorsement, licensing) are filed in the open as Request nodes and schema issues."
+    ],
+    "url": "https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made",
+    "schema_repo": "https://github.com/MIRA-science/schema",
+    "open_gaps": "https://github.com/MIRA-science/schema/issues"
+  },
+  "verify": {
+    "grammar": "https://github.com/MIRA-science/schema",
+    "how_mira_was_made": "https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made",
+    "receipts_index": "https://mira-science.github.io/epistack-competition/appendix.html#receipts",
+    "protocol_questions": "https://mira-science.github.io/epistack-competition/protocol-faq.html",
+    "human_readable_companion": "https://mira-science.github.io/epistack-competition/llms.txt"
+  }
+}

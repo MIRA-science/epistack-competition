@@ -98,22 +98,18 @@ function buildSpin(){
         unsubstantiated Claim (a proposed answer with no evidence yet) ---- */
 function buildEggs(){
   const svg=document.getElementById('egggraph'); if(!svg) return; ensureMarkers(svg);
-  const q=nodeBox(svg,{x:24,y:40,w:188,h:54,type:'question',label:'Are eggs healthy?',sub:'no observationBase',r:12});
-  const ghost=nodeBox(svg,{x:34,y:132,w:168,h:44,type:'entity',label:'measured exposure',sub:'self-report only',dash:true,r:10});
-  const gb=nodeBox(svg,{x:34,y:210,w:150,h:42,type:'entity',label:'validated biomarker',sub:'none exists',dash:true,r:9});
-  connect(svg,q,ghost,{fs:['bottom',.5],ts:['top',.5],pred:'observationBase?',cls:'base',dash:true,tip:'The question has no artifact under it — nothing measurable, as posed.'});
-  connect(svg,ghost,gb,{fs:['bottom',.5],ts:['top',.5],pred:'measured by?',cls:'base',dash:true,tip:'The self-reported exposure has no validated biomarker beneath it.'});
+  const q=nodeBox(svg,{x:24,y:120,w:188,h:56,type:'question',label:'Are eggs healthy?',sub:'no observationBase',r:12});
   const subs=[{y:12,t:'…vs processed meat?'},{y:76,t:'…lower apoB, in whom?'},{y:140,t:'…reduce lifespan?'},{y:204,t:'…lower “biological age”?'}];
   const sn=subs.map(s=>nodeBox(svg,{x:248,y:s.y,w:186,h:46,type:'question',label:'sub-question',sub:s.t,r:11}));
   sn.forEach((S,i)=>connect(svg,q,S,{fs:['right',.5],ts:['left',.5],pred:i===1?'splits into':'',cls:'addresses',bow:(i-1.5)*8}));
   /* one sub-question worked through: a proposed answer with no evidence, plus the Request that would test it */
-  const claim=nodeBox(svg,{x:492,y:30,w:196,h:50,type:'claim',label:'Claim · proposed',sub:'eggs lower apoB in most',r:11});
-  const ghostEv=nodeBox(svg,{x:520,y:110,w:140,h:40,type:'evidence',label:'supporting evidence',sub:'none yet',dash:true,r:9});
-  const req=nodeBox(svg,{x:492,y:182,w:196,h:50,type:'request',label:'Request',sub:'replicated apoB crossover',r:11});
-  connect(svg,claim,sn[1],{fs:['left',.5],ts:['right',.3],pred:'addresses',cls:'addresses',tip:'The proposed answer to the apoB sub-question.'});
+  const claim=nodeBox(svg,{x:492,y:120,w:200,h:50,type:'claim',label:'Claim · proposed',sub:'eggs slow biological aging',r:11});
+  const ghostEv=nodeBox(svg,{x:512,y:196,w:150,h:40,type:'evidence',label:'supporting evidence',sub:'none yet',dash:true,r:9});
+  const req=nodeBox(svg,{x:492,y:246,w:200,h:50,type:'request',label:'Request',sub:'longitudinal · biological age ± eggs',r:11});
+  connect(svg,claim,sn[3],{fs:['left',.5],ts:['right',.4],pred:'addresses',cls:'addresses',tip:'The proposed answer to the biological-age sub-question.'});
   connect(svg,ghostEv,claim,{fs:['top',.5],ts:['bottom',.5],pred:'supports?',cls:'supports',dash:true,tip:'A proposed answer with no supporting evidence yet — an unsubstantiated Claim.'});
   connect(svg,req,ghostEv,{fs:['top',.5],ts:['bottom',.5],pred:'would supply',cls:'ground',dash:true,tip:'Running the Request produces the evidence the claim is missing.'});
-  connect(svg,sn[1],req,{fs:['right',.7],ts:['left',.5],pred:'opens',cls:'request',tip:'<code>sub-question → Request</code> — an answerable sub-question names a specific study to run.'});
+  connect(svg,sn[3],req,{fs:['right',.6],ts:['left',.5],pred:'opens',cls:'request',tip:'<code>sub-question → Request</code> — an answerable sub-question names a specific study to run.'});
 }
 
 /* ---- WHO schematic (the pair, left) ---- */
@@ -157,8 +153,99 @@ function buildInterop(){
   connect(svg,hub,g2,{fs:['bottom',.65],ts:['top',.5],pred:'real instances',cls:'base',bow:0});
 }
 
+/* ---- workflow figure (run.html): tools as boxes, JSON-LD as the labelled
+        edge, a closed loop — both tools ⇄ one KOI transport; the graph
+        surfaces Requests → Study → new evidence re-enters. Self-contained
+        (own box/edge helpers + markers); reuses MIRAsvg el/side. ---- */
+function buildWorkflow(){
+  const svg=document.getElementById('workflow'); if(!svg) return;
+  const E=(tag,attrs,parent=svg)=>el(tag,attrs,parent);
+  const defs=E('defs',{});
+  const mkr=(id,fill)=>{ const m=E('marker',{id,viewBox:'0 0 10 10',refX:'8.5',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto-start-reverse'},defs); E('path',{d:'M0,0 L10,5 L0,10 z',fill},m); };
+  mkr('wfArrow','#AAA59C'); mkr('wfArrowWire','#241F2B'); mkr('wfArrowGhost','#B7B1A8'); mkr('wfArrowWork','#ADB2EE');
+
+  function box(cls,{x,y,w,h,name,sub,status,tag}){
+    const g=E('g',{class:`box ${cls}`});
+    E('rect',{x,y,width:w,height:h,rx:11},g);
+    if(status){ E('circle',{cx:x+14,cy:y+14,r:4.2,class:'status',fill:status==='designed'?'var(--question)':'var(--claim)'},g); }
+    if(tag){ const tg=E('text',{x:x+w/2,y:y+13,class:'ntag'},g); tg.textContent=tag; }
+    const ty=sub?y+h*(tag?0.5:0.44):y+h/2+1;
+    const t=E('text',{x:x+w/2,y:ty,class:'name','dominant-baseline':'middle'},g); t.textContent=name;
+    if(sub){ const s=E('text',{x:x+w/2,y:y+h*0.76,class:'sub','dominant-baseline':'middle'},g); s.textContent=sub; }
+    return {x,y,w,h};
+  }
+  function wedge(A,fromSide,B,toSide,o={}){
+    const {label,wire,work,designed,both,fromT=.5,toT=.5,bow=0}=o;
+    const a=side(A,fromSide,fromT), b=side(B,toSide,toT);
+    const [x1,y1]=a,[x2,y2]=b;
+    const cls=designed?'edge designed':work?'edge work':wire?'edge wire':'edge';
+    const mk=designed?'url(#wfArrowGhost)':work?'url(#wfArrowWork)':wire?'url(#wfArrowWire)':'url(#wfArrow)';
+    let d;
+    if(bow){ const mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len;
+      d=`M${x1},${y1} Q${mx+nx*bow},${my+ny*bow} ${x2},${y2}`; }
+    else d=`M${x1},${y1} L${x2},${y2}`;
+    const pa={class:cls,d,'marker-end':mk}; if(both) pa['marker-start']=mk; E('path',pa);
+    if(label){
+      let lx=(x1+x2)/2, ly=(y1+y2)/2;
+      if(bow){ const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len; lx+=nx*bow*.52; ly+=ny*bow*.52; }
+      if(wire){
+        const pill=E('g',{});
+        const txt=E('text',{x:lx,y:ly,class:'wirelabel','dominant-baseline':'middle'},pill); txt.textContent=label;
+        requestAnimationFrame(()=>{ try{ const bb=txt.getBBox(),px=7,py=3.5;
+          const r=E('rect',{x:bb.x-px,y:bb.y-py,width:bb.width+2*px,height:bb.height+2*py,rx:8,class:'wirepill'},pill);
+          pill.insertBefore(r,txt);}catch(_){} });
+      } else {
+        const txt=E('text',{x:lx,y:ly-3,class:work?'elabel work':'elabel'}); txt.textContent=label;
+      }
+    }
+  }
+
+  [['SOURCE',96],['INGEST · AUTHOR',300],['TRANSPORT',553],['RENDER',832]].forEach(([t,x])=>{ const s=E('text',{x,y:24,class:'stage'}); s.textContent=t; });
+
+  const CX=706, CY=84, CW=252, CH=252;
+  E('rect',{x:CX,y:CY,width:CW,height:CH,rx:16,class:'container-bg'});
+  const hd=E('text',{x:CX+CW/2,y:CY+22,class:'container-hd'}); hd.textContent='the shared graph — read many ways';
+
+  const S1  = box('io-src', {x:22, y:84,  w:148,h:52, name:'Source PDF', sub:'a paper · a figure'});
+  const EXT = box('tool',   {x:208,y:78,  w:178,h:64, name:'MIRA-extraction', sub:'AI-assisted MIRAfication', status:'shipped'});
+  const S2  = box('io-src', {x:22, y:238, w:148,h:52, name:'MyST Markdown', sub:'authored in prose'});
+  const MYST= box('tool',   {x:208,y:234, w:178,h:60, name:'myst-plus-mira', sub:'MyST → nodes parser', status:'shipped'});
+  const KOI = box('tool',   {x:470,y:150, w:166,h:76, name:'KOI node', sub:'shared cross-org transport', status:'shipped'});
+
+  box('io-view',{x:722,y:CY+36, w:220,h:44, name:'d3 viewer', sub:'traverse the graph'});
+  box('io-view',{x:722,y:CY+86, w:220,h:44, name:'narrative render', sub:'prose is a rendering'});
+  box('io-live',{x:722,y:CY+136,w:220,h:46, name:'live · 210 nodes', sub:'language & health'});
+  box('io-live',{x:722,y:CY+188,w:220,h:46, name:'live · 349 nodes', sub:'whitepaper graph'});
+
+  const FED = box('designed',{x:452,y:250,w:202,h:46, name:'federation across schemas', sub:'+ public ATProto layer'});
+
+  wedge(S1,'right', EXT,'left', {label:'PDF'});
+  wedge(S2,'right', MYST,'left',{label:'MyST'});
+  wedge(EXT,'right', KOI,'left', {label:'.mira.jsonld', wire:true, toT:0.28, both:true});
+  wedge(MYST,'right',KOI,'left', {label:'JSON-LD', wire:true, toT:0.72, both:true});
+  wedge(KOI,'right', {x:CX,y:CY,w:0,h:CH},'left', {label:'JSON-LD', wire:true, toT:(188-CY)/CH});
+  wedge(KOI,'bottom',FED,'top', {label:'designed', designed:true});
+  const rw=E('text',{x:428,y:192,class:'rwlabel'}); rw.textContent='read ↔ write';
+  const rw2=E('text',{x:428,y:203,class:'rwlabel'}); rw2.setAttribute('style','font-weight:600;fill:var(--muted);font-size:8px'); rw2.textContent='the same shared node';
+
+  const REQ = box('req',{x:520,y:432,w:172,h:56, name:'Request', sub:'a newcomer picks it up', tag:'open unit of work'});
+  const STU = box('stu',{x:250,y:432,w:172,h:56, name:'Study', sub:'runs it → new Evidence', tag:'answers the request'});
+  wedge({x:CX,y:CY,w:CW,h:CH},'bottom', REQ,'top', {label:'surfaces a gap', work:true, fromT:0.46, toT:0.62, bow:-44});
+  wedge(REQ,'left', STU,'right', {label:'request_for', work:true, bow:-26});
+  wedge(STU,'top', S2,'bottom', {label:'new Evidence → re-enters', work:true, fromT:0.42, toT:0.5, bow:-58});
+
+  const ln=E('text',{x:512,y:382,class:'loopnote'}); ln.textContent='the graph opens its own next questions';
+  const lc=E('text',{x:512,y:400,class:'loopcap'}); lc.textContent='research compounds — the loop closes';
+
+  const BX=20,BY=512,BW=940,BH=42;
+  E('rect',{x:BX,y:BY,width:BW,height:BH,rx:10,class:'schemaband'});
+  E('rect',{x:BX,y:BY,width:6,height:BH,rx:3,class:'schema-accent'});
+  const sn=E('text',{x:BX+BW/2,y:BY+17,class:'schema-name'}); sn.textContent='schema  ·  mira.yaml → SHACL';
+  const ss=E('text',{x:BX+BW/2,y:BY+32,class:'schema-sub'}); ss.textContent='one grammar under the whole loop — every record validates against it, conformance is machine-checkable';
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
-  try{ buildCovid(); buildWhoSchem(); buildSnap(); buildSpin(); buildEggs(); buildInterop(); }
+  try{ buildCovid(); buildWhoSchem(); buildSnap(); buildSpin(); buildEggs(); buildInterop(); buildWorkflow(); }
   catch(err){ console.error('graphs build',err); }
 });
 })();
