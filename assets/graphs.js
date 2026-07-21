@@ -164,8 +164,9 @@ function buildWorkflow(){
   const mkr=(id,fill)=>{ const m=E('marker',{id,viewBox:'0 0 10 10',refX:'8.5',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto-start-reverse'},defs); E('path',{d:'M0,0 L10,5 L0,10 z',fill},m); };
   mkr('wfArrow','#AAA59C'); mkr('wfArrowWire','#241F2B'); mkr('wfArrowGhost','#B7B1A8'); mkr('wfArrowWork','#ADB2EE');
 
-  function box(cls,{x,y,w,h,name,sub,status,tag}){
+  function box(cls,{x,y,w,h,name,sub,status,tag,tip}){
     const g=E('g',{class:`box ${cls}`});
+    if(tip) g.setAttribute('data-tip',tip);
     E('rect',{x,y,width:w,height:h,rx:11},g);
     if(status){ E('circle',{cx:x+14,cy:y+14,r:4.2,class:'status',fill:status==='designed'?'var(--question)':'var(--claim)'},g); }
     if(tag){ const tg=E('text',{x:x+w/2,y:y+13,class:'ntag'},g); tg.textContent=tag; }
@@ -175,7 +176,7 @@ function buildWorkflow(){
     return {x,y,w,h};
   }
   function wedge(A,fromSide,B,toSide,o={}){
-    const {label,wire,work,designed,both,fromT=.5,toT=.5,bow=0}=o;
+    const {label,wire,work,designed,both,tip,fromT=.5,toT=.5,bow=0}=o;
     const a=side(A,fromSide,fromT), b=side(B,toSide,toT);
     const [x1,y1]=a,[x2,y2]=b;
     const cls=designed?'edge designed':work?'edge work':wire?'edge wire':'edge';
@@ -185,17 +186,19 @@ function buildWorkflow(){
       d=`M${x1},${y1} Q${mx+nx*bow},${my+ny*bow} ${x2},${y2}`; }
     else d=`M${x1},${y1} L${x2},${y2}`;
     const pa={class:cls,d,'marker-end':mk}; if(both) pa['marker-start']=mk; E('path',pa);
+    if(tip){ const hit=E('path',{class:'wf-hit',d}); hit.setAttribute('data-tip',tip); }
     if(label){
       let lx=(x1+x2)/2, ly=(y1+y2)/2;
       if(bow){ const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len; lx+=nx*bow*.52; ly+=ny*bow*.52; }
       if(wire){
-        const pill=E('g',{});
+        const pill=E('g',{class:'wlabel'}); if(tip) pill.setAttribute('data-tip',tip);
         const txt=E('text',{x:lx,y:ly,class:'wirelabel','dominant-baseline':'middle'},pill); txt.textContent=label;
         requestAnimationFrame(()=>{ try{ const bb=txt.getBBox(),px=7,py=3.5;
           const r=E('rect',{x:bb.x-px,y:bb.y-py,width:bb.width+2*px,height:bb.height+2*py,rx:8,class:'wirepill'},pill);
           pill.insertBefore(r,txt);}catch(_){} });
       } else {
         const txt=E('text',{x:lx,y:ly-3,class:work?'elabel work':'elabel'}); txt.textContent=label;
+        if(tip) txt.setAttribute('data-tip',tip);
       }
     }
   }
@@ -206,33 +209,51 @@ function buildWorkflow(){
   E('rect',{x:CX,y:CY,width:CW,height:CH,rx:16,class:'container-bg'});
   const hd=E('text',{x:CX+CW/2,y:CY+22,class:'container-hd'}); hd.textContent='the shared graph — read many ways';
 
-  const S1  = box('io-src', {x:22, y:84,  w:148,h:52, name:'Source PDF', sub:'a paper · a figure'});
-  const EXT = box('tool',   {x:208,y:78,  w:178,h:64, name:'MIRA-extraction', sub:'AI-assisted MIRAfication', status:'shipped'});
-  const S2  = box('io-src', {x:22, y:238, w:148,h:52, name:'MyST Markdown', sub:'authored in prose'});
-  const MYST= box('tool',   {x:208,y:234, w:178,h:60, name:'myst-plus-mira', sub:'MyST → nodes parser', status:'shipped'});
-  const KOI = box('tool',   {x:470,y:150, w:166,h:76, name:'KOI node', sub:'shared cross-org transport', status:'shipped'});
+  const S1  = box('io-src', {x:22, y:84,  w:148,h:52, name:'Source PDF', sub:'a paper · a figure',
+    tip:"A <b>source document</b> — a paper, preprint, or figure. The raw input MIRA lifts records from; the graph points at it, never copies it."});
+  const EXT = box('tool',   {x:208,y:78,  w:178,h:64, name:'MIRA-extraction', sub:'AI-assisted MIRAfication', status:'shipped',
+    tip:"<b>AI-assisted MIRAfication.</b> Lifts Question / Claim / Evidence / Study nodes from a source and emits schema-conformant <code>JSON-LD</code>, each pinned to a verbatim source excerpt. Shipped · mira-extraction.vercel.app"});
+  const S2  = box('io-src', {x:22, y:238, w:148,h:52, name:'MyST Markdown', sub:'authored in prose',
+    tip:"Discourse-graph nodes <b>authored inline</b> in MyST Markdown prose — the human authoring path."});
+  const MYST= box('tool',   {x:208,y:234, w:178,h:60, name:'myst-plus-mira', sub:'MyST → nodes parser', status:'shipped',
+    tip:"The TypeScript <b>MyST parser</b>: authors nodes in MyST and emits <code>JSON-LD</code>. Shipped · github.com/MIRA-science/myst-plus-mira"});
+  const KOI = box('tool',   {x:470,y:150, w:166,h:76, name:'KOI node', sub:'shared cross-org transport', status:'shipped',
+    tip:"The <b>KOI</b> cross-organization envelope — the shared transport different orgs' agents and tools <code>read from and write to</code>. Operational · github.com/MIRA-science/koi-net-mira-prototype"});
 
-  box('io-view',{x:722,y:CY+36, w:220,h:44, name:'d3 viewer', sub:'traverse the graph'});
-  box('io-view',{x:722,y:CY+86, w:220,h:44, name:'narrative render', sub:'prose is a rendering'});
-  box('io-live',{x:722,y:CY+136,w:220,h:46, name:'live · 210 nodes', sub:'language & health'});
-  box('io-live',{x:722,y:CY+188,w:220,h:46, name:'live · 349 nodes', sub:'whitepaper graph'});
+  box('io-view',{x:722,y:CY+36, w:220,h:44, name:'d3 viewer', sub:'traverse the graph',
+    tip:"Traverse the graph node-by-node in a standalone <b>d3 viewer</b>."});
+  box('io-view',{x:722,y:CY+86, w:220,h:44, name:'narrative render', sub:'prose is a rendering',
+    tip:"The prose is a <b>rendering</b> of the graph — the narrative is generated as a traversal, not written by hand."});
+  box('io-live',{x:722,y:CY+136,w:220,h:46, name:'live · 210 nodes', sub:'language & health',
+    tip:"A <b>live public graph</b> — 210 nodes, a healthcare-language synthesis. language-and-health-open-synthesis.vercel.app"});
+  box('io-live',{x:722,y:CY+188,w:220,h:46, name:'live · 349 nodes', sub:'whitepaper graph',
+    tip:"A <b>live public graph</b> — 349 nodes, a whitepaper rendered as a graph. rdf.scios.tech"});
 
-  const FED = box('designed',{x:452,y:250,w:202,h:46, name:'federation across schemas', sub:'+ public ATProto layer'});
+  const FED = box('designed',{x:452,y:250,w:202,h:46, name:'federation across schemas', sub:'+ public ATProto layer',
+    tip:"<b>Designed, not built.</b> Federation across different schemas, plus the public ATProto layer — draft <code>science.mira.*</code> lexicons only."});
 
-  wedge(S1,'right', EXT,'left', {label:'PDF'});
-  wedge(S2,'right', MYST,'left',{label:'MyST'});
-  wedge(EXT,'right', KOI,'left', {label:'.mira.jsonld', wire:true, toT:0.28, both:true});
-  wedge(MYST,'right',KOI,'left', {label:'JSON-LD', wire:true, toT:0.72, both:true});
-  wedge(KOI,'right', {x:CX,y:CY,w:0,h:CH},'left', {label:'JSON-LD', wire:true, toT:(188-CY)/CH});
-  wedge(KOI,'bottom',FED,'top', {label:'designed', designed:true});
+  wedge(S1,'right', EXT,'left', {label:'PDF', tip:"The raw source goes into the extractor."});
+  wedge(S2,'right', MYST,'left',{label:'MyST', tip:"Prose authored in MyST goes into the parser."});
+  wedge(EXT,'right', KOI,'left', {label:'.mira.jsonld', wire:true, toT:0.28, both:true,
+    tip:"<code>read ↔ write</code> — the extractor emits <code>&lt;name&gt;.mira.jsonld</code> to the shared KOI node, and reads records back from it."});
+  wedge(MYST,'right',KOI,'left', {label:'JSON-LD', wire:true, toT:0.72, both:true,
+    tip:"<code>read ↔ write</code> — the parser writes <code>JSON-LD</code> to the same shared node, and reads records back."});
+  wedge(KOI,'right', {x:CX,y:CY,w:0,h:CH},'left', {label:'JSON-LD', wire:true, toT:(188-CY)/CH,
+    tip:"The shared graph is rendered from the <code>JSON-LD</code> records KOI carries."});
+  wedge(KOI,'bottom',FED,'top', {label:'designed', designed:true, tip:"Designed, not built — federation across schemas."});
   const rw=E('text',{x:428,y:192,class:'rwlabel'}); rw.textContent='read ↔ write';
   const rw2=E('text',{x:428,y:203,class:'rwlabel'}); rw2.setAttribute('style','font-weight:600;fill:var(--muted);font-size:8px'); rw2.textContent='the same shared node';
 
-  const REQ = box('req',{x:520,y:432,w:172,h:56, name:'Request', sub:'a newcomer picks it up', tag:'open unit of work'});
-  const STU = box('stu',{x:250,y:432,w:172,h:56, name:'Study', sub:'runs it → new Evidence', tag:'answers the request'});
-  wedge({x:CX,y:CY,w:CW,h:CH},'bottom', REQ,'top', {label:'surfaces a gap', work:true, fromT:0.46, toT:0.62, bow:-44});
-  wedge(REQ,'left', STU,'right', {label:'request_for', work:true, bow:-26});
-  wedge(STU,'top', S2,'bottom', {label:'new Evidence → re-enters', work:true, fromT:0.42, toT:0.5, bow:-58});
+  const REQ = box('req',{x:520,y:432,w:172,h:56, name:'Request', sub:'a newcomer picks it up', tag:'open unit of work',
+    tip:"A <code>Request</code> — an open unit of work the community can pick up, issue-tracker-shaped."});
+  const STU = box('stu',{x:250,y:432,w:172,h:56, name:'Study', sub:'runs it → new Evidence', tag:'answers the request',
+    tip:"A <code>Study</code> — the activity that runs the request and produces new <code>Evidence</code>."});
+  wedge({x:CX,y:CY,w:CW,h:CH},'bottom', REQ,'top', {label:'surfaces a gap', work:true, fromT:0.46, toT:0.62, bow:-44,
+    tip:"The graph <b>surfaces its own gaps</b> — open Questions, contested Claims, un-reproduced Evidence — as Requests."});
+  wedge(REQ,'left', STU,'right', {label:'request_for', work:true, bow:-26,
+    tip:"<code>request_for</code> — the Request spins out a Study to answer it."});
+  wedge(STU,'top', S2,'bottom', {label:'new Evidence → re-enters', work:true, fromT:0.42, toT:0.5, bow:-58,
+    tip:"The Study's new <b>Evidence</b> re-enters the pipeline as a new record — closing the loop."});
 
   const ln=E('text',{x:512,y:382,class:'loopnote'}); ln.textContent='the graph opens its own next questions';
   const lc=E('text',{x:512,y:400,class:'loopcap'}); lc.textContent='research compounds — the loop closes';
