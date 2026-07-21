@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <title>MIRA — run it</title>
-<meta name="description" content="The public, clickable and runnable MIRA prototypes — schema, live graphs, extraction, the KOI round-trip, the MyST round-trip — each marked shipped, designed, or past-tense pilot." />
+<meta name="description" content="The public, clickable and runnable MIRA prototypes — schema, live graphs, extraction (JSON-LD out), the KOI round-trip, the MyST round-trip — each marked shipped or designed." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400..800&display=swap" rel="stylesheet">
@@ -40,7 +40,6 @@
       <div class="tags" style="margin-top:var(--s5)">
         <span class="vtag" style="--fill:var(--claim-fill)"><span class="d" style="--c:var(--claim)"></span><b>shipped</b> — runs today</span>
         <span class="vtag" style="--fill:var(--question-fill)"><span class="d" style="--c:var(--question)"></span><b>designed</b> — a concrete draft, not built</span>
-        <span class="vtag" style="--fill:var(--source-fill)"><span class="d" style="--c:var(--source)"></span><b>past-tense pilot</b> — ran during the inter-lab pilot</span>
       </div>
     </div>
 
@@ -63,8 +62,8 @@
 
         <div class="protocard">
           <div class="top"><span class="name"><code>MIRA-extraction</code></span><span class="status shipped">shipped</span></div>
-          <p class="what">AI-assisted MIRAfication of a source. Emits a verbatim <span class="mono">provenance.excerpt</span> for each node (the receipts), reports dangling and ungrammatical edges instead of dropping them, and enforces the <span class="mono">source → study → grounds → evidence</span> spine.</p>
-          <p class="try"><b>What to try:</b> MIRAfy a source and diff the <b>Initial AI draft</b> nodes against what a human would advance — the diff is the exhibit.</p>
+          <p class="what">AI-assisted MIRAfication of a source. Emits schema-conformant <b>JSON-LD</b> (<span class="mono">&lt;name&gt;.mira.jsonld</span>) — the wire format the viewers and the KOI envelope speak — with a verbatim <span class="mono">provenance.excerpt</span> on every node (the receipts), dangling and ungrammatical edges reported instead of dropped, and the <span class="mono">source → study → grounds → evidence</span> spine enforced.</p>
+          <p class="try"><b>What to try:</b> MIRAfy a source and diff the <b>Initial AI draft</b> nodes against what a human would advance — the diff is the exhibit; the emitted <span class="mono">.mira.jsonld</span> is what moves downstream.</p>
           <a class="link" href="https://mira-extraction.vercel.app/" target="_blank" rel="noopener">mira-extraction.vercel.app ↗</a><br>
           <a class="link" href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">install it: github.com/MIRA-science/MIRA-extraction ↗</a>
         </div>
@@ -84,8 +83,8 @@
         </div>
 
         <div class="protocard">
-          <div class="top"><span class="name"><code>koi-net-mira-prototype</code></span><span class="status pilot">past-tense pilot</span></div>
-          <p class="what">The KOI cross-organization envelope. During the inter-lab pilot, different people’s agents and tools read from and wrote to the same KOI node across organizational boundaries, routinely. We do <b>not</b> claim a live federated network today.</p>
+          <div class="top"><span class="name"><code>koi-net-mira-prototype</code></span><span class="status shipped">shipped</span></div>
+          <p class="what">The KOI cross-organization envelope — operational. Different orgs’ agents and tools read from and write to the same KOI node, and it ingests the JSON-LD that <span class="mono">MIRA-extraction</span> emits. Still <b>designed, not built</b>: federation <i>across schemas</i> and a public network at scale.</p>
           <p class="try"><b>What to try:</b> run the local prototype network (<span class="mono">toy-demo</span>) and watch the coordinator-as-discovery 56-record lossless round trip.</p>
           <a class="link" href="https://github.com/MIRA-science/koi-net-mira-prototype" target="_blank" rel="noopener">github.com/MIRA-science/koi-net-mira-prototype ↗</a>
         </div>
