@@ -55,10 +55,6 @@
         </tbody>
       </table>
       <p class="foot-note">Every node also carries the same shared <b>NodeSchema</b> fields — <span class="mono">creator</span>, <span class="mono">created</span>, <span class="mono">modified</span>, <span class="mono">description</span>, <span class="mono">has_container</span> and the record’s own text. <span class="mono">Claim</span> and <span class="mono">Evidence</span> additionally include <b>Argument</b>, so they carry the <span class="mono">supports</span> / <span class="mono">opposes</span> slots.</p>
-
-      <div class="disclaim" style="margin-top:var(--s5)">
-        <b>A slot is a field of a node — not a free-floating edge.</b> Each type is distinguished by the handful of <b>slots</b> it carries. Some slots hold a <b>value</b>: a date, the record’s text, or a <b>pointer</b> like <span class="mono">observationBase</span>, whose value is a URL to the data. Other slots hold a <b>reference</b> to another node — <span class="mono">addresses</span> → a Question, <span class="mono">sourceDocument</span> → a SourceDocument, <span class="mono">follows</span> → a Protocol — and it is those reference-slots that weave the records into a graph. So a node is a bundle of fields first; the graph is what emerges when some of those fields name other nodes.
-      </div>
     </section>
 
     <section class="move">
