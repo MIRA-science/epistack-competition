@@ -100,14 +100,14 @@ function nodeBox(svg,{x,y,w,h,type,label,sub,cls='',dash=false,r=9}){
   else { const t=el('text',{x:x+w/2,y:y+h/2},grp); t.textContent=label; if(dash){t.setAttribute('fill','var(--muted)');t.setAttribute('font-style','italic');} }
   return N;
 }
-function connect(svg,A,B,{fs=['right',.5],ts=['left',.5],pred='',cls='',bow=0,dash=false,marker='url(#arrow2)',tip:tipText=''}){
+function connect(svg,A,B,{fs=['right',.5],ts=['left',.5],pred='',cls='',bow=0,dash=false,marker='url(#arrow2)',tip:tipText='',loff=[0,0]}){
   const a=side(A,fs[0],fs[1]), b=side(B,ts[0],ts[1]);
   const grp=el('g',{class:`gedge gedge--${cls} is-on`},svg);
   const p=el('path',{class:'glink',d:pathD(a,b,bow),'marker-end':marker},grp);
   if(dash){ p.setAttribute('stroke-dasharray','5 4'); p.setAttribute('marker-end','url(#arrowghost)'); }
   if(pred){
     const [lx,ly]=labelPt(a,b,bow);
-    const tx=el('text',{class:'elabel',x:lx,y:ly-2},grp); tx.textContent=pred;
+    const tx=el('text',{class:'elabel',x:lx+loff[0],y:ly-2+loff[1]},grp); tx.textContent=pred;
     if(tipText){ requestAnimationFrame(()=>{ try{ const bb=tx.getBBox(),pad=5; const r=el('rect',{class:'ehit',x:bb.x-pad,y:bb.y-pad,width:bb.width+2*pad,height:bb.height+2*pad},grp); r.dataset.tip=tipText; }catch(_){} }); }
   }
   return grp;

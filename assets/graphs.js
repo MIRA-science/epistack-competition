@@ -68,21 +68,29 @@ function buildSnap(){
   connect(svg,cNew,cOld,{fs:['left',.5],ts:['right',.4],pred:'informs',cls:'addresses',bow:-30,tip:'The new claim bears on the contested one — the graph re-weights without a rewrite.'});
 }
 
-/* ---- Request→Study spin-out loop ---- */
+/* ---- Request→Study spin-out loop ----
+   Orthogonal ring: Request (top-left) and Study (top-right) across the top;
+   Claim (bottom-left) and Evidence (bottom-right) across the bottom; every
+   edge runs pure H or V so nothing reads as askew. The production spine runs
+   the outer three sides (request_for → grounds → observationStatement); the
+   request_target chord drops straight down the ring's left side; the Question
+   hangs off the far left, and Evidence→Claim→Question sit colinear so the
+   observation flowing in and the claim addressing the question read as one
+   straight line. Creator chips sit ABOVE the top row, clear of every edge. */
 function buildSpin(){
   const svg=document.getElementById('spingraph'); if(!svg) return; ensureMarkers(svg);
-  const q=nodeBox(svg,{x:36,y:120,w:130,h:48,type:'question',label:'Question',r:10});
-  const req=nodeBox(svg,{x:210,y:36,w:150,h:48,type:'request',label:'Request',sub:'an open gap',r:10});
-  const stu=nodeBox(svg,{x:410,y:36,w:150,h:48,type:'study',label:'Study',sub:'someone claimed it',r:10});
-  const evd=nodeBox(svg,{x:560,y:150,w:130,h:48,type:'evidence',label:'Evidence',sub:'a new result',r:10});
-  const clm=nodeBox(svg,{x:250,y:210,w:150,h:48,type:'claim',label:'Claim',r:10});
-  connect(svg,req,stu,{fs:['right',.5],ts:['left',.5],pred:'request_for',cls:'request',tip:'<code>Request → Study</code> — claiming the request spins out a new study.'});
-  connect(svg,stu,evd,{fs:['bottom',.6],ts:['top',.5],pred:'grounds',cls:'ground',bow:20,tip:'<code>Study → Evidence</code> — the study produces new evidence.'});
-  connect(svg,evd,clm,{fs:['bottom',.5],ts:['right',.4],pred:'observationStatement',cls:'obs',bow:40,tip:'<code>Evidence → Claim</code> — the new result speaks to a claim.'});
-  connect(svg,clm,q,{fs:['left',.5],ts:['right',.6],pred:'addresses',cls:'addresses',tip:'<code>Claim → Question</code> — closing the loop back to the open question.'});
-  connect(svg,req,clm,{fs:['bottom',.3],ts:['top',.5],pred:'request_target',cls:'request',bow:-24,tip:'<code>Request → Claim</code> — the gap points at the claim it wants settled.'});
-  creatorChip(svg,214,90,'asked by · requester',getComputedStyle(document.documentElement).getPropertyValue('--request-ink').trim()||'#26309A');
-  creatorChip(svg,414,90,'claimed by · a researcher',getComputedStyle(document.documentElement).getPropertyValue('--study-ink').trim()||'#1F5596');
+  const q  =nodeBox(svg,{x:16, y:192,w:130,h:52,type:'question',label:'Question',r:10});
+  const req=nodeBox(svg,{x:196,y:40, w:164,h:52,type:'request',label:'Request',sub:'a dormant issue',r:10});
+  const stu=nodeBox(svg,{x:476,y:40, w:164,h:52,type:'study',label:'Study',sub:'claimed 14 mo later',r:10});
+  const evd=nodeBox(svg,{x:476,y:192,w:164,h:52,type:'evidence',label:'Evidence',sub:'a result — before the PI knew',r:10});
+  const clm=nodeBox(svg,{x:196,y:192,w:164,h:52,type:'claim',label:'Claim',r:10});
+  connect(svg,req,stu,{fs:['right',.5], ts:['left',.5], pred:'request_for',cls:'request',tip:'<code>Request → Study</code> — a newcomer claims the request; it spins out a study.'});
+  connect(svg,stu,evd,{fs:['bottom',.5],ts:['top',.5],  pred:'grounds',cls:'ground',loff:[-54,0],tip:'<code>Study → Evidence</code> — the study produces a new result.'});
+  connect(svg,evd,clm,{fs:['left',.5],  ts:['right',.5],pred:'observationStatement',cls:'obs',tip:'<code>Evidence → Claim</code> — the result speaks to a claim.'});
+  connect(svg,req,clm,{fs:['bottom',.5],ts:['top',.5],  pred:'request_target',cls:'request',loff:[54,0],tip:'<code>Request → Claim</code> — the gap points at the claim it wants settled.'});
+  connect(svg,clm,q,  {fs:['left',.5],  ts:['right',.5],pred:'addresses',cls:'addresses',tip:'<code>Claim → Question</code> — closing the loop back to the open question.'});
+  creatorChip(svg,196,14,'asked by · a lab member',getComputedStyle(document.documentElement).getPropertyValue('--request-ink').trim()||'#26309A');
+  creatorChip(svg,476,14,'claimed by · a newcomer',getComputedStyle(document.documentElement).getPropertyValue('--study-ink').trim()||'#1F5596');
 }
 
 /* ---- eggs: missing observationBase, answerable sub-questions, and one
