@@ -65,7 +65,7 @@
           <h2>Interoperability without flattening the nuance</h2>
           <p class="secsub">The central worry: a shared format that lets analyses combine usually does it by forcing agreement, and agreement is where the nuance dies.</p>
 
-          <details class="qa" id="q-a1" open>
+          <details class="qa" id="q-interop-without-flattening" data-legacy="q-a1" open>
             <summary><span class="core"></span>How do you get interoperability without flattening the nuance?</summary>
             <div class="body">
               <p class="prose">Put the objective/subjective boundary at the <b>artifact</b>. Below it — the data itself, the study that produced it, the method that study followed, which paper reported it — is shared and interoperable; everyone can point at it whether or not they agree. Above it — how you <i>describe</i> the artifact, which claim you think it speaks to, how strongly — is <b>attributed and allowed to coexist</b>, never merged into a single canonical reading.</p>
@@ -74,7 +74,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-a2">
+          <details class="qa" id="q-one-vocabulary" data-legacy="q-a2">
             <summary><span class="core"></span>Doesn’t a shared schema force everyone into one vocabulary or ontology?</summary>
             <div class="body">
               <p class="prose">No. The grammar is deliberately <b>minimal — six node types</b> — and the wire format is <b>JSON-LD</b>: schema-agnostic transport, no triple store required to participate. You <b>attach</b> records to shared artifacts; you never overwrite someone else’s node. Two “similar but not identical” claims stay as separate nodes, linked by qualitative <span class="mono">supports</span> / <span class="mono">opposes</span> / <span class="mono">informs</span> — not collapsed into one.</p>
@@ -83,7 +83,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-a3">
+          <details class="qa" id="q-whose-description-wins" data-legacy="q-a3">
             <summary><span class="core"></span>Two analysts describe the same plot differently — whose description wins?</summary>
             <div class="body">
               <p class="prose">Neither. The <span class="mono">observationBase</span> — the plot, table or dataset — is invariant; the <span class="mono">observationStatement</span> is one person’s <i>reading</i> of it, attributed to them. Several statements over one base is just several people reading one plot differently. That is not corruption to be resolved — it is the honest state, made queryable: you can ask <i>does the disagreement live in the description, or in the inference?</i></p>
@@ -92,7 +92,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-a4">
+          <details class="qa" id="q-whose-reading-to-trust" data-legacy="q-a4">
             <summary>If every reading coexists, how does a reader choose whose to trust?</summary>
             <div class="body">
               <p class="prose">You <b>subscribe to a lens</b>. Because every relation and every rating is <b>per-agent attributed</b> — each carries its <span class="mono">creator</span> — a reader, funder or lab can add a <b>signal for whose reading of the shared graph they trust</b>: follow one curator’s <span class="mono">observationStatement</span>s and confidence ratings, blend several, or discount a source you don’t. The artifacts underneath stay identical for everyone; the <b>lens applied on top</b> is the consumer’s choice.</p>
@@ -107,7 +107,7 @@
           <h2>The format</h2>
           <p class="secsub">What a format looks like that is flexible enough to link diverse subtopics and multi-perspective investigations while preserving important detail.</p>
 
-          <details class="qa" id="q-b1">
+          <details class="qa" id="q-what-the-format-looks-like" data-legacy="q-b1">
             <summary><span class="core"></span>What does the format actually look like?</summary>
             <div class="body">
               <p class="prose">Six node types — Question, Claim, Evidence, Study, Protocol, Request — plus SourceDocument. Each is a <b>record with fields (slots)</b>, and the type-specific slots are what distinguish the types. Some slots hold a <b>value</b> (a date, or a pointer like <span class="mono">observationBase</span> — a URL to the data); some hold a <b>reference</b> to another node, and those reference-slots are what weave the graph. The load-bearer is the <b>four-layer Evidence chain</b>: an Evidence record’s fields place it against the Claim it speaks to (<span class="mono">observationStatement</span>), the artifact it rests on (<span class="mono">observationBase</span>), the Study that produced it (<span class="mono">is_grounded_in</span>) and the paper that reported it (<span class="mono">sourceDocument</span>). When a reference needs to carry <i>who asserted it and how strongly</i>, it is <b>reified</b> as its own record so attribution, flavor and degree attach to the assertion itself.</p>
@@ -125,7 +125,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-b2">
+          <details class="qa" id="q-linking-subtopics" data-legacy="q-b2">
             <summary>How does it link diverse subtopics and multi-perspective investigations without collapsing them?</summary>
             <div class="body">
               <p class="prose">The <b>Question layer</b> plus <span class="mono">addresses</span> lets one inquiry fan out into sub-questions (“are eggs healthy?” → “healthy compared to what, on which observable, in whom?”). Multi-perspective disagreement rides on <span class="mono">supports</span> / <span class="mono">opposes</span> / <span class="mono">informs</span> with a qualitative degree, all pointing at the same claims. Cross-links compose across topics, so a graph in one field can reference a shared artifact in another.</p>
@@ -135,7 +135,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-b3">
+          <details class="qa" id="q-caveats-and-uncertainty" data-legacy="q-b3">
             <summary>How do you preserve caveats, uncertainty, and “similar but not identical”?</summary>
             <div class="body">
               <p class="prose">Three moves. Multiple Evidence records and <span class="mono">observationStatement</span>s instead of one merged claim. A <b>qualitative confidence rating</b> per edge that others can weigh in on. And <b>ghost-slots</b> — dashed placeholders that make <i>absence</i> structured and visible, so a missing dataset or an unmeasured exposure is a shape in the graph, not silence.</p>
@@ -145,7 +145,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-b4">
+          <details class="qa" id="q-disagreement-legible" data-legacy="q-b4">
             <summary><span class="core"></span>How do you keep disagreement legible instead of resolving it away?</summary>
             <div class="body">
               <p class="prose">The same anchor <b>absorbs</b> disagreement. One artifact can carry a <span class="mono">supports</span> edge and an <span class="mono">opposes</span> edge at once — Photograph 51 supports the double helix and opposes the triple helix. Five analyses can land on one <span class="mono">observationBase</span>. Once they do, you can ask <i>which layer</i> the disagreement lives in: the description of the artifact, the inference drawn from it, or the artifact itself. Nothing is deleted to reach a verdict.</p>
@@ -160,7 +160,7 @@
           <h2>Maintained over time</h2>
           <p class="secsub">How the format plays well with newly-emerging sources, a diverse and changing user base, and an expanding frontier of AI tooling.</p>
 
-          <details class="qa" id="q-c1">
+          <details class="qa" id="q-new-sources" data-legacy="q-c1">
             <summary><span class="core"></span>New sources keep arriving — how does the graph absorb them?</summary>
             <div class="body">
               <p class="prose"><b>Append-only attach.</b> A new paper becomes new Evidence and Claim nodes that attach to existing ones by edge; every claim they touch updates its support without anyone rewriting a review. When <i>Cell</i> published a new class of pre-emergence-selection evidence in March 2026, two years after the Rootclaim debate closed, in a sealed-document world it is a PDF nobody wires up — in the graph it is a Claim and two Evidence nodes that snap onto the 2024 COVID graph.</p>
@@ -168,7 +168,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-c2">
+          <details class="qa" id="q-diverse-user-base" data-legacy="q-c2">
             <summary>The user base is diverse and changing — how does that not corrupt the record?</summary>
             <div class="body">
               <p class="prose"><b>Extraction is AI-assisted; curation is human.</b> A curation-status ladder — <b>Initial AI draft → In review → Verified</b> — is surfaced per subgraph and per node, with plural users, allowing for filters based on one’s “epistemic standards.” Every AI-drafted node is anchored to a verbatim source quote so the reviewer can check it in seconds. Every assertion carries its <span class="mono">creator</span>.</p>
@@ -176,7 +176,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-c3">
+          <details class="qa" id="q-ai-tooling-obsolescence" data-legacy="q-c3">
             <summary>AI tooling keeps getting better — does the format go obsolete?</summary>
             <div class="body">
               <p class="prose">The format is <b>downstream of the tools, not coupled to them</b>. Extraction, anchoring and structural validation scale <i>with</i> the models and get better every generation; what stays fixed is the human <b>commitment</b> point — deciding what enters the shared record and how strongly it is claimed. That is where the human goes, and nowhere else, so no hand-designed step becomes the bottleneck.</p>
@@ -185,7 +185,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-c4">
+          <details class="qa" id="q-schema-drift" data-legacy="q-c4">
             <summary>How do you know the format is being followed and not silently drifting?</summary>
             <div class="body">
               <p class="prose"><b>Typed and validatable.</b> While entering this contest, we ran SHACL on our own graph and it caught real drift — a type error, a dead canonical URL, a validator silently broken for weeks — that we fixed with <a href="https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/commit/08493f6a46db223614cafbde68684fcb0f4b1c8a" target="_blank" rel="noopener">commits</a> and <a href="https://github.com/MIRA-science/schema/issues/25" target="_blank" rel="noopener">issues</a> proposing schema refinement. Maintaining a shared contract <i>looks like</i> catching your own violations; community calls and issue discussions allow for principled schema changes.</p>
@@ -193,7 +193,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-c5">
+          <details class="qa" id="q-cross-organizations" data-legacy="q-c5">
             <summary><span class="core"></span>How does it cross organizations and tools?</summary>
             <div class="body">
               <p class="prose"><b><a href="https://github.com/MIRA-science/koi-net-mira-prototype" target="_blank" rel="noopener">KOI</a></b> is the cross-organization envelope: different people’s agents and tools read from and write to the same KOI node across organizational boundaries. KOI is an instance of the <a href="https://github.com/DynamicalSystemsGroup/koi-net" target="_blank" rel="noopener">Knowledge Organization Infrastructure Network</a> developed by the Dynamical Systems Group. Those records live on KOI nodes the participating orgs run — and even there, each record is a pointer to its artifact, not a copy. Federation <i>across schemas</i> is designed but not implemented (yet!) <b>ATProto</b> is the intended public layer; draft lexicons (<span class="mono">science.mira.*</span>) exist. The three legs — <b>ingestion → structure → transport</b>: <b><a href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">MIRA-extraction</a></b> lifts nodes from a source PDF and emits them as schema-conformant <b>JSON-LD</b>, each pinned to a verbatim source excerpt; the shared <b>schema</b> is the structure those records validate against; and the <b>KOI</b> envelope carries them across organizational boundaries. Two round trips run in that one wire format — <b>ingestion:</b> <span class="mono">PDF → MIRA-extraction → JSON-LD → KOI</span>; <b>authoring:</b> <span class="mono">MyST Markdown → myst-plus-mira → JSON-LD → viewer</span>. Different tools at each end, one format in the middle, nothing hand-glued between them.</p>
@@ -207,7 +207,7 @@
           <h2>What it unlocks</h2>
           <p class="secsub">Once the material is structured, what becomes possible — including the move from “assess what exists” to “generate the work that would resolve it.”</p>
 
-          <details class="qa" id="q-d1">
+          <details class="qa" id="q-what-structure-unlocks" data-legacy="q-d1">
             <summary><span class="core"></span>Once it’s structured, what can you do that you couldn’t before?</summary>
             <div class="body">
               <p class="prose">Three things. <b>Navigate to the evidence</b> — the artifact is addressable, not buried on page 44 of an annex. <b>Detect correlated evidence masquerading as independent</b> — because convergence becomes a fact about artifacts, not a count of citations. And <b>the gaps become actionable</b> (next question).</p>
@@ -225,7 +225,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-d2">
+          <details class="qa" id="q-compounding-into-experiments" data-legacy="q-d2">
             <summary><span class="core"></span>How does disagreement “compound into new experiments”?</summary>
             <div class="body">
               <p class="prose">“What would change my mind” is a <span class="mono">Request</span>. Its <span class="mono">request_target</span> points at the contested Claim; its <span class="mono">request_for</span> points at the Study that would settle it. A researcher <b>claims</b> it and it spawns their Study, which grounds new Evidence — closing the provenance loop, with the requester’s and the claimer’s credit both on the record.</p>
@@ -234,7 +234,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-d3">
+          <details class="qa" id="q-attribution" data-legacy="q-d3">
             <summary>How does attribution work? — the “A” in MIRA</summary>
             <div class="body">
               <p class="prose"><b>Credit attaches to the contribution, not the byline.</b> Every node and edge carries its <span class="mono">creator</span>, so a claim, a piece of evidence, a protocol, or one reading of a figure is a discrete, attributable record — with its own author, date, identifier and license — separable from whatever paper it lands in (ORCID is the intended contributor identity). Because relations are <b>reified and attributed</b>, even “this evidence <i>changed my mind</i>” is a signed act by a named person, not an anonymous edge.</p>
@@ -250,7 +250,7 @@
           <h2>Provenance &amp; credibility</h2>
           <p class="secsub">The meta-questions a skeptic asks: is it real, and is it new?</p>
 
-          <details class="qa" id="q-e1">
+          <details class="qa" id="q-is-it-running" data-legacy="q-e1">
             <summary>Is any of this actually running, or is it a spec?</summary>
             <div class="body">
               <p class="prose"><b>Shipped:</b> the schema, two live public graphs on unrelated fields, the extraction tool (JSON-LD out), the KOI transport, and both round trips — <span class="mono">PDF→JSON-LD→KOI</span> and <span class="mono">MyST→JSON-LD→viewer</span>. <b>Designed, not built:</b> cross-schema federation, ATProto on the network, MIRA deployed at scale. We’re ready to build and test those, if we have financial support!</p>
@@ -258,7 +258,7 @@
             </div>
           </details>
 
-          <details class="qa" id="q-e2">
+          <details class="qa" id="q-prior-art" data-legacy="q-e2">
             <summary>Where does this sit relative to nanopublications, PROV-O, and AIF?</summary>
             <div class="body">
               <p class="prose">MIRA is compatible with all three and extends the lineage. The reified-assertion idea is shared with <b>nanopublications</b>, argument structure with <b>AIF</b>, provenance with <b>PROV-O</b>. What MIRA adds on top is a question layer — open unknowns as durable, first-class nodes — and at the heart of the model: <i>this observation is about that claim</i>, carried as a first-class relation slot (the <span class="mono">observationStatement</span> / <span class="mono">observationBase</span> split).</p>

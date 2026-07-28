@@ -154,10 +154,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     },true);
   }
 
-  /* open the item a deep-link points at */
+  /* open the item a deep-link points at — ids are content-based; the old
+     positional ids (q-c4 …) survive as data-legacy so shared links keep working */
   function openHash(){
     const id=location.hash.slice(1); if(!id) return;
-    const t=document.getElementById(id);
+    const t=document.getElementById(id)||faq.querySelector(`.qa[data-legacy="${CSS.escape(id)}"]`);
     if(t&&t.classList.contains('qa')){ t.open=true; t.querySelector('summary')?.focus({preventScroll:true}); t.scrollIntoView({block:'start'}); }
   }
   window.addEventListener('hashchange',openHash); openHash();

@@ -291,6 +291,9 @@ figcaption{ margin-top:var(--s3); font-size:var(--t-cap); line-height:1.5; color
 figcaption b{ color:#4a444f; font-weight:700; }
 .figttl{ font-size:var(--t-eyebrow); font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s3); }
 
+/* deep-link targets: clear the sticky header when an anchor lands on them */
+figure.fig[id], .figttl[id], h3.subsec[id]{ scroll-margin-top:calc(var(--head) + var(--s4)); }
+
 .gnode rect, .gnode .frame{ fill:#fff; stroke:var(--n,#bbb); stroke-width:2; }
 .gnode text{ font-family:var(--sans); font-size:12.5px; font-weight:700; fill:var(--ink); text-anchor:middle; dominant-baseline:middle; }
 .gnode .nsub{ font-size:10px; font-weight:600; fill:var(--nink,var(--muted)); opacity:.9; }
@@ -448,7 +451,7 @@ figcaption b{ color:#4a444f; font-weight:700; }
 .faqsec{ margin:var(--s6) 0 0; scroll-margin-top:calc(var(--head) + var(--s4)); }
 .faqsec > h2{ font-family:var(--display); font-weight:740; font-size:var(--t-h2); letter-spacing:-.015em; margin:0 0 var(--s2); line-height:1.1; }
 .faqsec > .secsub{ font-size:var(--t-sm); color:var(--muted); margin:0 0 var(--s3); max-width:60ch; line-height:1.5; }
-.qa{ border-top:1px solid var(--hair); }
+.qa{ border-top:1px solid var(--hair); scroll-margin-top:calc(var(--head) + var(--s3)); }
 .qa:last-child{ border-bottom:1px solid var(--hair); }
 .qa summary{ list-style:none; cursor:pointer; padding:var(--s4) 40px var(--s4) 0; position:relative;
   font-family:var(--display); font-weight:620; font-size:var(--t-lead); line-height:1.3; color:var(--ink); scroll-margin-top:calc(var(--head) + var(--s3)); }

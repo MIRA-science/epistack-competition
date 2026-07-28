@@ -51,7 +51,7 @@
       <h2 class="sec">Five readings. One picture. See for yourself.</h2>
       <p class="sub">The <a href="https://blog.rootclaim.com/rootclaims-covid-19-origins-debate-results/" target="_blank" rel="noopener">Rootclaim COVID-origins debate</a> turned on one term — where the earliest known cases clustered — and five independent-looking analyses weigh in. They are five <b>readings of one shared picture</b>, not five measurements of the world; because each is indexed to that same artifact by its <b>observationBase</b>, the schema lets the readings coexist over one base — and lets you walk down to it and judge for yourself. Do that, and the second surprise lands: the picture stands in for a dataset that was never released.</p>
 
-      <figure class="fig">
+      <figure class="fig" id="convergence">
         <p class="figttl">The convergence — five readings, one shared base</p>
         <div class="scroller">
           <svg id="covidgraph" viewBox="0 0 720 430" role="img" aria-label="Five Evidence nodes converge by observationBase onto a single depiction; the released dataset behind it is a ghost-slot that does not exist, and the collection log is a second ghost-slot."></svg>
@@ -66,7 +66,7 @@
       </div>
       <p class="prose">The 164 December-2019 Wuhan cases were never published as a data table. They exist publicly <b>only</b> as dots on a map in the WHO annex. To get coordinates at all, Worobey et al. had to <b>digitize the picture</b> — recovering 155 of the 164 points, and stating plainly that <q style="font-style:italic">No line list of early COVID-19 cases is available</q>, with the extraction introducing <b>up to about 50 m of noise</b>. Every later analysis — a spatial-statistics rebuttal, both judges, the losing side — reads from that same digitized picture.</p>
 
-      <p class="figttl" style="margin-top:var(--s6)">The derivation, made visible</p>
+      <p class="figttl" id="derivation" style="margin-top:var(--s6)">The derivation, made visible</p>
       <div class="pair">
         <figure>
           <svg class="who-schem" id="who-schem" viewBox="0 0 300 300" role="img" aria-label="A stylized dot-scatter standing in for WHO Figure 23 — a cluster of case markers around a central market location."></svg>
@@ -83,9 +83,9 @@
 
       <div class="disclaim"><b>We are not adjudicating COVID-19’s origin.</b> The point is structural: the term that decided the debate rests on data public since 2021 — the disagreement is about which model to run, not about access. That is a finding about the <i>shape</i> of the evidence, and it is invisible in prose.</div>
 
-      <h3 class="subsec accent-study" style="color:var(--study-ink)">It accumulates — the graph accepts work that didn’t exist when it was built</h3>
+      <h3 class="subsec accent-study" id="it-accumulates" style="color:var(--study-ink)">It accumulates — the graph accepts work that didn’t exist when it was built</h3>
       <p class="prose">The Rootclaim debate closed in 2024. In March 2026, <i>Cell</i> published a new class of evidence — <b>selection dynamics on the branch preceding emergence</b>, with the 1977 H1N1 outbreak (an accepted lab/vaccine-origin event) as a validated positive control. In a sealed-document world that paper is a new PDF nobody wires up. In the graph it is a Claim and two Evidence nodes that snap onto the existing structure.</p>
-      <figure class="fig">
+      <figure class="fig" id="snap-on">
         <p class="figttl">New records snap onto the existing graph</p>
         <div class="scroller">
           <svg id="snapgraph" viewBox="0 0 720 390" role="img" aria-label="A new Claim and two new Evidence nodes attach to the existing contested market-centrality claim; each Evidence node holds its actual figure panel inline as its observationBase field — the SARS-CoV-2 phylogeny/omega plot and the RELAX selection-intensity plot."></svg>
@@ -93,7 +93,7 @@
         <figcaption>Each new <b>Evidence</b> node holds its actual <b>Fig.&nbsp;5</b> panel inline, as the value of its <b>observationBase</b> field — the real data, not a citation. The pre-emergence stem stays purifying (ω&nbsp;≪&nbsp;1) with no shift in intensity (<b>K&nbsp;=&nbsp;1.1, n.s.</b>); a relaxation shows only once the earliest human cases are folded in (<b>K&nbsp;=&nbsp;0.69</b>) — adaptation <i>after</i> emergence, not before. The 1977 H1N1 lab-origin positive control <i>does</i> relax the stem, so a flat stem here is a real signal. Panels: <a href="https://www.cell.com/cell/fulltext/S0092-8674(26)00171-6" target="_blank" rel="noopener">Havens et&nbsp;al., <i>Cell</i> (2026)</a>, CC BY-NC 4.0.</figcaption>
       </figure>
 
-      <h3 class="subsec accent-request" style="color:var(--request-ink)">The COVID Request writes itself</h3>
+      <h3 class="subsec accent-request" id="covid-request" style="color:var(--request-ink)">The COVID Request writes itself</h3>
       <p class="prose">Both judges recorded what would have changed their minds — and had nowhere to put it. Judge Will Van Treuren, on the debate format:</p>
       <div class="pull accent-request">
         <q>I was not able to evaluate several lines of inquiry which I thought could have been valuable for both sides.</q>
@@ -102,7 +102,7 @@
       <p class="prose">He even named his own unexamined crux: <q style="font-style:italic">A cursory search suggested some (more credible) reports of early seropositivity in retrospective studies of US blood banks that would have been hard to explain under the ZO theory.</q> That sentence has sat inert in a PDF ever since. As a record it becomes a <span class="term" style="color:var(--request-ink)">Request</span>: <b>request_target</b> → the contested market-centrality Claim; <b>request_for</b> → an adversarial, pre-registered re-analysis of the same 155 coordinates. It needs no new data and no one’s cooperation — it hangs off the exact claim above.</p>
       <p class="prose">This isn’t only a proposal. In one lab’s own issue tracker — Roam, with the Discourse Graphs plugin — the mechanism already runs. Over 40 months: <b>445 issues</b>; 29% claimed; <b>15% claimed by someone other than the creator</b>; 38% of claimed issues produced a result; median <b>12 days</b> from claim to first result. One issue sat dormant for fourteen months until a new undergraduate found it, claimed it, and completed it <i>before the PI knew it existed</i>. The vocabulary maps without translation: Issue = Request, Experiment = Study, Result = Evidence.</p>
 
-      <figure class="fig">
+      <figure class="fig" id="full-circle">
         <p class="figttl">The full circle — a Request, claimed, becomes a Study</p>
         <div class="scroller">
           <svg id="spingraph" viewBox="0 0 720 276" role="img" aria-label="A Request is claimed and spins out into a new Study which grounds new Evidence, closing the loop to the Question. Creator chips mark the requester and the claimer."></svg>
@@ -118,7 +118,7 @@
       <h2 class="sec">A question with no <span style="font-style:italic">observationBase</span>.</h2>
       <p class="sub">“Are eggs healthy?” is a <span class="term" style="color:var(--question-ink)">Question</span> with <b>nothing measurable under it as posed</b>. Our protocol makes it clear that you need something observable to generate evidence. The need for a data artifact splits it into answerable sub-questions: <i>healthy compared to what, measured on which observable — apoB? lifespan? “biological age”? — in whom.</i></p>
 
-      <figure class="fig">
+      <figure class="fig" id="missing-observationbase">
         <p class="figttl">A question with a missing observationBase</p>
         <div class="scroller">
           <svg id="egggraph" viewBox="0 0 720 300" role="img" aria-label="The question 'Are eggs healthy?' splits into answerable sub-questions — compared to what, on apoB, on lifespan, on biological age. One sub-question (biological age) opens a specific Request and carries a proposed but unsubstantiated Claim whose supporting evidence does not yet exist."></svg>
@@ -126,7 +126,7 @@
         <figcaption>Each answerable sub-question names something <b>observable</b> a claim under it could rest on — its <b>observationBase</b>. One is worked through here: a proposed <b>Claim</b> with no evidence yet, and the <b>Request</b> — a longitudinal biological-age trial — that would supply it.</figcaption>
       </figure>
 
-      <h3 class="subsec accent-request" style="color:var(--request-ink)">The Requests fall out of the gap</h3>
+      <h3 class="subsec accent-request" id="eggs-requests" style="color:var(--request-ink)">The Requests fall out of the gap</h3>
       <p class="prose">Each missing artifact names a study that would supply it: a replicated crossover study measuring <b>apoB</b> (not just LDL-C), a longitudinal study controlling for egg consumption and measuring biological age. Each is a <span class="term" style="color:var(--request-ink)">Request</span> pointing <b>request_target</b> at the claim it would settle and <b>request_for</b> at the study that would settle it.</p>
 
       <p class="prose">The eggs case is the mirror image of COVID: there, the artifact exists but is a picture of a dataset never released; here, under the headline question, the artifact <i>never existed</i>. Both are only visible once you name what each claim is standing on.</p>

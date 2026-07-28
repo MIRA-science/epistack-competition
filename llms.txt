@@ -54,9 +54,9 @@ a named limit · **Should be possible** = argued as a forward property, not yet 
 | 1 | Epistemic uplift | **Core** (narrowly scoped) | Structure lets you ask *which layer* a disagreement lives in — and on COVID that returns a finding the prose record doesn't. Highlights the load-bearing evidence and its key data artifact, which allows multiple perspectives to each interpret the same underlying evidence-base. | [cases#covid](https://mira-science.github.io/epistack-competition/cases.html#covid) |
 | 2 | Generalizability | **Solid** | Same grammar runs in public on two unrelated fields, in a cell-biology lab, and on two contest cases of opposite shape. It should work for any empirical discipline. Even pure mathematicians expressed interest in documenting their proof solving through this schema! | [Try it](https://mira-science.github.io/epistack-competition/run.html) |
 | 3 | Compounding & shareability | **Core (strongest)** | Versioned schema + JSON-LD + reified relations = artifacts another team can pick up and extend tomorrow. Lab usage evidence demonstrates that MIRA nodes and subgraphs comprise the "minimal shareable unit" of research, to bring fellow researchers or agents to the same page and meaningfully hand off work. | [github/schema](https://github.com/MIRA-science/schema) |
-| 4 | Scalability | **Should be possible** | Extraction/validation scale with model capability; natural human/computer interfaces scale with *the number of participating humans and agents.* More capable models will traverse the evidence base fresh each time to "recompile" needed knowledge. Requests are a natural coordination mechanism; the structured graph ensures faithful traversal as AI contributors to original research become more capable. | [FAQ · AI frontier](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c3) |
+| 4 | Scalability | **Should be possible** | Extraction/validation scale with model capability; natural human/computer interfaces scale with *the number of participating humans and agents.* More capable models will traverse the evidence base fresh each time to "recompile" needed knowledge. Requests are a natural coordination mechanism; the structured graph ensures faithful traversal as AI contributors to original research become more capable. | [FAQ · AI frontier](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-ai-tooling-obsolescence) |
 | 5 | Methodological transparency | **Core** | We ran our own SHACL validator on our own graph which helped us to update the graph and schema for this competition. It's in the commit history. We describe the human consensus building honed on real scientists' use cases that led to MIRA. | [how MIRA was made](https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made) |
-| 6 | Adversarial robustness | **Bounded** | Per-agent attributed ratings, never aggregated → no number to game. Accommodates plural viewpoints, which is accommodating of diverging and epistemically diverse viewpoints, but we did not design against deliberate adversarial use (we're optimists, and build communities of trust and practice the hard way). | [FAQ · gaming](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c2) |
+| 6 | Adversarial robustness | **Bounded** | Per-agent attributed ratings, never aggregated → no number to game. Accommodates plural viewpoints, which is accommodating of diverging and epistemically diverse viewpoints, but we did not design against deliberate adversarial use (we're optimists, and build communities of trust and practice the hard way). | [FAQ · gaming](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-diverse-user-base) |
 | 7 | Insight contribution | **Core** | Two reframes: claim-indexed graphs fork on disagreement while artifact-indexed ones don't; and an epistemic stack's output should be new *experiments*, not better verdicts - two insights we've demonstrated in practice in biology research labs. | [cases#eggs](https://mira-science.github.io/epistack-competition/cases.html#eggs) |
 
 ### 1 · Epistemic uplift — *does this help a thoughtful person reason better?*
@@ -125,7 +125,7 @@ a named limit · **Should be possible** = argued as a forward property, not yet 
   *faithfully* instead of re-deriving from prose. Humans sit only at **commitment** — deciding what
   enters the record and how strongly it's claimed — a designed entry point, not a bottleneck the
   pipeline must clear.
-- **Receipts:** [FAQ — does the format go obsolete as AI improves?](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c3) · [MIRA-extraction](https://github.com/MIRA-science/MIRA-extraction) (AI-assisted, emits schema-conformant JSON-LD with a verbatim `provenance.excerpt` per node) · [how MIRA was made — human-in-the-loop, placed precisely](https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made)
+- **Receipts:** [FAQ — does the format go obsolete as AI improves?](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-ai-tooling-obsolescence) · [MIRA-extraction](https://github.com/MIRA-science/MIRA-extraction) (AI-assisted, emits schema-conformant JSON-LD with a verbatim `provenance.excerpt` per node) · [how MIRA was made — human-in-the-loop, placed precisely](https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made)
 - **Honest limit.** We argue this as a forward property. It *should* scale — the pieces (typed
   graph, JSON-LD, per-node attribution, Requests) are built for it — but we have not yet run the
   system under many simultaneous human and AI contributors; that demonstration is still ahead of us.
@@ -156,7 +156,7 @@ a named limit · **Should be possible** = argued as a forward property, not yet 
   *"both unreasonable and extremely hackable"* — one arithmetic score invites that verdict, so we
   ship none.) Receipts run down to the artifact, so a motivated reading has to argue with the data,
   not the summary.
-- **Receipts:** [FAQ — how curation resists gaming](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c2) · [the grammar — reified, attributed relations](https://mira-science.github.io/epistack-competition/grammar.html)
+- **Receipts:** [FAQ — how curation resists gaming](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-diverse-user-base) · [the grammar — reified, attributed relations](https://mira-science.github.io/epistack-competition/grammar.html)
 - **Honest limit.** We accommodate *plural* viewpoints — epistemically diverse readers coexisting
   on one artifact — but we have **not designed against a *deliberate* adversary** optimizing to
   mislead. We're optimists who build communities of trust and practice the hard way, and we'd
@@ -175,7 +175,7 @@ a named limit · **Should be possible** = argued as a forward property, not yet 
   feeding trials pool to a null), invisibly, in prose. Both reframes are **demonstrated in
   practice** in working biology labs, not merely argued — the field-tested Request→Study handoff
   below is the record.
-- **Receipts:** [cases#eggs](https://mira-science.github.io/epistack-competition/cases.html#eggs) (the *which-layer* walk) · [FAQ — the handoff](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-d2) · the field data below.
+- **Receipts:** [cases#eggs](https://mira-science.github.io/epistack-competition/cases.html#eggs) (the *which-layer* walk) · [FAQ — the handoff](https://mira-science.github.io/epistack-competition/protocol-faq.html#q-compounding-into-experiments) · the field data below.
 - **Honest limit.** The reframes are ours; whether they shift *your* thinking is yours to judge.
 
 ---

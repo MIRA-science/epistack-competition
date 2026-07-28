@@ -77,7 +77,7 @@
       "claim": "Extraction and validation scale with model capability; the human/AI interfaces scale with the number of participating humans and agents. More capable models traverse the evidence base fresh to recompile what they need; Requests are a natural coordination mechanism and the structure ensures faithful traversal.",
       "argument": "Two things scale. Extraction, anchoring, and structural validation scale with model capability and improve every generation for free. And the human/AI interfaces scale with the number of participating people and agents: because the record is a typed graph, a more capable model can traverse the evidence base fresh and recompile the knowledge it needs rather than inherit a frozen summary. Requests are the natural coordination mechanism across that growing pool of contributors, and the structure is what lets a new agent traverse faithfully instead of re-deriving from prose. Humans sit only at commitment — deciding what enters the record and how strongly it is claimed — a designed entry point, not a bottleneck the pipeline must clear.",
       "receipts": [
-        { "what": "FAQ — does the format go obsolete as AI improves?", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c3", "kind": "site" },
+        { "what": "FAQ — does the format go obsolete as AI improves?", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-ai-tooling-obsolescence", "kind": "site" },
         { "what": "AI-assisted extraction, JSON-LD out, verbatim provenance.excerpt per node", "url": "https://github.com/MIRA-science/MIRA-extraction", "kind": "repo" },
         { "what": "How MIRA was made — human-in-the-loop, placed precisely", "url": "https://mira-science.github.io/epistack-competition/audit.html#how-mira-was-made", "kind": "site" }
       ],
@@ -105,7 +105,7 @@
       "claim": "Per-agent attributed ratings, never aggregated, mean no number to game; the format accommodates plural, epistemically diverse viewpoints. But we did not design against deliberate adversarial use — we build communities of trust the hard way.",
       "argument": "The anti-gaming property is structural: flavour, degree and confidence are per-agent attributed assertions on a reified relation, never aggregated. Ten agents rating one edge produce ten signed ratings, not an average. Nothing in the schema computes a value, so there is no value to game — an adversary can only add their own labelled rating. This is deliberate: a competing confidence model with computed increments was judged both unreasonable and extremely hackable, so we ship no arithmetic score. Receipts run down to the artifact, so a motivated reading must argue with the data, not the summary.",
       "receipts": [
-        { "what": "FAQ — how curation resists gaming", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-c2", "kind": "site" },
+        { "what": "FAQ — how curation resists gaming", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-diverse-user-base", "kind": "site" },
         { "what": "The grammar — reified, attributed relations", "url": "https://mira-science.github.io/epistack-competition/grammar.html", "kind": "site" }
       ],
       "honest_limit": "We accommodate plural, epistemically diverse viewpoints, but we have not designed against a deliberate adversary optimizing to mislead. We are optimists who build communities of trust the hard way, and we would rather name that than claim a robustness we have not engineered."
@@ -119,7 +119,7 @@
       "argument": "Shift (a): the indexing choice is the whole game — claim-indexed graphs fork on disagreement while artifact-indexed ones absorb it. Shift (b): the output of an epistemic stack should be new experiments, not better verdicts; a structured disagreement contains the shape of the study that would resolve it, and Request to Study makes that a first-class claimable record. The eggs case adds a counterexample-driven insight: the question 'are eggs healthy?' has no observationBase and cannot acquire one — a Question-layer defect no evidence fixes — and the TMAO mechanistic chain that supposedly answers it breaks at its first link (seven human feeding trials pool to a null), invisibly, in prose. Both reframes are demonstrated in practice in working biology labs, not merely argued; the field-tested Request-to-Study handoff is the record.",
       "receipts": [
         { "what": "Eggs — the which-layer-is-the-problem walk", "url": "https://mira-science.github.io/epistack-competition/cases.html#eggs", "kind": "site" },
-        { "what": "FAQ — the Request to Study handoff", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-d2", "kind": "site" },
+        { "what": "FAQ — the Request to Study handoff", "url": "https://mira-science.github.io/epistack-competition/protocol-faq.html#q-compounding-into-experiments", "kind": "site" },
         { "what": "Field data (see field_test)", "url": "https://github.com/DiscourseGraphs/MATSUlab-issue-exchange-analysis/tree/main/output/evidence_bundles/", "kind": "data" }
       ],
       "honest_limit": "The reframes are ours; whether they shift your thinking is yours to judge."
