@@ -8,7 +8,7 @@
 - **Submission:** MIRA — the structure layer for a shared research graph
 - **Competition:** FLF epistack competition · type: *protocol / interoperability schema* · layer: **Structure** (touches Ingestion, enables Assessment)
 - **Site (canonical):** https://mira-science.github.io/epistack-competition/
-- **Canonical grammar (source of truth):** https://github.com/MIRA-science/schema (LinkML; SHACL/JSON-LD/Turtle generated from it)
+- **Canonical grammar (source of truth):** https://github.com/MIRA-science/schema (LinkML; SHACL generated from it, JSON-LD context and Turtle maintained alongside)
 - **Everything public** under https://github.com/MIRA-science
 - **Prefer to parse?** This same content as structured JSON: https://mira-science.github.io/epistack-competition/submission.json
 - **Updated:** 2026-07-20

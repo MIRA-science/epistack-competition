@@ -36,7 +36,7 @@
     <div class="pagehead accent-study">
       <p class="eyebrowline">Run it, don’t just read it</p>
       <h1 class="title">The prototypes — public, and marked for how real they are.</h1>
-      <p class="sub">Everything here is under <span class="mono">github.com/MIRA-science</span> and public. Each entry says what it is, points to a link, and what to try — and carries a status, because this page is also the provenance.</p>
+      <p class="sub">Everything here is public — most of it under <span class="mono">github.com/MIRA-science</span>, the rest hosted by the people who built it at the kickoff. Each entry says what it is, points to a link, and what to try — and carries a status, because this page is also the provenance. For a short demo video of each, see <a href="https://mira.science/blog/what-we-built-at-the-mira-kickoff/" target="_blank" rel="noopener">What we built at the MIRA Kickoff</a>.</p>
       <div class="tags" style="margin-top:var(--s5)">
         <span class="vtag" style="--fill:var(--claim-fill)"><span class="d" style="--c:var(--claim)"></span><b>shipped</b> — runs today</span>
         <span class="vtag" style="--fill:var(--question-fill)"><span class="d" style="--c:var(--question)"></span><b>designed</b> — a concrete draft, not built</span>
@@ -48,8 +48,9 @@
 
         <div class="protocard">
           <div class="top"><span class="name"><code>schema</code></span><span class="status shipped">shipped</span></div>
-          <p class="what">The canonical LinkML grammar — every node and edge on this site is defined in it. SHACL, Turtle and JSON-LD are generated from the source.</p>
-          <p class="try"><b>What to try:</b> read <span class="mono">mira.yaml</span>, then run the <span class="mono">Makefile</span> to regenerate SHACL and validate a graph against it.</p>
+          <p class="what">The canonical LinkML grammar — every node and edge on this site is defined in it. SHACL is generated from the source; the Turtle and JSON-LD context are maintained alongside it.</p>
+          <p class="try"><b>What to try:</b> browse the Docs for every class and slot, then write a record against the JSON-LD context and check it with the Validator — in the repo, <span class="mono">make validate_data</span> runs that check on the sample graph.</p>
+          <a class="link" href="https://purl.org/mira-science/mira" target="_blank" rel="noopener">Schema ↗</a> &nbsp;·&nbsp; <a class="link" href="https://purl.org/mira-science/mira.jsonld" target="_blank" rel="noopener">JSON-LD context ↗</a> &nbsp;·&nbsp; <a class="link" href="https://mira.science/mira.shacl" target="_blank" rel="noopener">Validator ↗</a> &nbsp;·&nbsp; <a class="link" href="https://mira.science/schema/" target="_blank" rel="noopener">Docs ↗</a><br>
           <a class="link" href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">github.com/MIRA-science/schema ↗</a>
         </div>
 
@@ -62,7 +63,7 @@
 
         <div class="protocard">
           <div class="top"><span class="name"><code>MIRA-extraction</code></span><span class="status shipped">shipped</span></div>
-          <p class="what">AI-assisted MIRAfication of a source. Emits schema-conformant <b>JSON-LD</b> (<span class="mono">&lt;name&gt;.mira.jsonld</span>) — the wire format the viewers and the KOI envelope speak — with a verbatim <span class="mono">provenance.excerpt</span> on every node (the receipts), dangling and ungrammatical edges reported instead of dropped, and the <span class="mono">source → study → grounds → evidence</span> spine enforced.</p>
+          <p class="what">AI-assisted MIRAfication of a source — the <b>MIRA-fier</b> of the kickoff write-up. Emits schema-conformant <b>JSON-LD</b> (<span class="mono">&lt;name&gt;.mira.jsonld</span>) — the wire format the viewers and the KOI envelope speak — with a verbatim <span class="mono">provenance.excerpt</span> on every node (the receipts), dangling and ungrammatical edges reported instead of dropped, and the <span class="mono">source → study → grounds → evidence</span> spine enforced.</p>
           <p class="try"><b>What to try:</b> MIRAfy a source and diff the <b>Initial AI draft</b> nodes against what a human would advance; the emitted <span class="mono">.mira.jsonld</span> is what moves downstream.</p>
           <a class="link" href="https://mira-extraction.vercel.app/" target="_blank" rel="noopener">mira-extraction.vercel.app ↗</a><br>
           <a class="link" href="https://github.com/MIRA-science/MIRA-extraction" target="_blank" rel="noopener">install it: github.com/MIRA-science/MIRA-extraction ↗</a>
@@ -77,9 +78,16 @@
 
         <div class="protocard">
           <div class="top"><span class="name"><code>myst-plus-mira</code></span><span class="status shipped">shipped</span></div>
-          <p class="what">The TypeScript MyST parser — authoring discourse-graph nodes inside MyST Markdown and emitting JSON-LD. One authoring tool to one viewer: real, and narrow.</p>
+          <p class="what">The TypeScript MyST parser (<b>MIRyST</b> in the kickoff write-up) — authoring discourse-graph nodes inside MyST Markdown and emitting JSON-LD. One authoring tool to one viewer: real, and narrow.</p>
           <p class="try"><b>What to try:</b> <span class="mono">npm test</span> (vitest) — the MyST → JSON-LD round-trip on the golden fixture.</p>
           <a class="link" href="https://github.com/MIRA-science/myst-plus-mira" target="_blank" rel="noopener">github.com/MIRA-science/myst-plus-mira ↗</a>
+        </div>
+
+        <div class="protocard">
+          <div class="top"><span class="name">MIROXA · MIRA in Stencila</span><span class="status shipped">shipped · in Stencila</span></div>
+          <p class="what">MIRA inside the existing OXA standard. Stencila, an open-source publishing platform, reads and writes Questions, Claims, Evidence, Protocols and Requests — authored as MyST directives, Quarto divs or Stencila Markdown blocks — and converts them to and from MIRA <b>JSON-LD</b> (<span class="mono">.mira.jsonld</span>). A second, independent authoring tool on the same wire format.</p>
+          <p class="try"><b>What to try:</b> follow the Stencila docs to export a marked-up document with <span class="mono">stencila graph &lt;doc&gt;.myst &lt;doc&gt;.mira.jsonld</span>.</p>
+          <a class="link" href="https://stencila.io/docs/formats/mira/" target="_blank" rel="noopener">stencila.io/docs/formats/mira ↗</a>
         </div>
 
         <div class="protocard">
@@ -93,7 +101,15 @@
           <div class="top"><span class="name"><code>inter-lab-user-story</code></span><span class="status shipped">shipped · mockups + prototype</span></div>
           <p class="what">The north-star user story — “push a result to a shared web interface” — with the normative transport/sharing rules R1–R13 and the authoritative open-questions list.</p>
           <p class="try"><b>What to try:</b> read <span class="mono">AGENTS.md</span>; it is the brief the whole approach is measured against.</p>
-          <a class="link" href="https://github.com/MIRA-science/inter-lab-user-story" target="_blank" rel="noopener">github.com/MIRA-science/inter-lab-user-story ↗</a>
+          <a class="link" href="https://github.com/MIRA-science/inter-lab-user-story" target="_blank" rel="noopener">github.com/MIRA-science/inter-lab-user-story ↗</a><br>
+          <a class="link" href="https://mira-science.github.io/inter-lab-user-story/07-shared-dashboard.html" target="_blank" rel="noopener">the shared-dashboard mockup ↗</a>
+        </div>
+
+        <div class="protocard">
+          <div class="top"><span class="name">MIRA-viewer · the cross-lab dashboard</span><span class="status shipped">shipped · demo data</span></div>
+          <p class="what">The inter-lab user story, built: a read-only shared dashboard — graph, kanban and by-question views of the questions, claims, evidence, studies, protocols and open requests two labs share — rendered from MIRA JSON-LD carried over KOI. The public instance shows demo data; each lab’s private notes stay local.</p>
+          <p class="try"><b>What to try:</b> open it, switch between Graph and Kanban, and follow the open Request back to the result it asks about.</p>
+          <a class="link" href="https://mira-dashboard.conversence.com/" target="_blank" rel="noopener">mira-dashboard.conversence.com ↗</a>
         </div>
 
         <div class="protocard">
@@ -105,8 +121,23 @@
         </div>
 
         <div class="protocard">
+          <div class="top"><span class="name">RRGI · the resilient research graph</span><span class="status shipped">shipped · live</span></div>
+          <p class="what">A public graph of MIRA records on AT Protocol and IPFS, built by SciOS: papers as bundles of signed records, questions and evidence added by signed-in researchers, claims endorsed as believed, verified or qualified, and a PDF extractor that turns a paper into records. It maps MIRA’s node types and relations onto its own lexicon and adds a few — proposed back to the schema in the open.</p>
+          <p class="try"><b>What to try:</b> browse the public graph without signing in; open a paper and follow a claim to its evidence.</p>
+          <a class="link" href="https://graph.scios.tech/" target="_blank" rel="noopener">graph.scios.tech ↗</a><br>
+          <a class="link" href="https://github.com/MIRA-science/schema/issues/35" target="_blank" rel="noopener">what it adds to the schema: MIRA-science/schema#35 ↗</a>
+        </div>
+
+        <div class="protocard">
+          <div class="top"><span class="name">Deltabay</span><span class="status designed">designed · UI mockup</span></div>
+          <p class="what">A funder-facing view from the kickoff: open scientific debates where every claim is backed by evidence, and endorsements are scored to show how much each piece of evidence moves the answer to a question. It is a lens applied on top of the graph — the scoring is the application’s, not the schema’s; MIRA itself still computes nothing.</p>
+          <p class="try"><b>What to try:</b> open a debate and trace a claim to the evidence behind it.</p>
+          <a class="link" href="https://deltabay.bycelium.com/" target="_blank" rel="noopener">deltabay.bycelium.com ↗</a>
+        </div>
+
+        <div class="protocard">
           <div class="top"><span class="name"><code>schema/atproto</code></span><span class="status designed">designed</span></div>
-          <p class="what">A draft ATProto lexicon binding (<span class="mono">science.mira.*</span>) for public discourse-graph nodes — the intended public layer. Self-labeled DRAFT / PROPOSAL: not adopted, not published, not on the network.</p>
+          <p class="what">A draft ATProto lexicon binding (<span class="mono">science.mira.*</span>) for public discourse-graph nodes — the intended public layer. Self-labeled DRAFT / PROPOSAL: not adopted, not published, not on the network. A working proof of concept on AT Protocol exists separately — RRGI, above, on its own lexicon.</p>
           <p class="try"><b>What to try:</b> read the lexicons as a concrete direction; treat them as a proposal pending schema-team review, not a shipped surface.</p>
           <a class="link" href="https://github.com/MIRA-science/schema/tree/atproto-lexicon-draft/atproto" target="_blank" rel="noopener">github.com/MIRA-science/schema/tree/atproto-lexicon-draft/atproto ↗</a>
         </div>

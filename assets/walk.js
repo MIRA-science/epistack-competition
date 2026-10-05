@@ -46,7 +46,7 @@ const T1_EDGE_TIP={
 const T1_NODE_TIP={
   question:'<code>Question</code> — a scientific unknown, addressable by research methods. The durable target a field’s claims hang off.',
   claim:'<code>Claim</code> — an atomic, generalized assertion that proposes to answer a question. It can be wrong and still belong.',
-  evidence:'<code>Evidence</code> — one empirical observation from one method. Its fields place it: the reading, the artifact it rests on, the study, the paper.',
+  evidence:'<code>Evidence</code> — one empirical observation from one method. Stated atomically, in the past tense. Its fields place it: the claim it speaks to, the artifact it rests on, the study, the paper.',
   entity:'<code>observationBase</code> — the artifact itself: figure, blot or dataset. A pointer, never a payload — and it lives <i>inside</i> the Evidence that rests on it.',
   study:'<code>Study</code> — the activity, an experiment or analysis, that produced the evidence.',
   protocol:'<code>Protocol</code> — the reusable method a study follows. A recipe, written once.',
@@ -84,13 +84,13 @@ function buildT1Graph(){
       el('circle',{cx:0,cy:0,r:1.8},gl);
       const t=el('text',{x:cxp,y:n.y+n.h-8,fill:'#4a444f','font-size':'8.5','font-weight':'700','text-anchor':'middle'},grp); t.textContent='Photograph 51';
     } else if(id==='E1'){
-      // Evidence is a card: header · the reading (its observationStatement, a title) · the observationBase field-label · then the artifact nested below
+      // Evidence is a card: header · the observation statement (atomic, past tense — short form) · the observationBase field-label · then the artifact nested below
       const grp=el('g',{class:'gnode gnode--evidence','data-node':id},ng);
       grp.dataset.tip=T1_NODE_TIP.evidence;
       const rect=el('rect',{x:n.x,y:n.y,width:n.w,height:n.h,rx:12},grp);
       rect.setAttribute('style','fill:var(--evidence-fill);stroke-width:2.4px');
       el('text',{x:n.x+n.w/2,y:n.y+18},grp).textContent='Evidence';
-      const rd=el('text',{x:n.x+n.w/2,y:n.y+33,class:'nsub'},grp); rd.textContent='reads as a helix';
+      const rd=el('text',{x:n.x+n.w/2,y:n.y+33,class:'nsub'},grp); rd.textContent='gave an X pattern';
       const ob=el('text',{x:n.x+12,y:n.y+52},grp); ob.setAttribute('style','fill:var(--evidence-ink);font-size:8.5px;font-weight:800;letter-spacing:.03em;text-anchor:start'); ob.textContent='observationBase';
     } else {
       const g=drawNode(ng,n);
@@ -135,7 +135,8 @@ const TIP_FWD={
   addresses:'The open question this claim proposes to answer.',
   observationStatement:'The claim this observation speaks to — what it is evidence <i>of</i>. A reading, attributed.',
   observationBase:'The artifact itself — figure, blot, dataset — kept as a pointer, never a payload.',
-  observationOriginActivity:'The experiment or analysis that produced this observation.',
+  observationOriginActivity:'The activity that produced this observation. <code>Study</code> and <code>Protocol</code> are both Activities.',
+  is_grounded_in:'The study behind this evidence — the same link as <code>grounds</code>, read from the evidence’s end.',
   sourceDocument:'The paper that reported this observation.',
   follows:'The reusable recipe this study ran.',
   grounds:'The evidence this study produced.',
@@ -148,7 +149,9 @@ const TIP_INV={
   addressedBy:'The claims proposing answers here — <code>addresses</code>, read from the question’s end.',
   supportedBy:'Arguments in favor — <code>supports</code>, read from the claim’s end.',
   opposedBy:'Arguments against — <code>opposes</code>, read from the claim’s end.',
-  is_grounded_in:'The study behind this evidence — <code>grounds</code>, read from the other end.',
+  is_grounded_in:'The evidence that names this study as its ground — <code>grounds</code>, read from the evidence’s end.',
+  grounds:'The study that produced this evidence — <code>is_grounded_in</code>, read from the study’s end.',
+  request_for:'The requests asking for this study to be run — <code>request_for</code>, read from the study’s end.',
   follows:'The studies that have run this recipe — <code>follows</code>, read from the study’s end.'
 };
 function pills(list,inv){
@@ -188,17 +191,17 @@ const SCENES=[
    def:'An atomic, generalized assertion about the world that (proposes to) answer a research question.',
    ex:{tag:'In the DNA story',lead:'DNA forms a double helix.',note:'Watson &amp; Crick, <i>Nature</i>, 25 April 1953 — correct. Its rival stays in the graph: Pauling &amp; Corey’s <b>triple helix</b> (1953), phosphates on the inside — famously <b>wrong</b>.'},
    why:'A claim can be wrong, and MIRA keeps it anyway. The claim is a stable thing to argue <i>about</i>; evidence then supports or opposes it. Being contested is data, not deletion.',
-   slots:[{s:'addresses',t:'Question',many:true}],
+   slots:[{s:'addresses',t:'Question',many:true},{s:'supports',t:'Claim',many:true},{s:'opposes',t:'Claim',many:true}],
    inv:[{s:'supportedBy',t:'Argument',many:true},{s:'opposedBy',t:'Argument',many:true}],
    note:'An <b>Argument</b> is anything that can take a side — a Claim or a piece of Evidence. <code>supports</code> and <code>opposes</code> are the pair that make a graph <i>argue</i> rather than merely cite.'},
   {key:'evidence',accent:'evidence',g:3,type:'node',
    kicker:'Evidence',also:'result · observation',
    def:'A specific empirical observation from a particular application of a research method.',
-   ex:{tag:'In the DNA story',artifact:true,lead:'Photograph 51 shows an X-shaped diffraction pattern — a helix, ~3.4 nm repeat, ~2 nm wide.',note:'That sentence is a <b>reading</b> of the image — Franklin &amp; Gosling’s, attributed. It <b>supports</b> the double helix and <b>opposes</b> the triple.'},
+   ex:{tag:'In the DNA story',artifact:true,lead:'X-ray diffraction of DNA fibers produced an X-shaped pattern with 3.4&nbsp;nm spacing.',note:'That sentence is a <b>reading</b> of the image — Franklin &amp; Gosling’s, attributed. It <b>supports</b> the double helix and <b>opposes</b> the triple.'},
    why:'Evidence is one observation, not a verdict. It points four ways at once — to the claim it speaks to, the actual figure, the experiment that made it, and the paper that reported it. That’s what lets you trace a claim down to the literal pixels.',
-   slots:[{s:'observationStatement',t:'Claim'},{s:'observationBase',t:'Entity'},{s:'observationOriginActivity',t:'Activity'},{s:'sourceDocument',t:'SourceDocument'}],
-   inv:[{s:'is_grounded_in',t:'Study'}],
-   note:'<code>observationStatement</code> is a reading, not a fact — which is why the <i>same</i> artifact can support one claim and oppose another.'},
+   slots:[{s:'observationStatement',t:'Claim'},{s:'observationBase',t:'Entity'},{s:'observationOriginActivity',t:'Activity'},{s:'sourceDocument',t:'SourceDocument'},{s:'is_grounded_in',t:'Study'},{s:'supports',t:'Claim',many:true},{s:'opposes',t:'Claim',many:true}],
+   inv:[{s:'grounds',t:'Study'}],
+   note:'The observation is <b>atomic and in the past tense</b> — one finding, naming the system and what was measured — so it can stand alone as the record’s title. The statement is still a reading, not a fact — which is why the <i>same</i> artifact can be described in multiple Evidence records.'},
   {key:'artifact',accent:'ink',g:4,type:'node',
    kicker:'Entity',also:'the observationBase · the actual data',
    def:'The artifact itself — the figure, blot or dataset an observation stands on. Held as a pointer, never a payload.',
@@ -212,8 +215,8 @@ const SCENES=[
    ex:{tag:'In the DNA story',lead:'X-ray fiber diffraction of B-form DNA — Franklin &amp; Gosling, King’s College London, 1952.',note:'The Protocol: hydrated-fiber prep + humidity-controlled X-ray diffraction — a recipe, written once. The SourceDocument: their 25 April 1953 <i>Nature</i> paper.'},
    why:'The Study is the <i>event</i>; the Protocol is the <i>recipe</i>. Splitting them lets two labs run the same method and be compared — and lets you tell a flawed result apart from a flawed method.',
    slots:[{s:'follows',t:'Protocol',many:true},{s:'grounds',t:'Evidence',many:true}],
-   inv:[{s:'is_grounded_in',t:'Evidence',many:true}],
-   note:'<code>grounds</code> and <code>is_grounded_in</code> are one link read two ways — Study→Evidence, and Evidence→Study. Reading an edge from either end is free.'},
+   inv:[{s:'is_grounded_in',t:'Evidence',many:true},{s:'request_for',t:'Request',many:true}],
+   note:'<code>grounds</code> and <code>is_grounded_in</code> are one link read two ways — Study→Evidence, and Evidence→Study. Reading an edge from either end is free. Study and Protocol are both <b>Activities</b>; a SourceDocument points back at the one it reports with its own slot, <code>describesActivity</code>.'},
   {key:'request',accent:'request',g:6,type:'node',
    kicker:'Request',also:'need · issue · idea',
    def:'A unit of work the community can pick up — issue-tracker-shaped.',

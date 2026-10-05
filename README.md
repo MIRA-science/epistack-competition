@@ -45,7 +45,7 @@ page has a "what to try" for each.
 
 | Component | Status | What it is |
 |---|---|---|
-| [**`schema`**](https://github.com/MIRA-science/schema) | `shipped` | The canonical LinkML grammar — every node and edge on the site is defined in it; SHACL, Turtle, and JSON-LD are generated from the source. |
+| [**`schema`**](https://github.com/MIRA-science/schema) | `shipped` | The canonical LinkML grammar — every node and edge on the site is defined in it; SHACL is generated from the source; the Turtle and JSON-LD context are maintained alongside it. |
 | [**DNA walkthrough**](https://mira-science.github.io/epistack-competition/walk.html) | `shipped` | Interactive deck: the six-node grammar built one record at a time on the discovery of DNA's structure, every slot and edge explaining itself on hover. |
 | [**`MIRA-extraction`**](https://github.com/MIRA-science/MIRA-extraction) | `shipped` | AI-assisted MIRAfication of a source — verbatim provenance excerpts (the receipts), dangling/ungrammatical edges reported instead of dropped, the `source → study → grounds → evidence` spine enforced. Live demo: [mira-extraction.vercel.app](https://mira-extraction.vercel.app/). |
 | [**`demo-MIRA-graph-data`**](https://github.com/MIRA-science/demo-MIRA-graph-data) | `shipped · mock data` | A ~314-node discourse graph + a standalone d3 viewer + the Python transform pipeline that built it. Terms are randomized to a microtubule-transport field — validate tooling, **never** a scientific source. |

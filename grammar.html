@@ -54,13 +54,13 @@
           <tr><td style="color:var(--artifact-ink)">Entity <span style="font-weight:400;color:var(--muted)">(the artifact)</span></td><td>Not a node type — it is what an Evidence record’s <span class="mono">observationBase</span> field points to: the figure, blot or dataset an observation stands on. Held as a <b>URL pointer</b>, never a payload — MIRA hosts nothing.</td></tr>
         </tbody>
       </table>
-      <p class="foot-note">Every node also carries the same shared <b>NodeSchema</b> fields — <span class="mono">creator</span>, <span class="mono">created</span>, <span class="mono">modified</span>, <span class="mono">description</span>, <span class="mono">has_container</span> and the record’s own text. <span class="mono">Claim</span> and <span class="mono">Evidence</span> additionally include <b>Argument</b>, so they carry the <span class="mono">supports</span> / <span class="mono">opposes</span> slots.</p>
+      <p class="foot-note">Every node also carries the same eight shared fields — <span class="mono">title</span>, <span class="mono">content</span>, <span class="mono">format</span>, <span class="mono">creator</span>, <span class="mono">created</span>, <span class="mono">modified</span>, <span class="mono">description</span> and <span class="mono">has_container</span>. <span class="mono">Claim</span> and <span class="mono">Evidence</span> additionally include <b>Argument</b>, so they carry the <span class="mono">supports</span> / <span class="mono">opposes</span> slots; <span class="mono">Study</span> and <span class="mono">Protocol</span> are both <b>Activities</b>.</p>
     </section>
 
     <section class="move">
       <p class="kick accent-evidence">The heart of the model</p>
       <h2 class="sec">The four-layer Evidence chain — and where the objective/subjective boundary sits.</h2>
-      <p class="sub">An <b>Evidence</b> record carries the fields that place it: <span class="mono">observationStatement</span> (which Claim it speaks to), <span class="mono">observationBase</span> (the artifact it rests on — a pointer), <span class="mono">is_grounded_in</span> (the Study that produced it) and <span class="mono">sourceDocument</span> (the paper that reported it). Reading those fields lets you ask <i>which layer</i> a problem lives in — is the claim contested, the evidence un-reproduced, or the figure itself unsound? — instead of collapsing all of it into “here’s the claim” or “cite the paper.”</p>
+      <p class="sub">An <b>Evidence</b> record states one observation — <b>atomic and in the past tense</b>, naming the system and what was measured — and carries the fields that place it: <span class="mono">observationStatement</span> (which Claim it speaks to), <span class="mono">observationBase</span> (the artifact it rests on — a pointer), <span class="mono">is_grounded_in</span> (the Study that produced it) and <span class="mono">sourceDocument</span> (the paper that reported it). Reading those fields lets you ask <i>which layer</i> a problem lives in — is the claim contested, the evidence un-reproduced, or the figure itself unsound? — instead of collapsing all of it into “here’s the claim” or “cite the paper.”</p>
 
       <figure class="fig chainfig">
         <p class="figttl">The grammar, anchored on the artifact</p>
@@ -96,7 +96,7 @@
           <g>
             <rect class="node-box" x="470" y="322" width="260" height="250" rx="14" stroke="var(--evidence)" style="fill:var(--evidence-fill);stroke-width:2.4px"/>
             <text class="n-label" x="600" y="352">Evidence</text>
-            <text class="n-sub" x="600" y="373" style="fill:var(--evidence-ink)">reads Photograph 51 as a helix</text>
+            <text class="n-sub" x="600" y="373" style="fill:var(--evidence-ink)">DNA fibers gave an X-shaped pattern</text>
             <text x="486" y="399" style="fill:var(--evidence-ink);font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.05em;text-anchor:start">observationBase</text>
             <rect x="496" y="410" width="208" height="150" rx="8" fill="#fff" stroke="#4a444f" stroke-width="1.6"/>
             <g fill="#3a343f">
@@ -120,7 +120,7 @@
           <path class="edge" marker-end="url(#ah)" d="M255,432 L255,484"/><text class="e-label" x="292" y="462" text-anchor="start">follows</text>
         </svg>
         </div>
-        <figcaption>The dashed rule is the argument. <b>Above it</b> are the competing claims — what a field argues about. <b>Below it</b> is the shared basis they argue over: a single <b>Evidence</b> record, the <b>artifact nested inside it</b> as its <span class="mono">observationBase</span> field, and the Study, Protocol and SourceDocument that produced and reported it. Here that one artifact — <b>Photograph 51</b> — <span style="color:var(--claim-ink)">supports</span> the double helix and <span style="color:var(--evidence-ink)">opposes</span> the triple. The reading lives in the record; the data it rests on lives <em>inside</em> it; both are addressable and queryable.</figcaption>
+        <figcaption>The dashed rule is the argument. <b>Above it</b> are the competing claims — what a field argues about. <b>Below it</b> is the shared basis they argue over: a single <b>Evidence</b> record, the <b>artifact nested inside it</b> as its <span class="mono">observationBase</span> field, and the Study, Protocol and SourceDocument that produced and reported it. Here that one artifact — <b>Photograph 51</b> — <span style="color:var(--claim-ink)">supports</span> the double helix and <span style="color:var(--evidence-ink)">opposes</span> the triple. The observation is stated in the record; the data it rests on lives <em>inside</em> it; both are addressable and queryable.</figcaption>
       </figure>
     </section>
 
@@ -130,22 +130,22 @@
       <p class="sub">A node carries a <span class="mono">@type</span> array and a set of <b>slots</b>. Some slots hold a <b>value</b>; some hold a <b>reference</b> to another node. Only when a reference needs to carry <i>who asserted it and how strongly</i> is it <b>reified</b> as its own record — and that is where <span class="mono">flavor</span>, <span class="mono">degree</span> and <span class="mono">confidence</span> live, per agent. The anti-gaming property depends on it.</p>
       <div class="code" role="img" aria-label="A JSON-LD Evidence record showing its slots as fields — some values, some references — and the same observationStatement optionally reified for attribution.">
 <span class="cm">// an Evidence record — a bundle of slots (fields)</span><br>
-{ <span class="k">"@id"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
-&nbsp;&nbsp;<span class="k">"@type"</span>: [<span class="s">"sdata:44107"</span>, <span class="s">"mira:Evidence"</span>],<br>
-&nbsp;&nbsp;<span class="k">"content"</span>: <span class="s">"An X-shaped diffraction pattern — a helix."</span>, <span class="cm">// a value</span><br>
+{ <span class="k">"@id"</span>: <span class="s">"mira:evd-photo51-x-pattern"</span>,<br>
+&nbsp;&nbsp;<span class="k">"@type"</span>: [<span class="s">"sdata:44107"</span>, <span class="s">"Evidence"</span>],<br>
+&nbsp;&nbsp;<span class="k">"title"</span>: <span class="s">"X-ray diffraction of DNA fibers produced an X-shaped pattern with 3.4 nm spacing."</span>, <span class="cm">// a value — one observation, past tense</span><br>
 &nbsp;&nbsp;<span class="k">"creator"</span>: <span class="s">"mira:person-franklin"</span>, <span class="cm">// a value</span><br>
 &nbsp;&nbsp;<span class="k">"observationBase"</span>: <span class="s">"https://.../photo-51.tif"</span>, <span class="cm">// a pointer (URL)</span><br>
 &nbsp;&nbsp;<span class="k">"observationStatement"</span>: <span class="s">"mira:clm-double-helix"</span>, <span class="cm">// a reference</span><br>
 &nbsp;&nbsp;<span class="k">"is_grounded_in"</span>: <span class="s">"mira:study-franklin-1952"</span>, <span class="cm">// a reference</span><br>
 &nbsp;&nbsp;<span class="k">"sourceDocument"</span>: <span class="s">"mira:doc-franklin-1953"</span> } <span class="cm">// a reference</span><br><br>
 <span class="cm">// the same observationStatement, reified — only to add attribution</span><br>
-{ <span class="k">"@type"</span>: <span class="s">"mira:RelationInstance"</span>,<br>
+{ <span class="k">"@type"</span>: <span class="s">"RelationInstance"</span>,<br>
 &nbsp;&nbsp;<span class="k">"predicate"</span>: <span class="s">"observationStatement"</span>,<br>
-&nbsp;&nbsp;<span class="k">"source"</span>: <span class="s">"mira:evd-photo51-helix"</span>,<br>
+&nbsp;&nbsp;<span class="k">"source"</span>: <span class="s">"mira:evd-photo51-x-pattern"</span>,<br>
 &nbsp;&nbsp;<span class="k">"destination"</span>: <span class="s">"mira:clm-double-helix"</span>,<br>
 &nbsp;&nbsp;<span class="k">"creator"</span>: <span class="s">"mira:person-franklin"</span> } <span class="cm">// who asserted it</span>
       </div>
-      <p class="foot-note">Canonical grammar: <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">github.com/MIRA-science/schema</a> (<span class="mono">mira.yaml</span>, LinkML — every slot is declared there with its range). The wire format is JSON-LD via <span class="mono">mira.jsonld</span>; SHACL and Turtle are generated from the source. For the same walkthrough you can click, see the interactive <a href="walk.html">DNA deck</a>.</p>
+      <p class="foot-note">Canonical grammar: <a href="https://github.com/MIRA-science/schema" target="_blank" rel="noopener">github.com/MIRA-science/schema</a> (<span class="mono">mira.yaml</span>, LinkML — every slot is declared there with its range). The wire format is JSON-LD via <span class="mono">mira.jsonld</span>; SHACL is generated from the source, and the Turtle and JSON-LD context are maintained alongside it. For the same walkthrough you can click, see the interactive <a href="walk.html">DNA deck</a>.</p>
     </section>
 
     <section class="move">
@@ -160,6 +160,7 @@
         </tbody>
       </table>
       <p class="prose">Plus a <b>qualitative confidence rating</b> on the relation that others can weigh in on. Flavor, degree and confidence are <b>per-agent attributed assertions on a reified relation</b> — never aggregated. Ten agents rating one relation produce ten signed ratings, not an average. Nothing in the schema computes a value, so <b>there is no value to game</b>: an adversary can add their own rating, and it arrives labeled with their identity like everyone else’s.</p>
+      <p class="foot-note"><b>Status.</b> In <span class="mono">mira.yaml</span> today: <span class="mono">supports</span> and <span class="mono">opposes</span>. <span class="mono">informs</span> is used in published graph data as a tool-level extension; the qualitative degree and the confidence rating are proposed, not yet schema slots.</p>
     </section>
   </div>
 
